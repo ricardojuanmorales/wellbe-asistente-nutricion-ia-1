@@ -1,30 +1,26 @@
-# User Cases
+# Casos de Uso
 
-## Primary User
+## Estudiante
 
-A user wants small, low-pressure wellbeing activities that can be completed quickly without creating an account or sharing personal information.
+Una persona estudiante entra al mapa, elige una ruta, completa una actividad breve y reflexiona sobre nutricion, comunidad o IA responsable sin crear cuenta.
 
-## Use Case 1: Choose a Route
+## Educador o facilitador
 
-The user opens the app, reviews available quest routes, and chooses one that matches their current need, such as calm, energy, or connection.
+Una persona facilitadora usa las rutas como base para conversacion en clase, taller o actividad comunitaria. Puede revisar JSON para adaptar contenido.
 
-## Use Case 2: Complete a Small Activity
+## Usuario explorador
 
-The user reads an activity prompt, completes it in a few minutes, and understands how many points it would award in a future interactive version.
+Una persona curiosa quiere entender conexiones entre alimentos, salud publica, agroecologia y tecnologia. Usa el avatar y los badges como guia de avance.
 
-## Use Case 3: Understand Progress
+## Responsable de contenido
 
-The user sees badges as supportive progress markers, not as judgment or pressure.
+Una persona edita `data/activities.json` o `data/routes.json`, valida referencias y actualiza documentacion cuando cambia el esquema.
 
-## Use Case 4: Pick an Avatar
+## Fuera de alcance V1
 
-The user picks an avatar style that feels aligned with how they want to approach the experience without entering personal identity data.
-
-## Out of Scope for V1
-
-- Account creation.
-- Personalized recommendations.
-- Medical or mental health assessment.
-- Crisis support workflows.
+- Diagnostico de salud.
+- Dietas personalizadas.
+- Seguimiento clinico.
 - Social sharing.
-- Push notifications.
+- Cuentas o perfiles remotos.
+- Recomendaciones generadas por IA externa.

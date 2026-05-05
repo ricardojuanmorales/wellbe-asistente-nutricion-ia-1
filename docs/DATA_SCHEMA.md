@@ -1,18 +1,20 @@
-# Data Schema
-
-This document describes the initial JSON shapes used by Wellbe Quest MVP V1.
+# Esquema de Datos
 
 ## Route
 
 ```json
 {
-  "id": "route-grounding-001",
-  "title": "Grounding Basics",
-  "description": "A short route description.",
-  "theme": "calm",
-  "estimated_days": 3,
-  "activity_ids": ["activity-breath-001"],
-  "badge_ids": ["badge-first-step"]
+  "id": "route-nutricion-humana",
+  "title": "Ruta 1: Nutricion humana cotidiana",
+  "short_title": "Nutricion",
+  "domain": "nutricion humana",
+  "story": "Narrativa breve.",
+  "learning_goal": "Objetivo educativo.",
+  "level": "inicial",
+  "estimated_minutes": 30,
+  "color": "#246b4f",
+  "activity_ids": ["activity-plato-diverso"],
+  "badge_ids": ["badge-primer-paso"]
 }
 ```
 
@@ -20,13 +22,18 @@ This document describes the initial JSON shapes used by Wellbe Quest MVP V1.
 
 ```json
 {
-  "id": "activity-breath-001",
-  "title": "Three Calm Breaths",
-  "type": "breathing",
-  "prompt": "Take three slow breaths.",
-  "estimated_minutes": 2,
-  "points": 10,
-  "safety_note": "Stop if the exercise feels uncomfortable."
+  "id": "activity-plato-diverso",
+  "route_id": "route-nutricion-humana",
+  "title": "El plato diverso",
+  "type": "observacion",
+  "story": "Contexto narrativo.",
+  "objective": "Objetivo de aprendizaje.",
+  "instructions": "Accion breve.",
+  "reflection_prompt": "Pregunta reflexiva.",
+  "points": 20,
+  "estimated_minutes": 10,
+  "suggested_level": "Nivel 1",
+  "educational_boundary": "Limite educativo."
 }
 ```
 
@@ -34,11 +41,12 @@ This document describes the initial JSON shapes used by Wellbe Quest MVP V1.
 
 ```json
 {
-  "id": "badge-first-step",
-  "name": "First Step",
-  "description": "Awarded after completing the first activity.",
-  "category": "starter",
-  "trigger": "complete_1_activity"
+  "id": "badge-primer-paso",
+  "name": "Primer paso",
+  "description": "Completaste tu primera actividad.",
+  "category": "inicio",
+  "trigger": "complete_1_activity",
+  "trigger_label": "1 actividad"
 }
 ```
 
@@ -46,39 +54,39 @@ This document describes the initial JSON shapes used by Wellbe Quest MVP V1.
 
 ```json
 {
-  "id": "avatar-sprout",
-  "name": "Sprout",
-  "description": "A beginner-friendly avatar.",
-  "traits": ["gentle", "curious", "patient"]
+  "id": "avatar-wellbe-transdisciplinario",
+  "name": "Wellbe transdisciplinario",
+  "role": "co-piloto principal",
+  "description": "Acompana el mapa.",
+  "traits": ["curioso", "cuidadoso"]
 }
 ```
 
-## Game Config
+## Progress Export
 
 ```json
 {
-  "app_name": "Wellbe Quest",
-  "version": "MVP V1",
-  "mission": "Short product mission.",
-  "default_avatar_id": "avatar-sprout",
-  "points": {
-    "activity_completion_min": 10,
-    "activity_completion_max": 20,
-    "route_completion_bonus": 50
+  "version": "1.0.0",
+  "selectedAvatarId": "avatar-wellbe-transdisciplinario",
+  "completedActivityIds": ["activity-plato-diverso"],
+  "earnedBadgeIds": ["badge-primer-paso"],
+  "points": 20,
+  "level": 1,
+  "routeProgress": {},
+  "stats": {
+    "completedActivities": 1,
+    "completedRoutes": 0,
+    "exportedCount": 0,
+    "importedCount": 0
   },
-  "privacy": {
-    "storage": "local_only",
-    "accounts_enabled": false,
-    "analytics_enabled": false,
-    "external_services_enabled": false
-  },
-  "content_boundaries": []
+  "updatedAt": "2026-05-05T00:00:00.000Z"
 }
 ```
 
-## ID Rules
+## Reglas
 
-- IDs are lowercase kebab-case.
-- IDs include the content type prefix.
-- Route records reference activities and badges by ID.
-- V1 does not include user records or personal health data.
+- IDs en kebab-case.
+- Rutas referencian actividades y badges existentes.
+- `default_avatar_id` debe existir en `avatars.json`.
+- La importacion solo acepta IDs conocidos.
+- No se guardan datos personales ni respuestas libres en V1.

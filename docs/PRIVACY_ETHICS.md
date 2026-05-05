@@ -1,30 +1,28 @@
-# Privacy and Ethics
+# Privacidad y Etica
 
-## V1 Privacy Posture
+## Postura V1
 
-Wellbe Quest MVP V1 is local-only. It does not collect user accounts, personal identifiers, analytics events, or health history.
+Wellbe Quest v1 guarda progreso solo en el navegador con `localStorage`. No hay cuentas, OAuth, Supabase, APIs externas, telemetria remota ni analitica.
 
-## Content Boundaries
+## Limites educativos
 
-The MVP is a wellbeing education prototype. It should not:
+Wellbe es un co-piloto educativo. No diagnostica, no recomienda tratamientos, no prescribe dietas y no reemplaza profesionales de salud, nutricion, educacion o trabajo comunitario.
 
-- Diagnose conditions.
-- Suggest treatment.
-- Replace professional care.
-- Ask for sensitive medical history.
-- Use shame, guilt, streak pressure, or manipulative retention patterns.
+## Minimizacion de datos
 
-## Safety Language
+V1 guarda unicamente:
 
-Activities should remain optional, gentle, and user-controlled. Content should invite noticing, reflection, movement, and planning without presenting itself as clinical advice.
+- avatar seleccionado;
+- IDs de actividades completadas;
+- badges ganados;
+- puntos, nivel y estadisticas locales.
 
-## Future Requirements
+No guarda nombres, correos, ubicaciones, historia medica, respuestas reflexivas ni datos sensibles.
 
-Before adding persistence, accounts, AI personalization, or analytics, define:
+## Cuidado del lenguaje
 
-- Data minimization rules.
-- Consent flows.
-- Retention and deletion policies.
-- Crisis and escalation guidance.
-- Age and guardian policies, if youth users are in scope.
-- Review process for wellbeing content.
+La experiencia debe evitar culpa, comparacion social, presion por rachas y promesas de salud. Los badges celebran aprendizaje, no valor personal.
+
+## Antes de futuras integraciones
+
+Cualquier version con backend, IA externa, cuentas o analitica debe definir consentimiento, retencion, borrado, evaluacion de riesgos, accesibilidad, gobernanza de contenido y rutas de ayuda.

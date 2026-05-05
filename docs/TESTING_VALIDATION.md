@@ -1,34 +1,37 @@
-# Testing and Validation
+# Testing y Validacion
 
-## Technical Checks
+## Checks tecnicos
 
-- `index.html` loads without external scripts, fonts, or APIs.
-- All files in `data/` contain valid JSON.
-- Every `route.activity_ids` value exists in `activities.json`.
-- Every `route.badge_ids` value exists in `badges.json`.
-- `game_config.default_avatar_id` exists in `avatars.json`.
-- The page is usable on mobile and desktop widths.
+- Validar JSON con `jq empty data/*.json`.
+- Confirmar que rutas apuntan a actividades existentes.
+- Confirmar que badges referenciados existen.
+- Confirmar que `default_avatar_id` existe.
+- Buscar dependencias externas activas en `index.html` y `data/`.
 
-## Manual UX Validation
+## Pruebas manuales
 
-Ask testers to complete these tasks:
+- Abrir la app desde un servidor estatico local.
+- Completar una actividad y verificar puntos, nivel, estadisticas y badge de primer paso.
+- Completar una ruta y verificar progreso al 100%.
+- Completar seis y doce actividades para verificar badges.
+- Recargar la pagina y confirmar persistencia local.
+- Exportar progreso, reiniciar e importar el JSON exportado.
+- Probar navegacion con teclado.
+- Revisar vista movil.
 
-- Explain what Wellbe Quest is after seeing the first screen.
-- Identify one route they would try.
-- Identify one activity that feels easy to complete.
-- Describe whether badges feel supportive or pressuring.
-- Describe whether any content feels too clinical, vague, or uncomfortable.
+## Validacion educativa
 
-## Success Signals
+Preguntar a personas usuarias:
 
-- Users understand the quest metaphor without coaching.
-- Users can name the next action they would take.
-- Users describe activities as gentle and approachable.
-- Users do not confuse the product with therapy or medical care.
+- Que creen que es el Mapa del Buen Vivir?
+- Que ruta les resulta mas clara o relevante?
+- Que actividad completarian primero?
+- Donde el lenguaje parece demasiado clinico, tecnico o confuso?
+- Los badges motivan sin presionar?
 
-## Risks to Watch
+## Criterios de exito V1
 
-- Gamification that creates pressure instead of support.
-- Prompts that accidentally request sensitive information.
-- Content that sounds diagnostic or prescriptive.
-- Local JSON fetch failures when opening the file directly instead of through a static server.
+- La persona entiende el proposito sin explicacion adicional.
+- Puede completar una actividad en menos de 15 minutos.
+- Comprende que el progreso es local.
+- No interpreta Wellbe como diagnostico o tratamiento.

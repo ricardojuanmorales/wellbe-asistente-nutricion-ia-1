@@ -1,47 +1,78 @@
 [
   {
-    "id": "route-grounding-001",
-    "title": "Grounding Basics",
-    "description": "A short path for noticing the body, breath, and immediate surroundings.",
-    "theme": "calm",
-    "estimated_days": 3,
+    "id": "route-nutricion-humana",
+    "title": "Ruta 1: Nutricion humana cotidiana",
+    "short_title": "Nutricion",
+    "domain": "nutricion humana",
+    "story": "Comienzas en una cocina comunitaria donde cada alimento cuenta una historia de energia, cultura y cuidado.",
+    "learning_goal": "Reconocer necesidades basicas del cuerpo, grupos de alimentos y decisiones cotidianas de alimentacion sin moralizar.",
+    "level": "inicial",
+    "estimated_minutes": 30,
+    "color": "#246b4f",
     "activity_ids": [
-      "activity-breath-001",
-      "activity-senses-001",
-      "activity-reflection-001"
+      "activity-plato-diverso",
+      "activity-energia-cuerpo",
+      "activity-etiqueta-preguntas"
     ],
     "badge_ids": [
-      "badge-first-step"
+      "badge-primer-paso"
     ]
   },
   {
-    "id": "route-energy-001",
-    "title": "Gentle Energy",
-    "description": "A practical route for restoring momentum through small movement and choice.",
-    "theme": "energy",
-    "estimated_days": 4,
+    "id": "route-seguridad-alimentaria",
+    "title": "Ruta 2: Seguridad alimentaria y nutricional",
+    "short_title": "Seguridad",
+    "domain": "seguridad alimentaria",
+    "story": "El mapa se abre hacia mercados, escuelas y hogares. La pregunta cambia: no solo que comemos, sino quien puede acceder a comida suficiente y digna.",
+    "learning_goal": "Explorar disponibilidad, acceso, utilizacion y estabilidad como dimensiones de seguridad alimentaria.",
+    "level": "inicial",
+    "estimated_minutes": 34,
+    "color": "#2f6f97",
     "activity_ids": [
-      "activity-movement-001",
-      "activity-water-001",
-      "activity-planning-001"
+      "activity-cuatro-dimensiones",
+      "activity-mapa-acceso",
+      "activity-decision-publica"
     ],
     "badge_ids": [
-      "badge-steady-builder"
+      "badge-ruta-completa"
     ]
   },
   {
-    "id": "route-connection-001",
-    "title": "Connection Spark",
-    "description": "A route that invites low-pressure reflection on care, gratitude, and support.",
-    "theme": "connection",
-    "estimated_days": 5,
+    "id": "route-agroecologia-comunidad",
+    "title": "Ruta 3: Agroecologia y comunidad",
+    "short_title": "Agroecologia",
+    "domain": "agroecologia y comunidad",
+    "story": "Llegas a una finca viva: suelo, agua, semillas y comunidad conversan. Aprender aqui significa observar relaciones.",
+    "learning_goal": "Conectar practicas agroecologicas con biodiversidad, cultura alimentaria y resiliencia comunitaria.",
+    "level": "intermedio",
+    "estimated_minutes": 36,
+    "color": "#a46d15",
     "activity_ids": [
-      "activity-gratitude-001",
-      "activity-kindness-001",
-      "activity-checkin-001"
+      "activity-suelo-vivo",
+      "activity-red-comunitaria",
+      "activity-temporada-local"
     ],
     "badge_ids": [
-      "badge-kind-signal"
+      "badge-exploracion-comunitaria"
+    ]
+  },
+  {
+    "id": "route-ia-salud-buen-vivir",
+    "title": "Ruta 4: IA, salud publica y buen vivir",
+    "short_title": "IA publica",
+    "domain": "inteligencia artificial y salud publica",
+    "story": "En el ultimo territorio, Wellbe te invita a mirar la IA como herramienta: util si se usa con preguntas claras, datos cuidados y responsabilidad social.",
+    "learning_goal": "Identificar usos responsables de IA educativa en salud publica sin sustituir juicio humano, comunidad ni evidencia.",
+    "level": "intermedio",
+    "estimated_minutes": 40,
+    "color": "#8b5740",
+    "activity_ids": [
+      "activity-pregunta-ia",
+      "activity-sesgo-datos",
+      "activity-buen-vivir-futuro"
+    ],
+    "badge_ids": [
+      "badge-ia-responsable"
     ]
   }
 ]

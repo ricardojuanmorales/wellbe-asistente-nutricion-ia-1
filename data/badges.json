@@ -1,30 +1,50 @@
 [
   {
-    "id": "badge-first-step",
-    "name": "First Step",
-    "description": "Awarded after completing the first activity in any route.",
-    "category": "starter",
-    "trigger": "complete_1_activity"
+    "id": "badge-primer-paso",
+    "name": "Primer paso",
+    "description": "Completaste tu primera actividad del Mapa del Buen Vivir.",
+    "category": "inicio",
+    "trigger": "complete_1_activity",
+    "trigger_label": "1 actividad"
   },
   {
-    "id": "badge-steady-builder",
-    "name": "Steady Builder",
-    "description": "Awarded for completing activities on three different days.",
-    "category": "consistency",
-    "trigger": "complete_3_days"
+    "id": "badge-ruta-completa",
+    "name": "Ruta completa",
+    "description": "Terminaste todas las actividades de una ruta de aprendizaje.",
+    "category": "avance",
+    "trigger": "complete_1_route",
+    "trigger_label": "1 ruta"
   },
   {
-    "id": "badge-kind-signal",
-    "name": "Kind Signal",
-    "description": "Awarded after completing two connection activities.",
-    "category": "connection",
-    "trigger": "complete_2_connection_activities"
+    "id": "badge-mitad-mapa",
+    "name": "Mitad del mapa",
+    "description": "Completaste seis actividades y conectaste varios saberes.",
+    "category": "constancia",
+    "trigger": "complete_6_activities",
+    "trigger_label": "6 actividades"
   },
   {
-    "id": "badge-route-finisher",
-    "name": "Route Finisher",
-    "description": "Awarded after completing all activities in one route.",
-    "category": "completion",
-    "trigger": "complete_route"
+    "id": "badge-mapa-completo",
+    "name": "Mapa completo",
+    "description": "Completaste las doce actividades iniciales del MVP.",
+    "category": "maestria",
+    "trigger": "complete_12_activities",
+    "trigger_label": "12 actividades"
+  },
+  {
+    "id": "badge-exploracion-comunitaria",
+    "name": "Exploracion comunitaria",
+    "description": "Exploraste agroecologia, territorio o redes comunitarias de alimentos.",
+    "category": "comunidad",
+    "trigger": "complete_community_activity",
+    "trigger_label": "actividad comunitaria"
+  },
+  {
+    "id": "badge-ia-responsable",
+    "name": "IA responsable",
+    "description": "Practicaste preguntas y limites para usar IA de forma educativa y cuidadosa.",
+    "category": "tecnologia",
+    "trigger": "complete_ai_activity",
+    "trigger_label": "actividad IA"
   }
 ]

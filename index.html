@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wellbe Quest MVP V1</title>
+  <title>Wellbe Quest v1 - Mapa del Buen Vivir</title>
   <style>
     :root {
       color-scheme: light;
-      --bg: #f7f4ef;
-      --surface: #ffffff;
-      --surface-2: #eef6f3;
-      --ink: #17211f;
-      --muted: #66736f;
-      --line: #d9ded9;
-      --green: #217c62;
-      --blue: #356f9f;
-      --gold: #a86f12;
-      --rose: #b64f65;
+      --bg: #f6f2ea;
+      --surface: #fffefa;
+      --surface-2: #edf7f1;
+      --ink: #17211d;
+      --muted: #607169;
+      --line: #d8ddd5;
+      --forest: #246b4f;
+      --water: #2f6f97;
+      --maize: #a46d15;
+      --berry: #a94e66;
+      --clay: #8b5740;
+      --focus: #123f99;
       --radius: 8px;
+      --shadow: 0 14px 40px rgba(40, 50, 43, 0.08);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -29,60 +36,156 @@
       min-height: 100vh;
       background: var(--bg);
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
     }
 
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--line);
-      padding: 20px clamp(18px, 4vw, 48px);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(36, 107, 79, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 107, 79, 0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, #000, transparent 72%);
     }
 
-    .topline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      max-width: 1180px;
+    a {
+      color: var(--forest);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      position: relative;
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
     }
 
-    h1, h2, h3, p {
+    header {
+      padding: 26px 0 18px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+    }
+
+    .eyebrow,
+    .chip,
+    .small-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
       margin-top: 0;
     }
 
     h1 {
-      margin-bottom: 4px;
-      font-size: clamp(1.6rem, 3vw, 2.35rem);
+      max-width: 850px;
+      margin-bottom: 10px;
+      font-size: clamp(2.05rem, 5vw, 4.4rem);
+      line-height: 1.02;
       letter-spacing: 0;
     }
 
-    .subtitle {
-      margin: 0;
-      color: var(--muted);
-      max-width: 720px;
+    h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.15;
     }
 
-    .status {
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: 0 -8px;
+      padding: 8px;
+      background: rgba(246, 242, 234, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(216, 221, 213, 0.8);
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .nav-list a {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 12px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      color: var(--green);
-      font-size: 0.82rem;
-      padding: 6px 10px;
-      white-space: nowrap;
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
     }
 
     main {
-      width: min(1180px, calc(100% - 32px));
-      margin: 28px auto 56px;
       display: grid;
       gap: 18px;
+      padding: 18px 0 56px;
+    }
+
+    section {
+      scroll-margin-top: 80px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
       gap: 18px;
       align-items: stretch;
     }
@@ -92,229 +195,452 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 18px;
+      box-shadow: var(--shadow);
     }
 
     .panel {
-      min-height: 100%;
+      padding: clamp(18px, 3vw, 28px);
     }
 
-    .metric-grid {
+    .hero-card {
+      min-height: 380px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 20px;
+      align-content: end;
+      background:
+        linear-gradient(145deg, rgba(36, 107, 79, 0.12), rgba(47, 111, 151, 0.08)),
+        var(--surface);
+      overflow: hidden;
     }
 
-    .metric {
+    .map-mark {
+      width: min(520px, 100%);
+      min-height: 190px;
+      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: end;
+    }
+
+    .land-tile {
+      min-height: var(--tile-h);
+      border: 1px solid rgba(23, 33, 29, 0.12);
+      border-radius: 8px;
+      background: var(--tile-bg);
+      display: flex;
+      align-items: end;
+      padding: 10px;
+      color: #fffefa;
+      font-weight: 800;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.28);
+    }
+
+    .copilot {
+      display: grid;
+      gap: 14px;
+    }
+
+    .wellbe-face {
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
       background: var(--surface-2);
-      border-radius: var(--radius);
-      padding: 14px;
+      border: 2px solid rgba(36, 107, 79, 0.2);
+      color: var(--forest);
+      font-size: 2rem;
+      font-weight: 900;
     }
 
-    .metric strong {
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: var(--radius);
+      background: var(--surface-2);
+    }
+
+    .stat strong {
       display: block;
       font-size: 1.55rem;
+      line-height: 1.1;
     }
 
-    .metric span {
+    .stat span {
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
-    .section-title {
+    .section-head {
       display: flex;
-      align-items: baseline;
+      align-items: end;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 12px;
+      gap: 16px;
+      margin-bottom: 14px;
     }
 
-    .section-title h2 {
-      font-size: 1.05rem;
+    .section-head p {
+      max-width: 680px;
       margin-bottom: 0;
-    }
-
-    .section-title span {
       color: var(--muted);
-      font-size: 0.9rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
     }
 
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin-bottom: 12px;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .tag {
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.76rem;
-      padding: 3px 8px;
+    .card {
+      padding: 16px;
     }
 
     .route-card {
-      border-left: 4px solid var(--green);
+      border-left: 5px solid var(--route-color, var(--forest));
     }
 
-    .badge-card {
-      border-left: 4px solid var(--gold);
-    }
-
-    .avatar-card {
-      border-left: 4px solid var(--blue);
-    }
-
-    .activity-meta {
+    .activity-card {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      gap: 12px;
+    }
+
+    .activity-card.completed {
+      background: #f1fbf5;
+      border-color: rgba(36, 107, 79, 0.35);
+    }
+
+    .activity-story,
+    .muted {
       color: var(--muted);
-      font-size: 0.83rem;
+    }
+
+    .meta-row,
+    .tag-row,
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tag,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 13px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: #fffefa;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .btn.good {
+      background: var(--forest);
+    }
+
+    .btn.warn {
+      background: var(--berry);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.62;
+      transform: none;
+    }
+
+    .route-progress {
+      height: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e8ece7;
+    }
+
+    .route-progress span {
+      display: block;
+      height: 100%;
+      width: var(--progress, 0%);
+      background: var(--route-color, var(--forest));
+    }
+
+    .avatar-option {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .avatar-option.selected {
+      border-color: var(--forest);
+      background: #f1fbf5;
+    }
+
+    .badge-card.earned {
+      border-color: rgba(164, 109, 21, 0.45);
+      background: #fff8e9;
     }
 
     .notice {
-      background: #fff8eb;
-      border: 1px solid #efd8a9;
-      color: #61420d;
+      padding: 13px 14px;
+      border: 1px solid #eed9ad;
       border-radius: var(--radius);
-      padding: 12px 14px;
-      font-size: 0.92rem;
+      background: #fff8e9;
+      color: #61410d;
     }
 
-    .error {
+    .notice.error {
+      border-color: #ecc0ca;
       background: #fff0f3;
-      border-color: #efb9c4;
-      color: #7d2638;
+      color: #76263a;
+    }
+
+    .file-input {
+      max-width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .privacy-list {
+      display: grid;
+      gap: 10px;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     footer {
+      padding: 0 0 34px;
       color: var(--muted);
-      font-size: 0.84rem;
-      padding: 0 clamp(18px, 4vw, 48px) 28px;
       text-align: center;
     }
 
-    @media (max-width: 760px) {
-      .topline,
+    @media (max-width: 800px) {
+      .topbar,
       .hero,
-      .metric-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .topline {
-        align-items: flex-start;
+      .section-head {
         display: grid;
       }
 
-      .activity-meta {
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .map-mark {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .shell {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .panel,
+      .card {
+        padding: 14px;
+      }
+
+      .stat-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="topline">
-      <div>
-        <h1>Wellbe Quest MVP V1</h1>
-        <p class="subtitle">A static-first wellbeing quest prototype for routes, activities, badges, and avatars.</p>
-      </div>
-      <span class="status" id="app-status">Loading local data</span>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="panel">
-        <div class="section-title">
-          <h2>Prototype Focus</h2>
-          <span id="version-label">V1</span>
+  <div class="shell">
+    <header>
+      <div class="topbar">
+        <div class="brand">
+          <span class="eyebrow">Wellbe Quest v1</span>
+          <strong>Mapa del Buen Vivir</strong>
         </div>
-        <p id="mission-copy">Wellbe Quest helps users build small, repeatable wellbeing habits through guided routes and reflective activities.</p>
-        <div class="metric-grid" aria-label="Prototype data summary">
-          <div class="metric">
-            <strong id="route-count">0</strong>
-            <span>routes</span>
-          </div>
-          <div class="metric">
-            <strong id="activity-count">0</strong>
-            <span>activities</span>
-          </div>
-          <div class="metric">
-            <strong id="badge-count">0</strong>
-            <span>badges</span>
+        <span class="chip" id="load-status">Cargando datos locales</span>
+      </div>
+      <h1>Explora nutricion, comunidad, agroecologia e IA para el buen vivir.</h1>
+      <p class="subtitle">Una experiencia educativa gamificada, local y sin cuentas para practicar pensamiento critico, cuidado colectivo y aprendizaje transdisciplinario.</p>
+    </header>
+
+    <nav aria-label="Navegacion principal">
+      <div class="nav-list">
+        <a href="#mapa">Mapa</a>
+        <a href="#rutas">Rutas</a>
+        <a href="#actividades">Actividades</a>
+        <a href="#progreso">Progreso</a>
+        <a href="#badges">Badges</a>
+        <a href="#avatar">Avatar</a>
+        <a href="#privacidad">Privacidad</a>
+      </div>
+    </nav>
+
+    <main id="app">
+      <section class="hero" id="mapa">
+        <div class="panel hero-card">
+          <div class="map-mark" aria-hidden="true" id="map-tiles"></div>
+          <span class="eyebrow">Storytelling educativo</span>
+          <h2>El mapa no busca competir: busca conectar saberes para tomar mejores decisiones.</h2>
+          <p class="muted" id="mission-copy">Wellbe te acompana como co-piloto educativo con preguntas, rutas y actividades breves.</p>
+          <div class="stat-grid" aria-label="Resumen de contenido">
+            <div class="stat"><strong id="route-count">0</strong><span>rutas</span></div>
+            <div class="stat"><strong id="activity-count">0</strong><span>actividades</span></div>
+            <div class="stat"><strong id="badge-count">0</strong><span>badges</span></div>
+            <div class="stat"><strong id="level-label">1</strong><span>nivel actual</span></div>
           </div>
         </div>
-      </div>
 
-      <aside class="panel">
-        <div class="section-title">
-          <h2>Privacy Posture</h2>
-          <span>local only</span>
+        <aside class="panel copilot" aria-labelledby="wellbe-title">
+          <div class="wellbe-face" aria-hidden="true">W</div>
+          <div>
+            <span class="eyebrow">Co-piloto educativo</span>
+            <h2 id="wellbe-title">Wellbe</h2>
+            <p id="wellbe-message">Observa el mapa, elige una ruta y completa una actividad pequena. Tu progreso vive solo en este navegador.</p>
+          </div>
+          <div class="notice">Wellbe no diagnostica, no da tratamiento y no reemplaza profesionales de salud. Este MVP es educativo.</div>
+        </aside>
+      </section>
+
+      <section class="panel" id="rutas">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">4 rutas de aprendizaje</span>
+            <h2>Rutas del Buen Vivir</h2>
+          </div>
+          <p>Cada ruta combina historia, accion breve y reflexion. Completa actividades para avanzar en el mapa.</p>
         </div>
-        <p>This MVP avoids accounts, tracking, analytics, and external services. All sample content is local and intentionally non-clinical.</p>
-        <div class="notice">This is not a medical device or therapy product. It is a wellbeing learning prototype.</div>
-      </aside>
-    </section>
+        <div class="grid" id="routes-list"></div>
+      </section>
 
-    <section class="panel">
-      <div class="section-title">
-        <h2>Quest Routes</h2>
-        <span>guided wellbeing journeys</span>
-      </div>
-      <div class="grid" id="routes"></div>
-    </section>
+      <section class="panel" id="actividades">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">12 actividades iniciales</span>
+            <h2>Actividades educativas</h2>
+          </div>
+          <p>Marca actividades completadas cuando hayas leido, practicado y reflexionado. Puedes reiniciarlas cuando quieras.</p>
+        </div>
+        <div class="grid" id="activities-list"></div>
+      </section>
 
-    <section class="panel">
-      <div class="section-title">
-        <h2>Activities</h2>
-        <span>small repeatable actions</span>
-      </div>
-      <div class="grid" id="activities"></div>
-    </section>
+      <section class="panel" id="progreso">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Progreso local</span>
+            <h2>Panel de aprendizaje</h2>
+          </div>
+          <p>Estos datos se guardan en `localStorage` de este navegador. No se envian a ningun servidor.</p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Estadisticas locales</h3>
+            <div class="stat-grid">
+              <div class="stat"><strong id="points-stat">0</strong><span>puntos</span></div>
+              <div class="stat"><strong id="completed-stat">0</strong><span>completadas</span></div>
+              <div class="stat"><strong id="badges-stat">0</strong><span>badges</span></div>
+              <div class="stat"><strong id="routes-stat">0</strong><span>rutas completas</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Exportar e importar JSON</h3>
+            <p class="muted">Exporta tu progreso para guardarlo localmente. Importar valida IDs conocidos e ignora valores desconocidos.</p>
+            <div class="actions">
+              <button class="btn good" id="export-progress" type="button">Exportar progreso</button>
+              <label class="btn secondary" for="import-progress">Importar JSON</label>
+              <input class="sr-only" id="import-progress" type="file" accept="application/json,.json" />
+              <button class="btn warn" id="reset-progress" type="button">Reiniciar progreso</button>
+            </div>
+            <p class="muted" id="import-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
 
-    <section class="panel">
-      <div class="section-title">
-        <h2>Badges</h2>
-        <span>progress signals</span>
-      </div>
-      <div class="grid" id="badges"></div>
-    </section>
+      <section class="panel" id="badges">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">6 badges iniciales</span>
+            <h2>Reconocimientos</h2>
+          </div>
+          <p>Los badges celebran aprendizaje y exploracion; no se usan para presionar ni comparar personas.</p>
+        </div>
+        <div class="grid" id="badges-list"></div>
+      </section>
 
-    <section class="panel">
-      <div class="section-title">
-        <h2>Avatars</h2>
-        <span>identity without personal data</span>
-      </div>
-      <div class="grid" id="avatars"></div>
-    </section>
-  </main>
+      <section class="panel" id="avatar">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Avatar transdisciplinario</span>
+            <h2>Elige tu compania de aprendizaje</h2>
+          </div>
+          <p>La eleccion de avatar se guarda localmente y no requiere identidad personal.</p>
+        </div>
+        <div class="grid" id="avatars-list"></div>
+      </section>
 
-  <footer>
-    Static MVP structure: index.html, local JSON files, and Markdown documentation.
-  </footer>
+      <section class="panel" id="privacidad">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Privacidad y limites</span>
+            <h2>Educativo, local y transparente</h2>
+          </div>
+          <p>Este MVP evita cuentas, servicios externos, telemetria remota y recoleccion de datos personales.</p>
+        </div>
+        <ul class="privacy-list" id="privacy-list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      Wellbe Quest v1 - Mapa del Buen Vivir. Prototipo educativo estatico.
+    </footer>
+  </div>
 
   <script>
-    const files = {
+    const STORAGE_KEY = "wellbeQuestV1Progress";
+    const DATA_FILES = {
       routes: "data/routes.json",
       activities: "data/activities.json",
       badges: "data/badges.json",
@@ -322,7 +648,7 @@
       config: "data/game_config.json"
     };
 
-    const appState = {
+    const data = {
       routes: [],
       activities: [],
       badges: [],
@@ -330,98 +656,353 @@
       config: {}
     };
 
-    const text = (value) => String(value ?? "");
+    let progress = createDefaultProgress();
 
-    function tagList(items) {
-      return (items || []).map((item) => `<span class="tag">${text(item)}</span>`).join("");
+    function createDefaultProgress() {
+      return {
+        version: "1.0.0",
+        selectedAvatarId: "",
+        completedActivityIds: [],
+        earnedBadgeIds: [],
+        points: 0,
+        level: 1,
+        routeProgress: {},
+        stats: {
+          completedActivities: 0,
+          completedRoutes: 0,
+          exportedCount: 0,
+          importedCount: 0
+        },
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function uniqueKnownIds(ids, knownSet) {
+      return [...new Set(Array.isArray(ids) ? ids : [])].filter((id) => knownSet.has(id));
     }
 
     async function loadJson(path) {
       const response = await fetch(path);
-      if (!response.ok) {
-        throw new Error(`Unable to load ${path}`);
-      }
+      if (!response.ok) throw new Error(`No se pudo cargar ${path}`);
       return response.json();
     }
 
-    function renderRoutes(routes) {
-      document.querySelector("#routes").innerHTML = routes.map((route) => `
-        <article class="card route-card">
-          <h3>${text(route.title)}</h3>
-          <p>${text(route.description)}</p>
+    function saveProgress() {
+      progress.updatedAt = new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return createDefaultProgress();
+        return { ...createDefaultProgress(), ...JSON.parse(stored) };
+      } catch {
+        return createDefaultProgress();
+      }
+    }
+
+    function calculateLevel(points) {
+      const levels = data.config.levels || [];
+      const current = levels.reduce((selected, level) => points >= level.min_points ? level : selected, levels[0]);
+      return current?.level || 1;
+    }
+
+    function calculateRouteProgress(completedIds) {
+      const completed = new Set(completedIds);
+      const routeProgress = {};
+      data.routes.forEach((route) => {
+        const total = route.activity_ids.length;
+        const done = route.activity_ids.filter((id) => completed.has(id)).length;
+        routeProgress[route.id] = {
+          completed: done,
+          total,
+          percent: total ? Math.round((done / total) * 100) : 0,
+          complete: total > 0 && done === total
+        };
+      });
+      return routeProgress;
+    }
+
+    function evaluateBadges(completedIds) {
+      const completed = new Set(completedIds);
+      const routeProgress = calculateRouteProgress(completedIds);
+      const completedActivities = data.activities.filter((activity) => completed.has(activity.id));
+      const completedRoutes = Object.values(routeProgress).filter((route) => route.complete).length;
+      const completedTypes = new Set(completedActivities.map((activity) => activity.type));
+
+      return data.badges.filter((badge) => {
+        if (badge.trigger === "complete_1_activity") return completed.size >= 1;
+        if (badge.trigger === "complete_1_route") return completedRoutes >= 1;
+        if (badge.trigger === "complete_6_activities") return completed.size >= 6;
+        if (badge.trigger === "complete_12_activities") return completed.size >= 12;
+        if (badge.trigger === "complete_community_activity") return completedActivities.some((activity) => activity.route_id === "route-agroecologia-comunidad");
+        if (badge.trigger === "complete_ai_activity") return completedActivities.some((activity) => activity.route_id === "route-ia-salud-buen-vivir");
+        if (badge.trigger === "complete_4_activity_types") return completedTypes.size >= 4;
+        return false;
+      }).map((badge) => badge.id);
+    }
+
+    function normalizeProgress(input) {
+      const activityIds = new Set(data.activities.map((item) => item.id));
+      const avatarIds = new Set(data.avatars.map((item) => item.id));
+      const completedActivityIds = uniqueKnownIds(input?.completedActivityIds, activityIds);
+      const selectedAvatarId = avatarIds.has(input?.selectedAvatarId) ? input.selectedAvatarId : data.config.default_avatar_id;
+      const points = data.activities
+        .filter((activity) => completedActivityIds.includes(activity.id))
+        .reduce((total, activity) => total + Number(activity.points || 0), 0);
+      const routeProgress = calculateRouteProgress(completedActivityIds);
+      const earnedBadgeIds = evaluateBadges(completedActivityIds);
+
+      return {
+        ...createDefaultProgress(),
+        version: input?.version || data.config.progress_version || "1.0.0",
+        selectedAvatarId,
+        completedActivityIds,
+        earnedBadgeIds,
+        points,
+        level: calculateLevel(points),
+        routeProgress,
+        stats: {
+          completedActivities: completedActivityIds.length,
+          completedRoutes: Object.values(routeProgress).filter((route) => route.complete).length,
+          exportedCount: Number(input?.stats?.exportedCount || 0),
+          importedCount: Number(input?.stats?.importedCount || 0)
+        },
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    function recalculateAndSave() {
+      progress = normalizeProgress(progress);
+      saveProgress();
+      render();
+    }
+
+    function completeActivity(activityId) {
+      if (!progress.completedActivityIds.includes(activityId)) {
+        progress.completedActivityIds.push(activityId);
+      }
+      recalculateAndSave();
+    }
+
+    function resetActivity(activityId) {
+      progress.completedActivityIds = progress.completedActivityIds.filter((id) => id !== activityId);
+      recalculateAndSave();
+    }
+
+    function selectAvatar(avatarId) {
+      progress.selectedAvatarId = avatarId;
+      recalculateAndSave();
+    }
+
+    function exportProgress() {
+      progress.stats.exportedCount += 1;
+      recalculateAndSave();
+      const today = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(progress, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `wellbe-quest-progress-${today}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+
+    function importProgress(file) {
+      const status = document.querySelector("#import-status");
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(String(reader.result || "{}"));
+          const imported = normalizeProgress(parsed);
+          imported.stats.importedCount = Number(progress.stats.importedCount || 0) + 1;
+          progress = imported;
+          saveProgress();
+          render();
+          status.textContent = "Progreso importado correctamente.";
+        } catch {
+          status.textContent = "No se pudo importar el archivo. Verifica que sea JSON valido.";
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetProgress() {
+      progress = normalizeProgress(createDefaultProgress());
+      saveProgress();
+      render();
+      document.querySelector("#import-status").textContent = "Progreso reiniciado en este navegador.";
+    }
+
+    function renderMapTiles() {
+      const colors = ["#246b4f", "#2f6f97", "#a46d15", "#8b5740"];
+      document.querySelector("#map-tiles").innerHTML = data.routes.map((route, index) => `
+        <div class="land-tile" style="--tile-h:${120 + index * 18}px; --tile-bg:${colors[index % colors.length]}">
+          ${escapeHtml(route.short_title || route.title)}
+        </div>
+      `).join("");
+    }
+
+    function renderRoutes() {
+      document.querySelector("#routes-list").innerHTML = data.routes.map((route) => {
+        const routeState = progress.routeProgress[route.id] || { completed: 0, total: route.activity_ids.length, percent: 0 };
+        return `
+          <article class="card route-card" style="--route-color:${escapeHtml(route.color)}">
+            <span class="eyebrow">${escapeHtml(route.domain)}</span>
+            <h3>${escapeHtml(route.title)}</h3>
+            <p class="muted">${escapeHtml(route.story)}</p>
+            <p>${escapeHtml(route.learning_goal)}</p>
+            <div class="route-progress" aria-label="Progreso ${routeState.percent}%">
+              <span style="--progress:${routeState.percent}%"></span>
+            </div>
+            <div class="tag-row">
+              <span class="tag">${routeState.completed}/${routeState.total} actividades</span>
+              <span class="tag">${route.estimated_minutes} min</span>
+              <span class="tag">${escapeHtml(route.level)}</span>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderActivities() {
+      const completed = new Set(progress.completedActivityIds);
+      const routeById = Object.fromEntries(data.routes.map((route) => [route.id, route]));
+      document.querySelector("#activities-list").innerHTML = data.activities.map((activity) => {
+        const route = routeById[activity.route_id] || {};
+        const isDone = completed.has(activity.id);
+        return `
+          <article class="card activity-card ${isDone ? "completed" : ""}">
+            <div>
+              <span class="eyebrow">${escapeHtml(route.short_title || activity.type)}</span>
+              <h3>${escapeHtml(activity.title)}</h3>
+              <p class="activity-story">${escapeHtml(activity.story)}</p>
+              <p><strong>Objetivo:</strong> ${escapeHtml(activity.objective)}</p>
+              <p><strong>Instrucciones:</strong> ${escapeHtml(activity.instructions)}</p>
+              <p><strong>Reflexion:</strong> ${escapeHtml(activity.reflection_prompt)}</p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">${activity.estimated_minutes} min</span>
+              <span class="tag">${activity.points} puntos</span>
+              <span class="tag">${escapeHtml(activity.suggested_level)}</span>
+            </div>
+            <p class="muted">${escapeHtml(activity.educational_boundary)}</p>
+            <button class="btn ${isDone ? "secondary" : "good"}" type="button" data-action="${isDone ? "reset" : "complete"}" data-id="${escapeHtml(activity.id)}">
+              ${isDone ? "Marcar como pendiente" : "Completar actividad"}
+            </button>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderBadges() {
+      const earned = new Set(progress.earnedBadgeIds);
+      document.querySelector("#badges-list").innerHTML = data.badges.map((badge) => `
+        <article class="card badge-card ${earned.has(badge.id) ? "earned" : ""}">
+          <span class="eyebrow">${earned.has(badge.id) ? "Ganado" : "Pendiente"}</span>
+          <h3>${escapeHtml(badge.name)}</h3>
+          <p class="muted">${escapeHtml(badge.description)}</p>
           <div class="tag-row">
-            ${tagList([route.theme, `${route.estimated_days} days`, `${route.activity_ids.length} activities`])}
+            <span class="tag">${escapeHtml(badge.category)}</span>
+            <span class="tag">${escapeHtml(badge.trigger_label)}</span>
           </div>
         </article>
       `).join("");
     }
 
-    function renderActivities(activities) {
-      document.querySelector("#activities").innerHTML = activities.map((activity) => `
-        <article class="card">
-          <h3>${text(activity.title)}</h3>
-          <p>${text(activity.prompt)}</p>
-          <div class="activity-meta">
-            <span>${text(activity.type)}</span>
-            <span>${text(activity.estimated_minutes)} min</span>
-            <span>${text(activity.points)} pts</span>
-          </div>
-        </article>
+    function renderAvatars() {
+      document.querySelector("#avatars-list").innerHTML = data.avatars.map((avatar) => `
+        <button class="card avatar-option ${progress.selectedAvatarId === avatar.id ? "selected" : ""}" type="button" data-action="avatar" data-id="${escapeHtml(avatar.id)}">
+          <span class="eyebrow">${escapeHtml(avatar.role)}</span>
+          <h3>${escapeHtml(avatar.name)}</h3>
+          <p class="muted">${escapeHtml(avatar.description)}</p>
+          <div class="tag-row">${avatar.traits.map((trait) => `<span class="tag">${escapeHtml(trait)}</span>`).join("")}</div>
+        </button>
       `).join("");
     }
 
-    function renderBadges(badges) {
-      document.querySelector("#badges").innerHTML = badges.map((badge) => `
-        <article class="card badge-card">
-          <h3>${text(badge.name)}</h3>
-          <p>${text(badge.description)}</p>
-          <div class="tag-row">${tagList([badge.category, badge.trigger])}</div>
-        </article>
-      `).join("");
-    }
-
-    function renderAvatars(avatars) {
-      document.querySelector("#avatars").innerHTML = avatars.map((avatar) => `
-        <article class="card avatar-card">
-          <h3>${text(avatar.name)}</h3>
-          <p>${text(avatar.description)}</p>
-          <div class="tag-row">${tagList(avatar.traits)}</div>
-        </article>
-      `).join("");
+    function renderPrivacy() {
+      const items = [
+        ...(data.config.privacy?.commitments || []),
+        ...(data.config.content_boundaries || [])
+      ];
+      document.querySelector("#privacy-list").innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
     }
 
     function renderSummary() {
-      document.querySelector("#route-count").textContent = appState.routes.length;
-      document.querySelector("#activity-count").textContent = appState.activities.length;
-      document.querySelector("#badge-count").textContent = appState.badges.length;
-      document.querySelector("#version-label").textContent = appState.config.version || "V1";
-      document.querySelector("#mission-copy").textContent = appState.config.mission || document.querySelector("#mission-copy").textContent;
+      const level = (data.config.levels || []).find((item) => item.level === progress.level);
+      const routeCount = Object.values(progress.routeProgress).filter((route) => route.complete).length;
+      document.querySelector("#route-count").textContent = data.routes.length;
+      document.querySelector("#activity-count").textContent = data.activities.length;
+      document.querySelector("#badge-count").textContent = data.badges.length;
+      document.querySelector("#level-label").textContent = progress.level;
+      document.querySelector("#points-stat").textContent = progress.points;
+      document.querySelector("#completed-stat").textContent = progress.stats.completedActivities;
+      document.querySelector("#badges-stat").textContent = progress.earnedBadgeIds.length;
+      document.querySelector("#routes-stat").textContent = routeCount;
+      document.querySelector("#mission-copy").textContent = data.config.mission;
+      document.querySelector("#wellbe-message").textContent = level?.wellbe_message || data.config.wellbe?.default_message || "";
+    }
+
+    function render() {
+      renderSummary();
+      renderMapTiles();
+      renderRoutes();
+      renderActivities();
+      renderBadges();
+      renderAvatars();
+      renderPrivacy();
+    }
+
+    function attachEvents() {
+      document.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-action]");
+        if (!target) return;
+        const action = target.dataset.action;
+        const id = target.dataset.id;
+        if (action === "complete") completeActivity(id);
+        if (action === "reset") resetActivity(id);
+        if (action === "avatar") selectAvatar(id);
+      });
+      document.querySelector("#export-progress").addEventListener("click", exportProgress);
+      document.querySelector("#import-progress").addEventListener("change", (event) => importProgress(event.target.files[0]));
+      document.querySelector("#reset-progress").addEventListener("click", resetProgress);
     }
 
     async function init() {
-      const status = document.querySelector("#app-status");
+      const status = document.querySelector("#load-status");
       try {
         const [routes, activities, badges, avatars, config] = await Promise.all([
-          loadJson(files.routes),
-          loadJson(files.activities),
-          loadJson(files.badges),
-          loadJson(files.avatars),
-          loadJson(files.config)
+          loadJson(DATA_FILES.routes),
+          loadJson(DATA_FILES.activities),
+          loadJson(DATA_FILES.badges),
+          loadJson(DATA_FILES.avatars),
+          loadJson(DATA_FILES.config)
         ]);
-
-        Object.assign(appState, { routes, activities, badges, avatars, config });
-        renderSummary();
-        renderRoutes(routes);
-        renderActivities(activities);
-        renderBadges(badges);
-        renderAvatars(avatars);
-        status.textContent = "Local data loaded";
-      } catch (error) {
-        status.textContent = "Data load failed";
+        Object.assign(data, { routes, activities, badges, avatars, config });
+        progress = normalizeProgress(loadProgress());
+        saveProgress();
+        render();
+        attachEvents();
+        status.textContent = "Datos locales cargados";
+      } catch {
+        status.textContent = "Error al cargar datos";
         status.classList.add("error");
-        document.querySelector("main").insertAdjacentHTML("afterbegin", `
+        document.querySelector("#app").insertAdjacentHTML("afterbegin", `
           <div class="notice error">
-            Local JSON files could not be loaded. Run a simple static server from the project root, then open index.html through localhost.
+            No se pudieron cargar los JSON locales. Ejecuta un servidor estatico desde la raiz del proyecto con python3 -m http.server 8000 y abre localhost en el puerto 8000.
           </div>
         `);
       }

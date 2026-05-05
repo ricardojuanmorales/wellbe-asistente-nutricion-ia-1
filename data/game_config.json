@@ -1,23 +1,68 @@
 {
   "app_name": "Wellbe Quest",
+  "product_name": "Wellbe Quest v1 - Mapa del Buen Vivir",
   "version": "MVP V1",
-  "mission": "Wellbe Quest helps users build small, repeatable wellbeing habits through guided routes and reflective activities.",
-  "default_avatar_id": "avatar-sprout",
+  "progress_version": "1.0.0",
+  "mission": "Wellbe te acompana como co-piloto educativo para conectar nutricion humana, seguridad alimentaria, agroecologia, comunidad, inteligencia artificial y salud publica desde el buen vivir.",
+  "default_avatar_id": "avatar-wellbe-transdisciplinario",
+  "levels": [
+    {
+      "level": 1,
+      "name": "Explorador inicial",
+      "min_points": 0,
+      "wellbe_message": "Empieza con una actividad breve. Aprender tambien es observar con calma."
+    },
+    {
+      "level": 2,
+      "name": "Conector de saberes",
+      "min_points": 80,
+      "wellbe_message": "Ya estas conectando cuerpo, comunidad y territorio. Sigue con una ruta nueva."
+    },
+    {
+      "level": 3,
+      "name": "Analista del buen vivir",
+      "min_points": 180,
+      "wellbe_message": "Tus respuestas pueden mirar sistemas, datos y decisiones publicas con mas cuidado."
+    },
+    {
+      "level": 4,
+      "name": "Co-creador comunitario",
+      "min_points": 300,
+      "wellbe_message": "Estas listo para imaginar propuestas educativas con responsabilidad y sentido comunitario."
+    }
+  ],
   "points": {
-    "activity_completion_min": 10,
-    "activity_completion_max": 20,
-    "route_completion_bonus": 50
+    "activity_completion_min": 20,
+    "activity_completion_max": 45,
+    "route_completion_bonus": 0
+  },
+  "wellbe": {
+    "default_message": "Elige una ruta, completa una actividad y usa la reflexion como evidencia de aprendizaje.",
+    "tone": "claro, cuidadoso, educativo y no clinico"
+  },
+  "export_import": {
+    "storage_key": "wellbeQuestV1Progress",
+    "export_filename_prefix": "wellbe-quest-progress",
+    "allowed_import_type": "application/json"
   },
   "privacy": {
     "storage": "local_only",
     "accounts_enabled": false,
     "analytics_enabled": false,
-    "external_services_enabled": false
+    "external_services_enabled": false,
+    "commitments": [
+      "El progreso se guarda solo en este navegador.",
+      "No hay cuentas, OAuth, Supabase ni servicios externos.",
+      "No hay telemetria remota ni analitica de comportamiento.",
+      "La exportacion JSON queda bajo control de la persona usuaria.",
+      "La importacion valida IDs conocidos e ignora datos desconocidos."
+    ]
   },
   "content_boundaries": [
-    "wellbeing education only",
-    "no diagnosis",
-    "no treatment claims",
-    "no crisis intervention in V1"
+    "Contenido educativo, no clinico.",
+    "No diagnostica condiciones de salud.",
+    "No recomienda tratamientos, dietas personalizadas ni sustitutos de atencion profesional.",
+    "No solicita informacion personal sensible.",
+    "No usa IA externa en esta version."
   ]
 }

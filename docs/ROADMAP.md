@@ -1,30 +1,30 @@
 # Roadmap
 
-## V1: Static MVP
+## V1: MVP estatico
 
-- Create static app shell.
-- Define route, activity, badge, avatar, and config JSON.
-- Document architecture, schemas, user cases, privacy, and testing.
-- Validate whether the core quest concept is understandable.
+- App monolitica en `index.html`.
+- 4 rutas, 12 actividades, 6 badges y avatars.
+- Progreso local, niveles, estadisticas, exportacion e importacion JSON.
+- Documentacion de arquitectura, datos, privacidad, testing y casos de uso.
 
-## V1.1: Local Interaction
+## V1.1: Mejoras sin servicios externos
 
-- Add activity completion states in browser memory.
-- Add optional `localStorage` persistence.
-- Add route detail views.
-- Add simple badge-award simulation.
+- Filtros por ruta y tipo de actividad.
+- Vista detalle de ruta.
+- Mejoras de accesibilidad con pruebas manuales.
+- Mas contenido educativo revisado.
+- Exportaciones de ejemplo anonimas, si son utiles.
 
-## V1.2: Content Expansion
+## V1.2: Preparacion pedagogica
 
-- Add more routes and activity types.
-- Add accessibility review.
-- Add Spanish-language content option.
-- Add safety review checklist for all prompts.
+- Guia para facilitadores.
+- Rubrica de validacion educativa.
+- Modo bilingue si el publico lo necesita.
+- Revision de contenido con personas expertas.
 
-## V2: Service-Ready Prototype
+## V2: Evaluacion antes de servicios
 
-- Decide whether accounts are necessary.
-- Design API boundaries.
-- Choose persistence model.
-- Add privacy-preserving analytics only if justified.
-- Add content management workflow.
+- Decidir si se necesita backend.
+- Definir modelo de consentimiento y retencion.
+- Evaluar riesgos de IA externa antes de cualquier integracion.
+- Disenar API solo si el MVP demuestra valor y necesidad real.

@@ -1,28 +1,27 @@
-# Architecture
+# Arquitectura
 
-## Current Approach
+## Enfoque
 
-MVP V1 is a static web prototype. The browser loads `index.html`, then fetches JSON files from the local `data/` directory.
+Wellbe Quest v1 es un monolito HTML estatico. El navegador carga `index.html`, solicita archivos JSON desde `data/` y guarda progreso en `localStorage`.
 
-## Components
+## Flujo de datos
 
-- `index.html`: Presentation layer and minimal client-side rendering logic.
-- `data/routes.json`: Quest route definitions.
-- `data/activities.json`: Activity catalog.
-- `data/badges.json`: Badge definitions and trigger names.
-- `data/avatars.json`: Avatar options.
-- `data/game_config.json`: MVP configuration and safety boundaries.
-- `docs/`: Product, data, validation, and ethics documentation.
+1. `index.html` carga rutas, actividades, badges, avatars y configuracion.
+2. La app normaliza progreso desde `localStorage` con la clave `wellbeQuestV1Progress`.
+3. Cada actividad completada recalcula puntos, nivel, progreso por ruta, badges y estadisticas.
+4. La exportacion descarga un JSON local.
+5. La importacion lee un JSON elegido por la persona usuaria, valida IDs conocidos e ignora valores desconocidos.
 
-## Intentional Constraints
+## Restricciones
 
-- No backend.
-- No database.
-- No login or identity provider.
-- No analytics.
-- No external APIs.
-- No package manager required.
+- Sin backend.
+- Sin base de datos remota.
+- Sin cuentas ni OAuth.
+- Sin Supabase.
+- Sin APIs externas.
+- Sin telemetria remota.
+- Sin dependencias instaladas.
 
-## Future Architecture Direction
+## Escalabilidad
 
-Later versions can split the app into frontend modules, add local persistence, introduce a backend API, and move content into a managed data store. Those changes should happen only after the static MVP validates core user flows.
+La separacion entre UI monolitica y datos JSON permite editar contenido educativo sin tocar la logica principal. Una futura V2 podria modularizar JavaScript, agregar pruebas automatizadas o introducir persistencia remota solo despues de definir privacidad, consentimiento y gobernanza.

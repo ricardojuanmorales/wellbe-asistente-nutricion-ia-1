@@ -1,35 +1,33 @@
-# Wellbe Quest MVP V1
+# Wellbe Quest v1 - Mapa del Buen Vivir
 
-Wellbe Quest MVP V1 is a static-first prototype for a wellbeing quest experience. It uses one `index.html` file, local JSON data, and Markdown documentation. There is no backend, account system, analytics, or external service dependency in this version.
+Wellbe Quest v1 es un MVP educativo gamificado sobre nutricion humana, seguridad alimentaria y nutricional, agroecologia, comunidad, inteligencia artificial, salud publica y buen vivir.
 
-## Project Structure
+La aplicacion es estatica: usa un solo `index.html`, datos JSON editables y documentacion Markdown. No usa backend, Supabase, OAuth, APIs externas, telemetria remota ni frameworks pesados.
+
+## Estructura
 
 ```text
+AGENTS.md
 index.html
 data/routes.json
 data/activities.json
 data/badges.json
 data/avatars.json
 data/game_config.json
-docs/README.md
-docs/ARCHITECTURE.md
-docs/DATA_SCHEMA.md
-docs/PRIVACY_ETHICS.md
-docs/ROADMAP.md
-docs/TESTING_VALIDATION.md
-docs/USER_CASES.md
+docs/
+exports/.gitkeep
 ```
 
-## MVP Goal
+## Ejecutar localmente
 
-The goal is to validate whether users understand and value a simple quest-based wellbeing flow before investing in backend services, accounts, personalization, or integrations.
-
-## Running Locally
-
-Because `index.html` loads local JSON files with `fetch`, use a static file server from the project root.
+`index.html` carga JSON con `fetch`, asi que conviene usar un servidor estatico desde la raiz:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
+Luego abre el navegador en el puerto 8000 de localhost.
+
+## MVP
+
+Incluye 4 rutas, 12 actividades, 6 badges, avatar transdisciplinario, progreso local, niveles, estadisticas basicas, exportacion/importacion JSON y aviso de privacidad.
