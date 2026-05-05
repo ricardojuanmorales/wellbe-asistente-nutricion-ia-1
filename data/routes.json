@@ -1,0 +1,47 @@
+[
+  {
+    "id": "route-grounding-001",
+    "title": "Grounding Basics",
+    "description": "A short path for noticing the body, breath, and immediate surroundings.",
+    "theme": "calm",
+    "estimated_days": 3,
+    "activity_ids": [
+      "activity-breath-001",
+      "activity-senses-001",
+      "activity-reflection-001"
+    ],
+    "badge_ids": [
+      "badge-first-step"
+    ]
+  },
+  {
+    "id": "route-energy-001",
+    "title": "Gentle Energy",
+    "description": "A practical route for restoring momentum through small movement and choice.",
+    "theme": "energy",
+    "estimated_days": 4,
+    "activity_ids": [
+      "activity-movement-001",
+      "activity-water-001",
+      "activity-planning-001"
+    ],
+    "badge_ids": [
+      "badge-steady-builder"
+    ]
+  },
+  {
+    "id": "route-connection-001",
+    "title": "Connection Spark",
+    "description": "A route that invites low-pressure reflection on care, gratitude, and support.",
+    "theme": "connection",
+    "estimated_days": 5,
+    "activity_ids": [
+      "activity-gratitude-001",
+      "activity-kindness-001",
+      "activity-checkin-001"
+    ],
+    "badge_ids": [
+      "badge-kind-signal"
+    ]
+  }
+]

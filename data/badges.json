@@ -1,0 +1,30 @@
+[
+  {
+    "id": "badge-first-step",
+    "name": "First Step",
+    "description": "Awarded after completing the first activity in any route.",
+    "category": "starter",
+    "trigger": "complete_1_activity"
+  },
+  {
+    "id": "badge-steady-builder",
+    "name": "Steady Builder",
+    "description": "Awarded for completing activities on three different days.",
+    "category": "consistency",
+    "trigger": "complete_3_days"
+  },
+  {
+    "id": "badge-kind-signal",
+    "name": "Kind Signal",
+    "description": "Awarded after completing two connection activities.",
+    "category": "connection",
+    "trigger": "complete_2_connection_activities"
+  },
+  {
+    "id": "badge-route-finisher",
+    "name": "Route Finisher",
+    "description": "Awarded after completing all activities in one route.",
+    "category": "completion",
+    "trigger": "complete_route"
+  }
+]

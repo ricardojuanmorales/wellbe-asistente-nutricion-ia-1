@@ -1,0 +1,23 @@
+{
+  "app_name": "Wellbe Quest",
+  "version": "MVP V1",
+  "mission": "Wellbe Quest helps users build small, repeatable wellbeing habits through guided routes and reflective activities.",
+  "default_avatar_id": "avatar-sprout",
+  "points": {
+    "activity_completion_min": 10,
+    "activity_completion_max": 20,
+    "route_completion_bonus": 50
+  },
+  "privacy": {
+    "storage": "local_only",
+    "accounts_enabled": false,
+    "analytics_enabled": false,
+    "external_services_enabled": false
+  },
+  "content_boundaries": [
+    "wellbeing education only",
+    "no diagnosis",
+    "no treatment claims",
+    "no crisis intervention in V1"
+  ]
+}

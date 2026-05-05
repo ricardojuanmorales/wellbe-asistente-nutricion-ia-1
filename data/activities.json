@@ -1,0 +1,83 @@
+[
+  {
+    "id": "activity-breath-001",
+    "title": "Three Calm Breaths",
+    "type": "breathing",
+    "prompt": "Take three slow breaths and write one word for how your body feels now.",
+    "estimated_minutes": 2,
+    "points": 10,
+    "safety_note": "Stop if the exercise feels uncomfortable."
+  },
+  {
+    "id": "activity-senses-001",
+    "title": "Five Senses Scan",
+    "type": "grounding",
+    "prompt": "Name one thing you can see, hear, touch, smell, and taste.",
+    "estimated_minutes": 4,
+    "points": 15,
+    "safety_note": "Keep the activity observational and non-judgmental."
+  },
+  {
+    "id": "activity-reflection-001",
+    "title": "One Sentence Check-In",
+    "type": "reflection",
+    "prompt": "Complete this sentence: Right now, I need a little more...",
+    "estimated_minutes": 3,
+    "points": 10,
+    "safety_note": "Do not request sensitive health history."
+  },
+  {
+    "id": "activity-movement-001",
+    "title": "Two-Minute Reset",
+    "type": "movement",
+    "prompt": "Stretch, walk, or change posture for two minutes.",
+    "estimated_minutes": 2,
+    "points": 10,
+    "safety_note": "Choose a movement that is safe for your body."
+  },
+  {
+    "id": "activity-water-001",
+    "title": "Hydration Pause",
+    "type": "self-care",
+    "prompt": "Drink water or prepare a drink, then notice one small shift.",
+    "estimated_minutes": 3,
+    "points": 10,
+    "safety_note": "Avoid prescriptive nutrition or medical advice."
+  },
+  {
+    "id": "activity-planning-001",
+    "title": "Tiny Next Step",
+    "type": "planning",
+    "prompt": "Choose one small action you can complete in less than ten minutes.",
+    "estimated_minutes": 5,
+    "points": 20,
+    "safety_note": "Keep the task optional and user-controlled."
+  },
+  {
+    "id": "activity-gratitude-001",
+    "title": "Gratitude Dot",
+    "type": "reflection",
+    "prompt": "Write down one person, place, or moment you appreciate today.",
+    "estimated_minutes": 3,
+    "points": 10,
+    "safety_note": "Do not force positivity or minimize hard feelings."
+  },
+  {
+    "id": "activity-kindness-001",
+    "title": "Quiet Kindness",
+    "type": "connection",
+    "prompt": "Pick one low-effort kind action for yourself or someone else.",
+    "estimated_minutes": 5,
+    "points": 20,
+    "safety_note": "Avoid activities that create obligation or pressure."
+  },
+  {
+    "id": "activity-checkin-001",
+    "title": "Support Check-In",
+    "type": "connection",
+    "prompt": "Identify one supportive resource, person, or place available to you.",
+    "estimated_minutes": 4,
+    "points": 15,
+    "safety_note": "Include crisis-resource routing in later versions."
+  }
+]

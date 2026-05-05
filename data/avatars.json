@@ -1,0 +1,32 @@
+[
+  {
+    "id": "avatar-sprout",
+    "name": "Sprout",
+    "description": "A beginner-friendly avatar for slow, steady growth.",
+    "traits": [
+      "gentle",
+      "curious",
+      "patient"
+    ]
+  },
+  {
+    "id": "avatar-compass",
+    "name": "Compass",
+    "description": "An avatar for users who like direction, progress, and clarity.",
+    "traits": [
+      "focused",
+      "reflective",
+      "steady"
+    ]
+  },
+  {
+    "id": "avatar-spark",
+    "name": "Spark",
+    "description": "An avatar for energy, experimentation, and playful momentum.",
+    "traits": [
+      "bright",
+      "active",
+      "creative"
+    ]
+  }
+]
