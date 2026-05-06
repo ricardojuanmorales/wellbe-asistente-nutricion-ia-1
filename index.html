@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wellbe Quest v1 - Mapa del Buen Vivir</title>
+  <title>Wellbe Quest v1 — Mapa del Buen Vivir</title>
   <style>
     :root {
       color-scheme: light;
@@ -20,17 +20,10 @@
       --clay: #8b5740;
       --focus: #123f99;
       --radius: 8px;
-      --shadow: 0 14px 40px rgba(40, 50, 43, 0.08);
+      --shadow: 0 14px 40px rgba(40,50,43,.08);
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
@@ -39,395 +32,260 @@
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.55;
     }
-
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(rgba(36, 107, 79, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(36, 107, 79, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(36,107,79,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,79,.06) 1px, transparent 1px);
       background-size: 44px 44px;
       mask-image: linear-gradient(to bottom, #000, transparent 72%);
     }
-
-    a {
-      color: var(--forest);
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      border: 0;
-    }
-
-    button:focus-visible,
-    a:focus-visible,
-    input:focus-visible,
-    select:focus-visible {
+    a { color: var(--forest); }
+    button, input, select, textarea { font: inherit; }
+    button { border: 0; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
       outline: 3px solid var(--focus);
       outline-offset: 3px;
     }
-
     .shell {
       position: relative;
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
     }
-
     header {
-      padding: 26px 0 18px;
+      padding: 48px 0 32px;
     }
-
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
-
-    .brand {
-      display: grid;
-      gap: 2px;
-    }
-
-    .eyebrow,
-    .chip,
-    .small-label {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .brand strong { font-size: 1.05rem; }
+    .eyebrow {
+      display: block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
       text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      max-width: 850px;
-      margin-bottom: 10px;
-      font-size: clamp(2.05rem, 5vw, 4.4rem);
-      line-height: 1.02;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 8px;
-      font-size: clamp(1.35rem, 2.4vw, 2rem);
-      line-height: 1.15;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-      line-height: 1.25;
-    }
-
-    .subtitle {
-      max-width: 780px;
-      margin-bottom: 0;
       color: var(--muted);
-      font-size: 1.06rem;
+      margin-bottom: 4px;
     }
-
+    h1 { margin: 0 0 10px; font-size: clamp(1.5rem, 4vw, 2.4rem); line-height: 1.2; }
+    h2 { margin: 0 0 10px; font-size: clamp(1.1rem, 3vw, 1.6rem); }
+    h3 { margin: 0 0 6px; font-size: 1rem; }
+    p { margin: 0 0 10px; }
+    p:last-child { margin-bottom: 0; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; max-width: 60ch; }
+    .muted { color: var(--muted); }
+    .chip {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--surface-2);
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--forest);
+      border: 1px solid var(--line);
+    }
+    .chip.error { background: #fff0f3; color: #76263a; border-color: #ecc0ca; }
     nav {
       position: sticky;
       top: 0;
-      z-index: 5;
-      margin: 0 -8px;
-      padding: 8px;
-      background: rgba(246, 242, 234, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(216, 221, 213, 0.8);
+      z-index: 10;
+      background: rgba(246,242,234,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      margin: 0 0 28px;
     }
-
     .nav-list {
       display: flex;
-      gap: 8px;
+      gap: 2px;
       overflow-x: auto;
-      padding-bottom: 2px;
+      padding: 6px 0;
+      scrollbar-width: none;
     }
-
+    .nav-list::-webkit-scrollbar { display: none; }
     .nav-list a {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      min-height: 40px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--ink);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    main {
-      display: grid;
-      gap: 18px;
-      padding: 18px 0 56px;
-    }
-
-    section {
-      scroll-margin-top: 80px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .panel,
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
+      white-space: nowrap;
+      padding: 5px 12px;
       border-radius: var(--radius);
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    .nav-list a:hover { background: var(--surface-2); color: var(--forest); }
+    main { display: grid; gap: 24px; padding-bottom: 48px; }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
-
-    .panel {
-      padding: clamp(18px, 3vw, 28px);
-    }
-
-    .hero-card {
-      min-height: 380px;
+    .hero {
       display: grid;
-      align-content: end;
-      background:
-        linear-gradient(145deg, rgba(36, 107, 79, 0.12), rgba(47, 111, 151, 0.08)),
-        var(--surface);
-      overflow: hidden;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
     }
-
-    .map-mark {
-      width: min(520px, 100%);
-      min-height: 190px;
-      margin-bottom: 22px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      align-items: end;
-    }
-
-    .land-tile {
-      min-height: var(--tile-h);
-      border: 1px solid rgba(23, 33, 29, 0.12);
-      border-radius: 8px;
-      background: var(--tile-bg);
-      display: flex;
-      align-items: end;
-      padding: 10px;
-      color: #fffefa;
-      font-weight: 800;
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.28);
-    }
-
-    .copilot {
-      display: grid;
-      gap: 14px;
-    }
-
-    .wellbe-face {
-      display: grid;
-      place-items: center;
-      width: 76px;
-      height: 76px;
-      border-radius: 50%;
-      background: var(--surface-2);
-      border: 2px solid rgba(36, 107, 79, 0.2);
-      color: var(--forest);
-      font-size: 2rem;
-      font-weight: 900;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .stat {
-      padding: 14px;
-      border-radius: var(--radius);
-      background: var(--surface-2);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.55rem;
-      line-height: 1.1;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
+    .hero-card { padding: 28px; }
     .section-head {
       display: flex;
-      align-items: end;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
-
-    .section-head p {
-      max-width: 680px;
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
     }
-
     .card {
-      padding: 16px;
-    }
-
-    .route-card {
-      border-left: 5px solid var(--route-color, var(--forest));
-    }
-
-    .activity-card {
-      display: grid;
-      gap: 12px;
-    }
-
-    .activity-card.completed {
-      background: #f1fbf5;
-      border-color: rgba(36, 107, 79, 0.35);
-    }
-
-    .activity-story,
-    .muted {
-      color: var(--muted);
-    }
-
-    .meta-row,
-    .tag-row,
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .tag,
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 4px 9px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--muted);
-      font-size: 0.8rem;
-      text-transform: none;
-      letter-spacing: 0;
-      font-weight: 700;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 9px 13px;
-      border-radius: var(--radius);
-      background: var(--ink);
-      color: #fffefa;
-      cursor: pointer;
-      font-weight: 800;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn.secondary {
-      border: 1px solid var(--line);
       background: var(--surface);
-      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-
-    .btn.good {
-      background: var(--forest);
-    }
-
-    .btn.warn {
-      background: var(--berry);
-    }
-
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.62;
-      transform: none;
-    }
-
+    .route-card { border-top: 3px solid var(--route-color, var(--forest)); }
+    .activity-card.completed { opacity: .7; }
+    .activity-card.completed h3::after { content: " ✓"; color: var(--forest); }
     .route-progress {
-      height: 10px;
+      height: 6px;
+      background: var(--line);
+      border-radius: 99px;
       overflow: hidden;
-      border-radius: 999px;
-      background: #e8ece7;
     }
-
     .route-progress span {
       display: block;
       height: 100%;
       width: var(--progress, 0%);
       background: var(--route-color, var(--forest));
+      border-radius: 99px;
+      transition: width .4s ease;
     }
-
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--surface-2);
+      font-size: .75rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: var(--radius);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: filter .15s, opacity .15s;
+      text-decoration: none;
+    }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn:not(:disabled):hover { filter: brightness(.93); }
+    .btn.good { background: var(--forest); color: #fff; }
+    .btn.secondary { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
+    .btn.warn { background: #fef2cd; color: #7a4a00; border: 1px solid #f0d48a; }
+    .btn.danger { background: #fff0f3; color: #76263a; border: 1px solid #ecc0ca; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .copilot {
+      background: var(--surface-2);
+      border: 1px solid rgba(36,107,79,.18);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .wellbe-face {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .map-mark {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .land-tile {
+      height: var(--tile-h, 80px);
+      border-radius: var(--radius);
+      background: var(--tile-bg, var(--forest));
+      opacity: .85;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+      font-size: .7rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.9);
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .stat strong { font-size: 1.5rem; font-weight: 800; color: var(--forest); }
+    .stat span { font-size: .72rem; color: var(--muted); }
     .avatar-option {
       display: grid;
       gap: 10px;
       text-align: left;
       cursor: pointer;
+      background: var(--surface);
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: border-color .15s, background .15s;
     }
-
-    .avatar-option.selected {
-      border-color: var(--forest);
-      background: #f1fbf5;
-    }
-
-    .badge-card.earned {
-      border-color: rgba(164, 109, 21, 0.45);
-      background: #fff8e9;
-    }
-
+    .avatar-option.selected { border-color: var(--forest); background: #f1fbf5; }
+    .badge-card.earned { border-color: rgba(164,109,21,.45); background: #fff8e9; }
     .notice {
       padding: 13px 14px;
       border: 1px solid #eed9ad;
       border-radius: var(--radius);
       background: #fff8e9;
       color: #61410d;
+      font-size: .88rem;
     }
-
-    .notice.error {
-      border-color: #ecc0ca;
-      background: #fff0f3;
-      color: #76263a;
-    }
-
+    .notice.error { border-color: #ecc0ca; background: #fff0f3; color: #76263a; }
+    .notice.info { border-color: #b3d4f0; background: #f0f7ff; color: #1a3f6e; }
     .file-input {
       max-width: 100%;
       padding: 10px;
@@ -435,61 +293,331 @@
       border-radius: var(--radius);
       background: var(--surface);
     }
-
-    .privacy-list {
-      display: grid;
-      gap: 10px;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
+    .privacy-list { display: grid; gap: 10px; padding-left: 20px; color: var(--muted); }
     .sr-only {
       position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip: rect(0,0,0,0);
       white-space: nowrap;
       border: 0;
     }
+    footer { padding: 0 0 34px; color: var(--muted); text-align: center; }
 
-    footer {
-      padding: 0 0 34px;
-      color: var(--muted);
+    /* ── Profile section ── */
+    .profile-form { display: grid; gap: 14px; max-width: 480px; }
+    .field { display: grid; gap: 6px; }
+    .field label { font-size: .88rem; font-weight: 600; }
+    .field input, .field select {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .consent-row { display: flex; align-items: flex-start; gap: 10px; }
+    .consent-row input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+    .consent-row label { font-size: .85rem; color: var(--muted); }
+    .profile-display {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .profile-avatar-circle {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .profile-info strong { display: block; font-size: 1.05rem; }
+    .profile-info span { font-size: .85rem; color: var(--muted); }
+
+    /* ── Activity modal ── */
+    dialog {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.22);
+      padding: 0;
+      width: min(720px, calc(100vw - 32px));
+      max-height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    dialog::backdrop { background: rgba(10,20,15,.55); backdrop-filter: blur(3px); }
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    .modal-scroll {
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: grid;
+      gap: 16px;
+      flex: 1 1 0;
+    }
+    .modal-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .modal-story { color: var(--muted); }
+    .modal-wellbe {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--surface-2);
+      border: 1px solid rgba(36,107,79,.18);
+      border-radius: var(--radius);
+    }
+    .modal-wellbe-face {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-weight: 800;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-wellbe p { font-size: .88rem; margin: 0; }
+
+    /* ── Quiz ── */
+    .quiz-questions { display: grid; gap: 20px; }
+    .quiz-question { display: grid; gap: 10px; }
+    .question-text { font-weight: 600; margin: 0; }
+    .quiz-options { display: grid; gap: 8px; }
+    .quiz-option {
+      text-align: left;
+      padding: 10px 14px;
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: .88rem;
+      transition: border-color .15s, background .15s;
+    }
+    .quiz-option:not(:disabled):hover { border-color: var(--forest); background: #f1fbf5; }
+    .quiz-option.correct { border-color: var(--forest); background: #e8f7ee; }
+    .quiz-option.wrong { border-color: var(--berry); background: #fdf0f3; }
+    .explanation-box {
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-left: 3px solid var(--forest);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .85rem;
+      color: var(--ink);
+    }
+
+    /* ── Claim detector ── */
+    .claims-list { display: grid; gap: 16px; }
+    .claim-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      background: var(--surface);
+    }
+    .claim-text { font-style: italic; margin: 0; }
+    .claim-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .claim-result {
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-left: 3px solid var(--maize);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .85rem;
+    }
+    .verdict-true { border-left-color: var(--forest); }
+    .verdict-misleading { border-left-color: var(--maize); }
+    .verdict-false { border-left-color: var(--berry); }
+
+    /* ── Branching case ── */
+    .branch-scenario {
+      padding: 14px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      font-style: italic;
+    }
+    .branch-step { display: grid; gap: 14px; }
+    .branch-choices { display: grid; gap: 8px; }
+    .branch-choice {
+      text-align: left;
+      padding: 11px 15px;
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: .88rem;
+      transition: border-color .15s, background .15s;
+    }
+    .branch-choice:hover { border-color: var(--forest); background: #f1fbf5; }
+    .branch-end {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-2);
+    }
+
+    /* ── Mind map ── */
+    .mind-center {
       text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 14px;
+      background: var(--forest);
+      color: #fff;
+      border-radius: var(--radius);
+      margin-bottom: 4px;
+    }
+    .mind-map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+    .mind-node {
+      border: 2px solid var(--node-color, var(--forest));
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .mind-node-btn {
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: .88rem;
+    }
+    .mind-node-btn strong { color: var(--node-color, var(--forest)); }
+    .mind-node-btn::after { content: "▸"; font-size: .75rem; color: var(--muted); transition: transform .15s; }
+    .mind-node-btn[aria-expanded="true"]::after { transform: rotate(90deg); }
+    .mind-node-body {
+      padding: 10px 14px 12px;
+      font-size: .82rem;
+      border-top: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+    .mind-node-body p { margin: 0 0 6px; }
+    .mind-node-body ul { margin: 0; padding-left: 16px; color: var(--muted); }
+    .mind-reflection {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #fff8e9;
+      border: 1px solid #eed9ad;
+      border-radius: var(--radius);
+      font-size: .88rem;
+      color: #61410d;
+    }
+
+    /* ── Simulation ── */
+    .sim-resilience {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: .88rem;
+      font-weight: 600;
+    }
+    .sim-resilience-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--line);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .sim-resilience-fill {
+      height: 100%;
+      background: var(--forest);
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+    .sim-step { display: grid; gap: 12px; }
+    .sim-options { display: grid; gap: 8px; }
+    .sim-option {
+      text-align: left;
+      padding: 10px 14px;
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: .88rem;
+      transition: border-color .15s;
+    }
+    .sim-option.selected { border-color: var(--forest); background: #e8f7ee; }
+    .sim-effect {
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-left: 3px solid var(--maize);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .85rem;
+    }
+    .sim-end { display: grid; gap: 10px; padding: 14px; background: var(--surface-2); border-radius: var(--radius); border: 1px solid var(--line); }
+
+    /* ── Reflection ── */
+    .reflection-prompts { display: grid; gap: 16px; }
+    .reflection-prompt-item { display: grid; gap: 6px; }
+    .reflection-label { font-size: .88rem; font-weight: 600; }
+    .reflection-textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      resize: vertical;
+      min-height: 72px;
+    }
+
+    /* ── Activity card: comenzar mode ── */
+    .activity-type-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      background: var(--surface-2);
+      color: var(--muted);
+      border: 1px solid var(--line);
     }
 
     @media (max-width: 800px) {
-      .topbar,
-      .hero,
-      .section-head {
-        display: grid;
-      }
-
-      .stat-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .map-mark {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .topbar, .hero, .section-head { display: grid; }
+      .hero { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .map-mark { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 520px) {
-      .shell {
-        width: min(100% - 20px, 1180px);
-      }
-
-      .panel,
-      .card {
-        padding: 14px;
-      }
-
-      .stat-grid {
-        grid-template-columns: 1fr;
-      }
+      .shell { width: min(100% - 20px, 1180px); }
+      .panel, .card { padding: 14px; }
+      .stat-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -503,12 +631,13 @@
         </div>
         <span class="chip" id="load-status">Cargando datos locales</span>
       </div>
-      <h1>Explora nutricion, comunidad, agroecologia e IA para el buen vivir.</h1>
-      <p class="subtitle">Una experiencia educativa gamificada, local y sin cuentas para practicar pensamiento critico, cuidado colectivo y aprendizaje transdisciplinario.</p>
+      <h1>Explora nutrición, comunidad, agroecología e IA para el buen vivir.</h1>
+      <p class="subtitle">Una experiencia educativa gamificada, local y sin cuentas para practicar pensamiento crítico, cuidado colectivo y aprendizaje transdisciplinario.</p>
     </header>
 
-    <nav aria-label="Navegacion principal">
+    <nav aria-label="Navegación principal">
       <div class="nav-list">
+        <a href="#perfil">Perfil</a>
         <a href="#mapa">Mapa</a>
         <a href="#rutas">Rutas</a>
         <a href="#actividades">Actividades</a>
@@ -520,12 +649,61 @@
     </nav>
 
     <main id="app">
+
+      <!-- 1. Perfil -->
+      <section class="panel" id="perfil" aria-labelledby="perfil-title">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Tu perfil educativo</span>
+            <h2 id="perfil-title">Bienvenida/o al Mapa del Buen Vivir</h2>
+          </div>
+        </div>
+
+        <div id="profile-form-container">
+          <p class="muted">Crea un perfil local para personalizar tu experiencia. No se envía a ningún servidor.</p>
+          <form id="profile-form" class="profile-form" novalidate>
+            <div class="field">
+              <label for="prof-name">Nombre o alias (opcional)</label>
+              <input id="prof-name" type="text" placeholder="Explorador/a del Buen Vivir" maxlength="60" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="prof-role">Rol</label>
+              <select id="prof-role">
+                <option value="">— Selecciona un rol —</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="docente">Docente</option>
+                <option value="investigador">Investigador/a</option>
+                <option value="comunidad">Comunidad</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="consent-row">
+              <input type="checkbox" id="prof-consent" />
+              <label for="prof-consent">Acepto participar opcionalmente en investigación educativa futura (desactivado por defecto; no recopila datos en V1).</label>
+            </div>
+            <button class="btn good" type="submit">Crear perfil</button>
+          </form>
+        </div>
+
+        <div id="profile-display" hidden>
+          <div class="profile-display">
+            <div class="profile-avatar-circle" aria-hidden="true" id="profile-initial">E</div>
+            <div class="profile-info">
+              <strong id="profile-name-label">Explorador/a</strong>
+              <span id="profile-role-label">–</span>
+            </div>
+            <button class="btn secondary" type="button" id="profile-edit-btn">Editar perfil</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Mapa / Hero -->
       <section class="hero" id="mapa">
         <div class="panel hero-card">
           <div class="map-mark" aria-hidden="true" id="map-tiles"></div>
           <span class="eyebrow">Storytelling educativo</span>
           <h2>El mapa no busca competir: busca conectar saberes para tomar mejores decisiones.</h2>
-          <p class="muted" id="mission-copy">Wellbe te acompana como co-piloto educativo con preguntas, rutas y actividades breves.</p>
+          <p class="muted" id="mission-copy">Wellbe te acompaña como co-piloto educativo con preguntas, rutas y actividades breves.</p>
           <div class="stat-grid" aria-label="Resumen de contenido">
             <div class="stat"><strong id="route-count">0</strong><span>rutas</span></div>
             <div class="stat"><strong id="activity-count">0</strong><span>actividades</span></div>
@@ -539,45 +717,48 @@
           <div>
             <span class="eyebrow">Co-piloto educativo</span>
             <h2 id="wellbe-title">Wellbe</h2>
-            <p id="wellbe-message">Observa el mapa, elige una ruta y completa una actividad pequena. Tu progreso vive solo en este navegador.</p>
+            <p id="wellbe-message">Observa el mapa, elige una ruta y completa una actividad pequeña. Tu progreso vive solo en este navegador.</p>
           </div>
           <div class="notice">Wellbe no diagnostica, no da tratamiento y no reemplaza profesionales de salud. Este MVP es educativo.</div>
         </aside>
       </section>
 
-      <section class="panel" id="rutas">
+      <!-- 3. Rutas -->
+      <section class="panel" id="rutas" aria-labelledby="rutas-title">
         <div class="section-head">
           <div>
             <span class="eyebrow">4 rutas de aprendizaje</span>
-            <h2>Rutas del Buen Vivir</h2>
+            <h2 id="rutas-title">Rutas del Buen Vivir</h2>
           </div>
-          <p>Cada ruta combina historia, accion breve y reflexion. Completa actividades para avanzar en el mapa.</p>
+          <p>Cada ruta combina historia, acción breve y reflexión. Completa actividades para avanzar en el mapa.</p>
         </div>
         <div class="grid" id="routes-list"></div>
       </section>
 
-      <section class="panel" id="actividades">
+      <!-- 4. Actividades -->
+      <section class="panel" id="actividades" aria-labelledby="actividades-title">
         <div class="section-head">
           <div>
             <span class="eyebrow">12 actividades iniciales</span>
-            <h2>Actividades educativas</h2>
+            <h2 id="actividades-title">Actividades educativas</h2>
           </div>
-          <p>Marca actividades completadas cuando hayas leido, practicado y reflexionado. Puedes reiniciarlas cuando quieras.</p>
+          <p>Haz clic en "Comenzar" para abrir la actividad interactiva. Puedes reiniciar cualquier actividad cuando quieras.</p>
         </div>
         <div class="grid" id="activities-list"></div>
       </section>
 
-      <section class="panel" id="progreso">
+      <!-- 5. Progreso -->
+      <section class="panel" id="progreso" aria-labelledby="progreso-title">
         <div class="section-head">
           <div>
             <span class="eyebrow">Progreso local</span>
-            <h2>Panel de aprendizaje</h2>
+            <h2 id="progreso-title">Panel de aprendizaje</h2>
           </div>
-          <p>Estos datos se guardan en `localStorage` de este navegador. No se envian a ningun servidor.</p>
+          <p>Estos datos se guardan en <code>localStorage</code> de este navegador. No se envían a ningún servidor.</p>
         </div>
         <div class="grid">
           <div class="card">
-            <h3>Estadisticas locales</h3>
+            <h3>Estadísticas locales</h3>
             <div class="stat-grid">
               <div class="stat"><strong id="points-stat">0</strong><span>puntos</span></div>
               <div class="stat"><strong id="completed-stat">0</strong><span>completadas</span></div>
@@ -587,7 +768,7 @@
           </div>
           <div class="card">
             <h3>Exportar e importar JSON</h3>
-            <p class="muted">Exporta tu progreso para guardarlo localmente. Importar valida IDs conocidos e ignora valores desconocidos.</p>
+            <p class="muted">Exporta tu progreso para guardarlo. Importar valida IDs conocidos e ignora valores desconocidos.</p>
             <div class="actions">
               <button class="btn good" id="export-progress" type="button">Exportar progreso</button>
               <label class="btn secondary" for="import-progress">Importar JSON</label>
@@ -599,65 +780,126 @@
         </div>
       </section>
 
-      <section class="panel" id="badges">
+      <!-- 6. Badges -->
+      <section class="panel" id="badges" aria-labelledby="badges-title">
         <div class="section-head">
           <div>
             <span class="eyebrow">6 badges iniciales</span>
-            <h2>Reconocimientos</h2>
+            <h2 id="badges-title">Reconocimientos</h2>
           </div>
-          <p>Los badges celebran aprendizaje y exploracion; no se usan para presionar ni comparar personas.</p>
+          <p>Los badges celebran aprendizaje y exploración; no se usan para presionar ni comparar personas.</p>
         </div>
         <div class="grid" id="badges-list"></div>
       </section>
 
-      <section class="panel" id="avatar">
+      <!-- 7. Avatar -->
+      <section class="panel" id="avatar" aria-labelledby="avatar-title">
         <div class="section-head">
           <div>
             <span class="eyebrow">Avatar transdisciplinario</span>
-            <h2>Elige tu compania de aprendizaje</h2>
+            <h2 id="avatar-title">Elige tu compañía de aprendizaje</h2>
           </div>
-          <p>La eleccion de avatar se guarda localmente y no requiere identidad personal.</p>
+          <p>La elección de avatar se guarda localmente y no requiere identidad personal.</p>
         </div>
         <div class="grid" id="avatars-list"></div>
       </section>
 
-      <section class="panel" id="privacidad">
+      <!-- 8. Privacidad -->
+      <section class="panel" id="privacidad" aria-labelledby="privacidad-title">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Privacidad y limites</span>
-            <h2>Educativo, local y transparente</h2>
+            <span class="eyebrow">Privacidad y límites</span>
+            <h2 id="privacidad-title">Educativo, local y transparente</h2>
           </div>
-          <p>Este MVP evita cuentas, servicios externos, telemetria remota y recoleccion de datos personales.</p>
+          <p>Este MVP evita cuentas, servicios externos, telemetría remota y recolección de datos personales.</p>
         </div>
         <ul class="privacy-list" id="privacy-list"></ul>
       </section>
+
     </main>
 
     <footer>
-      Wellbe Quest v1 - Mapa del Buen Vivir. Prototipo educativo estatico.
+      Wellbe Quest v1 — Mapa del Buen Vivir. Prototipo educativo estático.
     </footer>
   </div>
 
+  <!-- Activity modal -->
+  <dialog id="activity-modal" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <div>
+        <span class="eyebrow" id="modal-route-name"></span>
+        <h2 id="modal-title" style="margin:0"></h2>
+      </div>
+      <button class="btn secondary" id="modal-close" type="button" aria-label="Cerrar actividad">✕ Cerrar</button>
+    </div>
+    <div class="modal-scroll">
+      <p class="modal-story muted" id="modal-story"></p>
+      <div class="modal-wellbe" id="modal-wellbe-hint">
+        <div class="modal-wellbe-face" aria-hidden="true">W</div>
+        <p id="modal-wellbe-text"></p>
+      </div>
+      <div id="modal-content"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn good" id="modal-complete" type="button" disabled>Completar actividad</button>
+    </div>
+  </dialog>
+
   <script>
+    /* ─────────────────────────────────────────
+       Constants & state
+    ───────────────────────────────────────── */
     const STORAGE_KEY = "wellbeQuestV1Progress";
-    const DATA_FILES = {
-      routes: "data/routes.json",
+    const PROFILE_KEY = "wellbeQuestV1Profile";
+    const DATA_FILES  = {
+      routes:     "data/routes.json",
       activities: "data/activities.json",
-      badges: "data/badges.json",
-      avatars: "data/avatars.json",
-      config: "data/game_config.json"
+      badges:     "data/badges.json",
+      avatars:    "data/avatars.json",
+      config:     "data/game_config.json"
     };
 
-    const data = {
-      routes: [],
-      activities: [],
-      badges: [],
-      avatars: [],
-      config: {}
-    };
-
+    const data = { routes: [], activities: [], badges: [], avatars: [], config: {} };
     let progress = createDefaultProgress();
+    let profile  = createDefaultProfile();
 
+    /* ─────────────────────────────────────────
+       Profile helpers
+    ───────────────────────────────────────── */
+    function createDefaultProfile() {
+      return { name: "", role: "", researchConsent: false, createdAt: "", profileVersion: "1.0" };
+    }
+
+    function saveProfile() {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    }
+
+    function loadProfile() {
+      try {
+        const s = localStorage.getItem(PROFILE_KEY);
+        return s ? { ...createDefaultProfile(), ...JSON.parse(s) } : createDefaultProfile();
+      } catch { return createDefaultProfile(); }
+    }
+
+    function renderProfile() {
+      const hasProfile = profile.name || profile.role;
+      document.querySelector("#profile-form-container").hidden = !!hasProfile;
+      document.querySelector("#profile-display").hidden = !hasProfile;
+      if (hasProfile) {
+        const initial = (profile.name || "E").charAt(0).toUpperCase();
+        document.querySelector("#profile-initial").textContent = initial;
+        document.querySelector("#profile-name-label").textContent = profile.name || "Explorador/a";
+        const roleLabels = {
+          estudiante: "Estudiante", docente: "Docente",
+          investigador: "Investigador/a", comunidad: "Comunidad", otro: "Otro"
+        };
+        document.querySelector("#profile-role-label").textContent = roleLabels[profile.role] || "Sin rol especificado";
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       Progress helpers
+    ───────────────────────────────────────── */
     function createDefaultProgress() {
       return {
         version: "1.0.0",
@@ -667,33 +909,26 @@
         points: 0,
         level: 1,
         routeProgress: {},
-        stats: {
-          completedActivities: 0,
-          completedRoutes: 0,
-          exportedCount: 0,
-          importedCount: 0
-        },
+        stats: { completedActivities: 0, completedRoutes: 0, exportedCount: 0, importedCount: 0 },
         updatedAt: new Date().toISOString()
       };
     }
 
     function escapeHtml(value) {
       return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
+        .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;").replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
     }
 
     function uniqueKnownIds(ids, knownSet) {
-      return [...new Set(Array.isArray(ids) ? ids : [])].filter((id) => knownSet.has(id));
+      return [...new Set(Array.isArray(ids) ? ids : [])].filter(id => knownSet.has(id));
     }
 
     async function loadJson(path) {
-      const response = await fetch(path);
-      if (!response.ok) throw new Error(`No se pudo cargar ${path}`);
-      return response.json();
+      const r = await fetch(path);
+      if (!r.ok) throw new Error(`No se pudo cargar ${path}`);
+      return r.json();
     }
 
     function saveProgress() {
@@ -703,66 +938,53 @@
 
     function loadProgress() {
       try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) return createDefaultProgress();
-        return { ...createDefaultProgress(), ...JSON.parse(stored) };
-      } catch {
-        return createDefaultProgress();
-      }
+        const s = localStorage.getItem(STORAGE_KEY);
+        return s ? { ...createDefaultProgress(), ...JSON.parse(s) } : createDefaultProgress();
+      } catch { return createDefaultProgress(); }
     }
 
     function calculateLevel(points) {
       const levels = data.config.levels || [];
-      const current = levels.reduce((selected, level) => points >= level.min_points ? level : selected, levels[0]);
-      return current?.level || 1;
+      return levels.reduce((sel, lv) => points >= lv.min_points ? lv : sel, levels[0])?.level || 1;
     }
 
     function calculateRouteProgress(completedIds) {
-      const completed = new Set(completedIds);
-      const routeProgress = {};
-      data.routes.forEach((route) => {
+      const done = new Set(completedIds);
+      const rp = {};
+      data.routes.forEach(route => {
         const total = route.activity_ids.length;
-        const done = route.activity_ids.filter((id) => completed.has(id)).length;
-        routeProgress[route.id] = {
-          completed: done,
-          total,
-          percent: total ? Math.round((done / total) * 100) : 0,
-          complete: total > 0 && done === total
-        };
+        const count = route.activity_ids.filter(id => done.has(id)).length;
+        rp[route.id] = { completed: count, total, percent: total ? Math.round((count / total) * 100) : 0, complete: total > 0 && count === total };
       });
-      return routeProgress;
+      return rp;
     }
 
     function evaluateBadges(completedIds) {
-      const completed = new Set(completedIds);
-      const routeProgress = calculateRouteProgress(completedIds);
-      const completedActivities = data.activities.filter((activity) => completed.has(activity.id));
-      const completedRoutes = Object.values(routeProgress).filter((route) => route.complete).length;
-      const completedTypes = new Set(completedActivities.map((activity) => activity.type));
-
-      return data.badges.filter((badge) => {
-        if (badge.trigger === "complete_1_activity") return completed.size >= 1;
-        if (badge.trigger === "complete_1_route") return completedRoutes >= 1;
-        if (badge.trigger === "complete_6_activities") return completed.size >= 6;
-        if (badge.trigger === "complete_12_activities") return completed.size >= 12;
-        if (badge.trigger === "complete_community_activity") return completedActivities.some((activity) => activity.route_id === "route-agroecologia-comunidad");
-        if (badge.trigger === "complete_ai_activity") return completedActivities.some((activity) => activity.route_id === "route-ia-salud-buen-vivir");
-        if (badge.trigger === "complete_4_activity_types") return completedTypes.size >= 4;
+      const done = new Set(completedIds);
+      const rp   = calculateRouteProgress(completedIds);
+      const completedActivities = data.activities.filter(a => done.has(a.id));
+      const completedRoutes     = Object.values(rp).filter(r => r.complete).length;
+      const completedTypes      = new Set(completedActivities.map(a => a.type));
+      return data.badges.filter(badge => {
+        if (badge.trigger === "complete_1_activity")           return done.size >= 1;
+        if (badge.trigger === "complete_1_route")              return completedRoutes >= 1;
+        if (badge.trigger === "complete_6_activities")         return done.size >= 6;
+        if (badge.trigger === "complete_12_activities")        return done.size >= 12;
+        if (badge.trigger === "complete_community_activity")   return completedActivities.some(a => a.route_id === "route-agroecologia-comunidad");
+        if (badge.trigger === "complete_ai_activity")          return completedActivities.some(a => a.route_id === "route-ia-salud-buen-vivir");
+        if (badge.trigger === "complete_4_activity_types")     return completedTypes.size >= 4;
         return false;
-      }).map((badge) => badge.id);
+      }).map(b => b.id);
     }
 
     function normalizeProgress(input) {
-      const activityIds = new Set(data.activities.map((item) => item.id));
-      const avatarIds = new Set(data.avatars.map((item) => item.id));
+      const activityIds = new Set(data.activities.map(a => a.id));
+      const avatarIds   = new Set(data.avatars.map(a => a.id));
       const completedActivityIds = uniqueKnownIds(input?.completedActivityIds, activityIds);
-      const selectedAvatarId = avatarIds.has(input?.selectedAvatarId) ? input.selectedAvatarId : data.config.default_avatar_id;
-      const points = data.activities
-        .filter((activity) => completedActivityIds.includes(activity.id))
-        .reduce((total, activity) => total + Number(activity.points || 0), 0);
-      const routeProgress = calculateRouteProgress(completedActivityIds);
-      const earnedBadgeIds = evaluateBadges(completedActivityIds);
-
+      const selectedAvatarId     = avatarIds.has(input?.selectedAvatarId) ? input.selectedAvatarId : (data.config.default_avatar_id || "");
+      const points = data.activities.filter(a => completedActivityIds.includes(a.id)).reduce((sum, a) => sum + Number(a.points || 0), 0);
+      const routeProgress   = calculateRouteProgress(completedActivityIds);
+      const earnedBadgeIds  = evaluateBadges(completedActivityIds);
       return {
         ...createDefaultProgress(),
         version: input?.version || data.config.progress_version || "1.0.0",
@@ -774,7 +996,7 @@
         routeProgress,
         stats: {
           completedActivities: completedActivityIds.length,
-          completedRoutes: Object.values(routeProgress).filter((route) => route.complete).length,
+          completedRoutes: Object.values(routeProgress).filter(r => r.complete).length,
           exportedCount: Number(input?.stats?.exportedCount || 0),
           importedCount: Number(input?.stats?.importedCount || 0)
         },
@@ -796,7 +1018,7 @@
     }
 
     function resetActivity(activityId) {
-      progress.completedActivityIds = progress.completedActivityIds.filter((id) => id !== activityId);
+      progress.completedActivityIds = progress.completedActivityIds.filter(id => id !== activityId);
       recalculateAndSave();
     }
 
@@ -809,8 +1031,8 @@
       progress.stats.exportedCount += 1;
       recalculateAndSave();
       const today = new Date().toISOString().slice(0, 10);
-      const blob = new Blob([JSON.stringify(progress, null, 2)], { type: "application/json" });
-      const link = document.createElement("a");
+      const blob  = new Blob([JSON.stringify(progress, null, 2)], { type: "application/json" });
+      const link  = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = `wellbe-quest-progress-${today}.json`;
       document.body.appendChild(link);
@@ -825,7 +1047,7 @@
       const reader = new FileReader();
       reader.onload = () => {
         try {
-          const parsed = JSON.parse(String(reader.result || "{}"));
+          const parsed   = JSON.parse(String(reader.result || "{}"));
           const imported = normalizeProgress(parsed);
           imported.stats.importedCount = Number(progress.stats.importedCount || 0) + 1;
           progress = imported;
@@ -833,126 +1055,411 @@
           render();
           status.textContent = "Progreso importado correctamente.";
         } catch {
-          status.textContent = "No se pudo importar el archivo. Verifica que sea JSON valido.";
+          status.textContent = "No se pudo importar el archivo. Verifica que sea JSON válido.";
         }
       };
       reader.readAsText(file);
     }
 
     function resetProgress() {
+      if (!confirm("¿Reiniciar todo el progreso? Esta acción no se puede deshacer.")) return;
       progress = normalizeProgress(createDefaultProgress());
       saveProgress();
       render();
       document.querySelector("#import-status").textContent = "Progreso reiniciado en este navegador.";
     }
 
+    /* ─────────────────────────────────────────
+       Activity modal
+    ───────────────────────────────────────── */
+    let currentActivityId = null;
+    let activityState     = {};
+
+    function openActivity(activityId) {
+      const activity = data.activities.find(a => a.id === activityId);
+      if (!activity) return;
+      currentActivityId = activityId;
+      activityState     = {};
+
+      const routeById = Object.fromEntries(data.routes.map(r => [r.id, r]));
+      const route     = routeById[activity.route_id] || {};
+
+      document.querySelector("#modal-route-name").textContent  = route.short_title || "";
+      document.querySelector("#modal-title").textContent       = activity.title;
+      document.querySelector("#modal-story").textContent       = activity.story;
+      document.querySelector("#modal-wellbe-text").textContent = activity.wellbe_hint || "";
+      document.querySelector("#modal-wellbe-hint").hidden      = !activity.wellbe_hint;
+      document.querySelector("#modal-complete").disabled       = true;
+
+      renderActivityContent(activity);
+      document.querySelector("#activity-modal").showModal();
+    }
+
+    function closeModal() {
+      document.querySelector("#activity-modal").close();
+      currentActivityId = null;
+      activityState     = {};
+    }
+
+    function enableComplete() {
+      document.querySelector("#modal-complete").disabled = false;
+    }
+
+    /* ─────────────────────────────────────────
+       Activity renderers (by type)
+    ───────────────────────────────────────── */
+    function renderActivityContent(activity) {
+      const container = document.querySelector("#modal-content");
+      if (!activity.content) { container.innerHTML = ""; enableComplete(); return; }
+      switch (activity.type) {
+        case "quiz":              renderQuiz(container, activity);          break;
+        case "claim_detector":    renderClaimDetector(container, activity); break;
+        case "branching_case":    renderBranchingCase(container, activity); break;
+        case "mind_map":          renderMindMap(container, activity);       break;
+        case "simple_simulation": renderSimulation(container, activity);    break;
+        case "reflection":        renderReflection(container, activity);    break;
+        default:                  container.innerHTML = ""; enableComplete();
+      }
+    }
+
+    /* ── Quiz ── */
+    function renderQuiz(container, activity) {
+      const questions = activity.content.questions || [];
+      activityState.quizAnswers = {};
+      activityState.quizTotal   = questions.length;
+      container.innerHTML = `<div class="quiz-questions">${questions.map((q, qi) => `
+        <div class="quiz-question" id="qq-${qi}">
+          <p class="question-text">${qi + 1}. ${escapeHtml(q.text)}</p>
+          <div class="quiz-options">${q.options.map(opt => `
+            <button class="quiz-option" type="button" data-qi="${qi}" data-opt="${escapeHtml(opt.id)}" data-correct="${q.correct === opt.id}">
+              ${escapeHtml(opt.text)}
+            </button>`).join("")}
+          </div>
+          <div class="explanation-box" id="exp-${qi}" hidden></div>
+        </div>`).join("")}
+      </div>`;
+      container.addEventListener("click", handleQuizClick);
+    }
+
+    function handleQuizClick(e) {
+      const btn = e.target.closest(".quiz-option");
+      if (!btn || btn.disabled) return;
+      const qi       = Number(btn.dataset.qi);
+      const optId    = btn.dataset.opt;
+      const isCorrect = btn.dataset.correct === "true";
+      const activity = data.activities.find(a => a.id === currentActivityId);
+      const q        = activity.content.questions[qi];
+      document.querySelectorAll(`#qq-${qi} .quiz-option`).forEach(b => {
+        b.disabled = true;
+        if (b.dataset.opt === q.correct) b.classList.add("correct");
+        else if (b.dataset.opt === optId && !isCorrect) b.classList.add("wrong");
+      });
+      const expEl = document.querySelector(`#exp-${qi}`);
+      expEl.textContent = q.explanation;
+      expEl.hidden = false;
+      activityState.quizAnswers[qi] = optId;
+      if (Object.keys(activityState.quizAnswers).length === activityState.quizTotal) enableComplete();
+    }
+
+    /* ── Claim detector ── */
+    function renderClaimDetector(container, activity) {
+      const claims = activity.content.claims || [];
+      activityState.claimVerdicts = {};
+      activityState.claimTotal    = claims.length;
+      container.innerHTML = `
+        <p class="muted">${escapeHtml(activity.content.intro || "")}</p>
+        <div class="claims-list">${claims.map((claim, ci) => `
+          <div class="claim-card" id="claim-${ci}">
+            <p class="claim-text">"${escapeHtml(claim.text.replace(/^"|"$/g, ''))}"</p>
+            <div class="claim-buttons">
+              <button class="btn good" type="button" data-ci="${ci}" data-verdict="true">Verdadera</button>
+              <button class="btn warn" type="button" data-ci="${ci}" data-verdict="misleading">Engañosa</button>
+              <button class="btn danger" type="button" data-ci="${ci}" data-verdict="false">Falsa</button>
+            </div>
+            <div class="claim-result" id="claim-result-${ci}" hidden></div>
+          </div>`).join("")}
+        </div>`;
+      container.addEventListener("click", handleClaimClick);
+    }
+
+    function handleClaimClick(e) {
+      const btn = e.target.closest("[data-verdict]");
+      if (!btn || btn.disabled) return;
+      const ci      = Number(btn.dataset.ci);
+      const chosen  = btn.dataset.verdict;
+      const activity = data.activities.find(a => a.id === currentActivityId);
+      const claim   = activity.content.claims[ci];
+      const correct = chosen === claim.verdict;
+      const verdictLabels = { true: "Verdadera", misleading: "Engañosa", false: "Falsa" };
+      document.querySelectorAll(`#claim-${ci} [data-verdict]`).forEach(b => {
+        b.disabled = true;
+        if (b.dataset.verdict === claim.verdict) b.classList.add("good");
+      });
+      const resultEl = document.querySelector(`#claim-result-${ci}`);
+      resultEl.className = `claim-result verdict-${claim.verdict}`;
+      resultEl.innerHTML = `<strong>${correct ? "✓ Correcto" : "✗ No del todo"} — Es ${verdictLabels[claim.verdict]}.</strong> ${escapeHtml(claim.explanation)}`;
+      resultEl.hidden = false;
+      activityState.claimVerdicts[ci] = chosen;
+      if (Object.keys(activityState.claimVerdicts).length === activityState.claimTotal) enableComplete();
+    }
+
+    /* ── Branching case ── */
+    function renderBranchingCase(container, activity) {
+      activityState.branchStep = activity.content.start;
+      container.innerHTML = `
+        <p class="branch-scenario">${escapeHtml(activity.content.scenario)}</p>
+        <div id="branch-current"></div>`;
+      renderBranchStep(activity);
+    }
+
+    function renderBranchStep(activity) {
+      const steps  = activity.content.steps;
+      const stepId = activityState.branchStep;
+      const step   = steps[stepId];
+      if (!step) return;
+      const el = document.querySelector("#branch-current");
+      if (step.is_end) {
+        el.innerHTML = `<div class="branch-end">
+          <p>${escapeHtml(step.text)}</p>
+          ${step.wellbe_closing ? `<div class="notice"><span aria-hidden="true">🌱 </span><strong>Wellbe:</strong> ${escapeHtml(step.wellbe_closing)}</div>` : ""}
+        </div>`;
+        enableComplete();
+        return;
+      }
+      el.innerHTML = `<div class="branch-step">
+        <p>${escapeHtml(step.text)}</p>
+        <div class="branch-choices">${(step.choices || []).map(c => `
+          <button class="branch-choice" type="button" data-next="${escapeHtml(c.next)}">${escapeHtml(c.text)}</button>`).join("")}
+        </div>
+      </div>`;
+      el.querySelectorAll(".branch-choice").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activityState.branchStep = btn.dataset.next;
+          renderBranchStep(activity);
+        });
+      });
+    }
+
+    /* ── Mind map ── */
+    function renderMindMap(container, activity) {
+      const nodes = activity.content.nodes || [];
+      activityState.nodesViewed = new Set();
+      container.innerHTML = `
+        <div class="mind-center">${escapeHtml(activity.content.center)}</div>
+        <div class="mind-map-grid">${nodes.map((node, ni) => `
+          <div class="mind-node" id="mnode-${ni}" style="--node-color:${escapeHtml(node.color || '#246b4f')}">
+            <button class="mind-node-btn" type="button" data-ni="${ni}" aria-expanded="false" aria-controls="mnode-body-${ni}">
+              <strong>${escapeHtml(node.label)}</strong>
+            </button>
+            <div class="mind-node-body" id="mnode-body-${ni}" hidden>
+              <p>${escapeHtml(node.description)}</p>
+              <ul>${(node.examples || []).map(ex => `<li>${escapeHtml(ex)}</li>`).join("")}</ul>
+            </div>
+          </div>`).join("")}
+        </div>
+        <div class="mind-reflection">${escapeHtml(activity.content.reflection || "")}</div>`;
+      const threshold = Math.min(nodes.length, 3);
+      container.querySelectorAll(".mind-node-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const ni   = Number(btn.dataset.ni);
+          const body = document.querySelector(`#mnode-body-${ni}`);
+          const open = !body.hidden;
+          body.hidden = open;
+          btn.setAttribute("aria-expanded", String(!open));
+          activityState.nodesViewed.add(ni);
+          if (activityState.nodesViewed.size >= threshold) enableComplete();
+        });
+      });
+    }
+
+    /* ── Simple simulation ── */
+    function renderSimulation(container, activity) {
+      activityState.simStep      = 0;
+      activityState.simResilience = 5;
+      container.innerHTML = `
+        <p class="muted">${escapeHtml(activity.content.intro || "")}</p>
+        <div class="sim-resilience">
+          <span>Resiliencia:</span>
+          <div class="sim-resilience-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="10">
+            <div class="sim-resilience-fill" id="resilience-fill" style="width:50%"></div>
+          </div>
+          <span id="resilience-score">5</span>/10
+        </div>
+        <div id="sim-current"></div>`;
+      renderSimStep(activity);
+    }
+
+    function renderSimStep(activity) {
+      const steps = activity.content.steps || [];
+      const si    = activityState.simStep;
+      const el    = document.querySelector("#sim-current");
+      if (si >= steps.length) {
+        el.innerHTML = `<div class="sim-end">
+          <p><strong>Simulación completada.</strong></p>
+          <p>${escapeHtml(activity.content.reflection || "")}</p>
+        </div>`;
+        enableComplete();
+        return;
+      }
+      const step = steps[si];
+      el.innerHTML = `<div class="sim-step">
+        <span class="eyebrow">${escapeHtml(step.label)}</span>
+        <p>${escapeHtml(step.description)}</p>
+        <p><strong>${escapeHtml(step.question)}</strong></p>
+        <div class="sim-options">${(step.options || []).map(opt => `
+          <button class="sim-option" type="button" data-oi="${escapeHtml(opt.id)}" data-change="${Number(opt.resilience_change || 0)}">
+            ${escapeHtml(opt.text)}
+          </button>`).join("")}
+        </div>
+        <div id="sim-feedback-${si}" class="sim-effect" hidden></div>
+      </div>`;
+      el.querySelectorAll(".sim-option").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const oi     = btn.dataset.oi;
+          const change = Number(btn.dataset.change || 0);
+          const opt    = step.options.find(o => o.id === oi);
+          el.querySelectorAll(".sim-option").forEach(b => { b.disabled = true; });
+          btn.classList.add("selected");
+          const fb = document.querySelector(`#sim-feedback-${si}`);
+          fb.textContent = opt?.effect || "";
+          fb.hidden = false;
+          activityState.simResilience = Math.max(0, Math.min(10, activityState.simResilience + change));
+          const pct = (activityState.simResilience / 10) * 100;
+          document.querySelector("#resilience-score").textContent = activityState.simResilience;
+          const fill = document.querySelector("#resilience-fill");
+          fill.style.width = pct + "%";
+          fill.closest("[role=progressbar]").setAttribute("aria-valuenow", activityState.simResilience);
+          setTimeout(() => { activityState.simStep++; renderSimStep(activity); }, 1600);
+        });
+      });
+    }
+
+    /* ── Reflection ── */
+    function renderReflection(container, activity) {
+      const prompts = activity.content.prompts || [];
+      container.innerHTML = `
+        ${activity.content.wellbe_message ? `<div class="notice">${escapeHtml(activity.content.wellbe_message)}</div>` : ""}
+        <div class="reflection-prompts">${prompts.map((p, pi) => `
+          <div class="reflection-prompt-item">
+            <label class="reflection-label" for="ref-${pi}">${escapeHtml(p.text)}</label>
+            <textarea id="ref-${pi}" class="reflection-textarea" rows="3" placeholder="Escribe tu reflexión aquí…"></textarea>
+          </div>`).join("")}
+        </div>`;
+      container.querySelectorAll(".reflection-textarea").forEach(ta => {
+        ta.addEventListener("input", () => {
+          const any = [...container.querySelectorAll(".reflection-textarea")].some(t => t.value.trim().length > 10);
+          if (any) enableComplete();
+        });
+      });
+    }
+
+    /* ─────────────────────────────────────────
+       Render functions (DOM)
+    ───────────────────────────────────────── */
     function renderMapTiles() {
       const colors = ["#246b4f", "#2f6f97", "#a46d15", "#8b5740"];
-      document.querySelector("#map-tiles").innerHTML = data.routes.map((route, index) => `
-        <div class="land-tile" style="--tile-h:${120 + index * 18}px; --tile-bg:${colors[index % colors.length]}">
+      document.querySelector("#map-tiles").innerHTML = data.routes.map((route, i) => `
+        <div class="land-tile" style="--tile-h:${120 + i * 18}px;--tile-bg:${colors[i % colors.length]}">
           ${escapeHtml(route.short_title || route.title)}
-        </div>
-      `).join("");
+        </div>`).join("");
     }
 
     function renderRoutes() {
-      document.querySelector("#routes-list").innerHTML = data.routes.map((route) => {
-        const routeState = progress.routeProgress[route.id] || { completed: 0, total: route.activity_ids.length, percent: 0 };
-        return `
-          <article class="card route-card" style="--route-color:${escapeHtml(route.color)}">
-            <span class="eyebrow">${escapeHtml(route.domain)}</span>
-            <h3>${escapeHtml(route.title)}</h3>
-            <p class="muted">${escapeHtml(route.story)}</p>
-            <p>${escapeHtml(route.learning_goal)}</p>
-            <div class="route-progress" aria-label="Progreso ${routeState.percent}%">
-              <span style="--progress:${routeState.percent}%"></span>
-            </div>
-            <div class="tag-row">
-              <span class="tag">${routeState.completed}/${routeState.total} actividades</span>
-              <span class="tag">${route.estimated_minutes} min</span>
-              <span class="tag">${escapeHtml(route.level)}</span>
-            </div>
-          </article>
-        `;
+      document.querySelector("#routes-list").innerHTML = data.routes.map(route => {
+        const rs = progress.routeProgress[route.id] || { completed: 0, total: route.activity_ids.length, percent: 0 };
+        return `<article class="card route-card" style="--route-color:${escapeHtml(route.color)}">
+          <span class="eyebrow">${escapeHtml(route.domain)}</span>
+          <h3>${escapeHtml(route.title)}</h3>
+          <p class="muted">${escapeHtml(route.story)}</p>
+          <p>${escapeHtml(route.learning_goal)}</p>
+          <div class="route-progress" role="progressbar" aria-valuenow="${rs.percent}" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de ruta ${rs.percent}%">
+            <span style="--progress:${rs.percent}%"></span>
+          </div>
+          <div class="tag-row">
+            <span class="tag">${rs.completed}/${rs.total} actividades</span>
+            <span class="tag">${route.estimated_minutes} min</span>
+            <span class="tag">${escapeHtml(route.level)}</span>
+          </div>
+        </article>`;
       }).join("");
     }
 
+    const typeLabels = {
+      quiz: "Quiz", claim_detector: "Semáforo", branching_case: "Decisiones",
+      mind_map: "Mapa mental", simple_simulation: "Simulación", reflection: "Reflexión"
+    };
+
     function renderActivities() {
-      const completed = new Set(progress.completedActivityIds);
-      const routeById = Object.fromEntries(data.routes.map((route) => [route.id, route]));
-      document.querySelector("#activities-list").innerHTML = data.activities.map((activity) => {
-        const route = routeById[activity.route_id] || {};
+      const completed  = new Set(progress.completedActivityIds);
+      const routeById  = Object.fromEntries(data.routes.map(r => [r.id, r]));
+      document.querySelector("#activities-list").innerHTML = data.activities.map(activity => {
+        const route  = routeById[activity.route_id] || {};
         const isDone = completed.has(activity.id);
-        return `
-          <article class="card activity-card ${isDone ? "completed" : ""}">
-            <div>
-              <span class="eyebrow">${escapeHtml(route.short_title || activity.type)}</span>
-              <h3>${escapeHtml(activity.title)}</h3>
-              <p class="activity-story">${escapeHtml(activity.story)}</p>
-              <p><strong>Objetivo:</strong> ${escapeHtml(activity.objective)}</p>
-              <p><strong>Instrucciones:</strong> ${escapeHtml(activity.instructions)}</p>
-              <p><strong>Reflexion:</strong> ${escapeHtml(activity.reflection_prompt)}</p>
-            </div>
-            <div class="tag-row">
-              <span class="tag">${activity.estimated_minutes} min</span>
-              <span class="tag">${activity.points} puntos</span>
-              <span class="tag">${escapeHtml(activity.suggested_level)}</span>
-            </div>
-            <p class="muted">${escapeHtml(activity.educational_boundary)}</p>
-            <button class="btn ${isDone ? "secondary" : "good"}" type="button" data-action="${isDone ? "reset" : "complete"}" data-id="${escapeHtml(activity.id)}">
-              ${isDone ? "Marcar como pendiente" : "Completar actividad"}
+        const typeLabel = typeLabels[activity.type] || activity.type;
+        return `<article class="card activity-card ${isDone ? "completed" : ""}">
+          <div>
+            <span class="eyebrow">${escapeHtml(route.short_title || "")}</span>
+            <h3>${escapeHtml(activity.title)}</h3>
+            <p class="muted" style="font-size:.85rem">${escapeHtml(activity.story)}</p>
+            <p style="font-size:.82rem"><strong>Objetivo:</strong> ${escapeHtml(activity.objective)}</p>
+          </div>
+          <div class="tag-row">
+            <span class="activity-type-badge">${escapeHtml(typeLabel)}</span>
+            <span class="tag">${activity.estimated_minutes} min</span>
+            <span class="tag">${activity.points} pts</span>
+          </div>
+          <p class="muted" style="font-size:.78rem">${escapeHtml(activity.educational_boundary)}</p>
+          <div class="actions">
+            <button class="btn good" type="button" data-action="open" data-id="${escapeHtml(activity.id)}">
+              ${isDone ? "Ver actividad" : "Comenzar actividad"}
             </button>
-          </article>
-        `;
+            ${isDone ? `<button class="btn secondary" type="button" data-action="reset" data-id="${escapeHtml(activity.id)}">Reiniciar</button>` : ""}
+          </div>
+        </article>`;
       }).join("");
     }
 
     function renderBadges() {
       const earned = new Set(progress.earnedBadgeIds);
-      document.querySelector("#badges-list").innerHTML = data.badges.map((badge) => `
+      document.querySelector("#badges-list").innerHTML = data.badges.map(badge => `
         <article class="card badge-card ${earned.has(badge.id) ? "earned" : ""}">
-          <span class="eyebrow">${earned.has(badge.id) ? "Ganado" : "Pendiente"}</span>
+          <span class="eyebrow">${earned.has(badge.id) ? "✓ Ganado" : "Pendiente"}</span>
           <h3>${escapeHtml(badge.name)}</h3>
           <p class="muted">${escapeHtml(badge.description)}</p>
           <div class="tag-row">
             <span class="tag">${escapeHtml(badge.category)}</span>
             <span class="tag">${escapeHtml(badge.trigger_label)}</span>
           </div>
-        </article>
-      `).join("");
+        </article>`).join("");
     }
 
     function renderAvatars() {
-      document.querySelector("#avatars-list").innerHTML = data.avatars.map((avatar) => `
+      document.querySelector("#avatars-list").innerHTML = data.avatars.map(avatar => `
         <button class="card avatar-option ${progress.selectedAvatarId === avatar.id ? "selected" : ""}" type="button" data-action="avatar" data-id="${escapeHtml(avatar.id)}">
           <span class="eyebrow">${escapeHtml(avatar.role)}</span>
           <h3>${escapeHtml(avatar.name)}</h3>
           <p class="muted">${escapeHtml(avatar.description)}</p>
-          <div class="tag-row">${avatar.traits.map((trait) => `<span class="tag">${escapeHtml(trait)}</span>`).join("")}</div>
-        </button>
-      `).join("");
+          <div class="tag-row">${avatar.traits.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>
+        </button>`).join("");
     }
 
     function renderPrivacy() {
-      const items = [
-        ...(data.config.privacy?.commitments || []),
-        ...(data.config.content_boundaries || [])
-      ];
-      document.querySelector("#privacy-list").innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      const items = [...(data.config.privacy?.commitments || []), ...(data.config.content_boundaries || [])];
+      document.querySelector("#privacy-list").innerHTML = items.map(item => `<li>${escapeHtml(item)}</li>`).join("");
     }
 
     function renderSummary() {
-      const level = (data.config.levels || []).find((item) => item.level === progress.level);
-      const routeCount = Object.values(progress.routeProgress).filter((route) => route.complete).length;
-      document.querySelector("#route-count").textContent = data.routes.length;
+      const level      = (data.config.levels || []).find(l => l.level === progress.level);
+      const routeCount = Object.values(progress.routeProgress).filter(r => r.complete).length;
+      document.querySelector("#route-count").textContent    = data.routes.length;
       document.querySelector("#activity-count").textContent = data.activities.length;
-      document.querySelector("#badge-count").textContent = data.badges.length;
-      document.querySelector("#level-label").textContent = progress.level;
-      document.querySelector("#points-stat").textContent = progress.points;
+      document.querySelector("#badge-count").textContent    = data.badges.length;
+      document.querySelector("#level-label").textContent    = progress.level;
+      document.querySelector("#points-stat").textContent    = progress.points;
       document.querySelector("#completed-stat").textContent = progress.stats.completedActivities;
-      document.querySelector("#badges-stat").textContent = progress.earnedBadgeIds.length;
-      document.querySelector("#routes-stat").textContent = routeCount;
-      document.querySelector("#mission-copy").textContent = data.config.mission;
+      document.querySelector("#badges-stat").textContent    = progress.earnedBadgeIds.length;
+      document.querySelector("#routes-stat").textContent    = routeCount;
+      document.querySelector("#mission-copy").textContent   = data.config.mission || "";
       document.querySelector("#wellbe-message").textContent = level?.wellbe_message || data.config.wellbe?.default_message || "";
     }
 
@@ -964,23 +1471,69 @@
       renderBadges();
       renderAvatars();
       renderPrivacy();
+      renderProfile();
     }
 
+    /* ─────────────────────────────────────────
+       Event wiring
+    ───────────────────────────────────────── */
     function attachEvents() {
-      document.addEventListener("click", (event) => {
-        const target = event.target.closest("[data-action]");
+      /* Profile form */
+      document.querySelector("#profile-form").addEventListener("submit", e => {
+        e.preventDefault();
+        profile.name            = document.querySelector("#prof-name").value.trim() || "Explorador/a";
+        profile.role            = document.querySelector("#prof-role").value;
+        profile.researchConsent = document.querySelector("#prof-consent").checked;
+        if (!profile.createdAt) profile.createdAt = new Date().toISOString();
+        saveProfile();
+        renderProfile();
+      });
+
+      /* Edit profile */
+      document.querySelector("#profile-edit-btn").addEventListener("click", () => {
+        document.querySelector("#profile-form-container").hidden = false;
+        document.querySelector("#profile-display").hidden = true;
+        document.querySelector("#prof-name").value    = profile.name === "Explorador/a" ? "" : profile.name;
+        document.querySelector("#prof-role").value    = profile.role;
+        document.querySelector("#prof-consent").checked = profile.researchConsent;
+      });
+
+      /* Modal close */
+      document.querySelector("#modal-close").addEventListener("click", closeModal);
+      document.querySelector("#activity-modal").addEventListener("click", e => {
+        if (e.target === e.currentTarget) closeModal();
+      });
+      document.querySelector("#activity-modal").addEventListener("keydown", e => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      /* Modal complete */
+      document.querySelector("#modal-complete").addEventListener("click", () => {
+        if (currentActivityId) {
+          completeActivity(currentActivityId);
+          closeModal();
+        }
+      });
+
+      /* Activity actions (open / reset) via event delegation */
+      document.addEventListener("click", e => {
+        const target = e.target.closest("[data-action]");
         if (!target) return;
-        const action = target.dataset.action;
-        const id = target.dataset.id;
-        if (action === "complete") completeActivity(id);
-        if (action === "reset") resetActivity(id);
+        const { action, id } = target.dataset;
+        if (action === "open")   openActivity(id);
+        if (action === "reset")  resetActivity(id);
         if (action === "avatar") selectAvatar(id);
       });
+
+      /* Export / import / reset */
       document.querySelector("#export-progress").addEventListener("click", exportProgress);
-      document.querySelector("#import-progress").addEventListener("change", (event) => importProgress(event.target.files[0]));
+      document.querySelector("#import-progress").addEventListener("change", e => importProgress(e.target.files[0]));
       document.querySelector("#reset-progress").addEventListener("click", resetProgress);
     }
 
+    /* ─────────────────────────────────────────
+       Init
+    ───────────────────────────────────────── */
     async function init() {
       const status = document.querySelector("#load-status");
       try {
@@ -993,20 +1546,30 @@
         ]);
         Object.assign(data, { routes, activities, badges, avatars, config });
         progress = normalizeProgress(loadProgress());
+        profile  = loadProfile();
         saveProgress();
         render();
         attachEvents();
         status.textContent = "Datos locales cargados";
-      } catch {
+      } catch (err) {
         status.textContent = "Error al cargar datos";
         status.classList.add("error");
         document.querySelector("#app").insertAdjacentHTML("afterbegin", `
           <div class="notice error">
-            No se pudieron cargar los JSON locales. Ejecuta un servidor estatico desde la raiz del proyecto con python3 -m http.server 8000 y abre localhost en el puerto 8000.
-          </div>
-        `);
+            No se pudieron cargar los JSON locales. Ejecuta un servidor estático desde la raíz del proyecto:<br>
+            <code>python3 -m http.server 8000</code> y abre <code>localhost:8000</code>.
+          </div>`);
       }
     }
+
+    /*
+     * Future adapters (V2+) — NOT active in V1:
+     * - SupabaseProvider: remote persistence + sync
+     * - SupabaseAuthProvider: session management
+     * - GoogleOAuthProvider: social login
+     * - ApiProvider: Render backend for analytics
+     * - ResearchTelemetryProvider: opt-in educational research (consent required)
+     */
 
     init();
   </script>

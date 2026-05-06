@@ -1,170 +1,706 @@
 [
   {
-    "id": "activity-plato-diverso",
+    "id": "activity-fibra-invisible",
     "route_id": "route-nutricion-humana",
-    "title": "El plato diverso",
-    "type": "observacion",
-    "story": "Una mesa cotidiana puede mostrar colores, texturas, costumbres y posibilidades.",
-    "objective": "Identificar diversidad alimentaria sin clasificar alimentos como buenos o malos.",
-    "instructions": "Dibuja o describe un plato real o imaginario con al menos tres grupos de alimentos y una bebida.",
-    "reflection_prompt": "Que elemento de ese plato habla de cultura, acceso o preferencia personal?",
+    "title": "La Fibra Invisible",
+    "type": "quiz",
+    "story": "Está en frutas, verduras, legumbres y granos, pero casi nunca aparece en los anuncios de nutrición. La fibra dietética hace un trabajo silencioso y esencial.",
+    "objective": "Identificar las funciones de la fibra dietética y reconocerla en la alimentación cotidiana.",
     "points": 20,
-    "estimated_minutes": 10,
+    "estimated_minutes": 8,
     "suggested_level": "Nivel 1",
-    "educational_boundary": "Actividad educativa; no ofrece dieta personalizada ni consejo clinico."
+    "educational_boundary": "Actividad educativa. No recomienda cantidades individuales ni sustituye consejo clínico.",
+    "wellbe_hint": "La fibra no es un nutriente de moda: es parte esencial de patrones alimentarios tradicionales de muchas comunidades.",
+    "content": {
+      "questions": [
+        {
+          "id": "q1",
+          "text": "¿Cuál de estos alimentos es una fuente destacada de fibra dietética?",
+          "options": [
+            { "id": "a", "text": "Carne de res" },
+            { "id": "b", "text": "Frijoles negros" },
+            { "id": "c", "text": "Leche entera" },
+            { "id": "d", "text": "Huevo frito" }
+          ],
+          "correct": "b",
+          "explanation": "Las legumbres como los frijoles son excelentes fuentes de fibra. La fibra se encuentra principalmente en alimentos de origen vegetal: legumbres, frutas, verduras y granos enteros."
+        },
+        {
+          "id": "q2",
+          "text": "¿Qué función principal cumple la fibra en la digestión?",
+          "options": [
+            { "id": "a", "text": "Aportar energía inmediata al cuerpo" },
+            { "id": "b", "text": "Construir tejido muscular" },
+            { "id": "c", "text": "Apoyar el tránsito intestinal y la microbiota" },
+            { "id": "d", "text": "Regular el ciclo del sueño" }
+          ],
+          "correct": "c",
+          "explanation": "La fibra apoya el tránsito intestinal, alimenta la microbiota, contribuye a la saciedad y ayuda a regular la glucosa en sangre. Su rol va mucho más allá de la digestión simple."
+        },
+        {
+          "id": "q3",
+          "text": "Una persona que consume frutas, verduras y legumbres a diario, ¿probablemente necesita suplementos de fibra?",
+          "options": [
+            { "id": "a", "text": "Sí, siempre son necesarios para todos" },
+            { "id": "b", "text": "Probablemente no, si su dieta ya es variada" },
+            { "id": "c", "text": "Solo si hace ejercicio de alta intensidad" },
+            { "id": "d", "text": "Depende de su grupo sanguíneo" }
+          ],
+          "correct": "b",
+          "explanation": "Una alimentación variada con alimentos integrales y vegetales suele cubrir las necesidades de fibra sin suplementos. Siempre consulta a un profesional de salud si tienes dudas específicas."
+        }
+      ]
+    }
   },
   {
-    "id": "activity-energia-cuerpo",
+    "id": "activity-codigo-etiqueta",
     "route_id": "route-nutricion-humana",
-    "title": "Energia para el cuerpo",
-    "type": "concepto",
-    "story": "El cuerpo aprende, juega, descansa y se mueve con energia que viene de multiples fuentes.",
-    "objective": "Relacionar alimentacion con energia, hidratacion, descanso y movimiento.",
-    "instructions": "Escribe tres actividades de tu dia y que apoyos necesita tu cuerpo para realizarlas.",
-    "reflection_prompt": "Que apoyo suele faltar mas: comida, agua, descanso, movimiento o tiempo?",
-    "points": 20,
-    "estimated_minutes": 10,
-    "suggested_level": "Nivel 1",
-    "educational_boundary": "Evita contar calorias o recomendar cantidades individuales."
-  },
-  {
-    "id": "activity-etiqueta-preguntas",
-    "route_id": "route-nutricion-humana",
-    "title": "Preguntas a una etiqueta",
-    "type": "alfabetizacion",
-    "story": "Una etiqueta no decide por ti, pero puede ayudarte a preguntar mejor.",
-    "objective": "Practicar lectura critica de informacion alimentaria basica.",
-    "instructions": "Elige una etiqueta disponible y anota tres preguntas: ingredientes, porcion y contexto de uso.",
-    "reflection_prompt": "Que informacion fue clara y cual necesitarias investigar mejor?",
+    "title": "El Código de la Etiqueta",
+    "type": "claim_detector",
+    "story": "Las etiquetas de alimentos hablan un idioma propio. Algunas afirmaciones informan, otras confunden, y unas pocas engañan.",
+    "objective": "Practicar lectura crítica de afirmaciones en etiquetas de alimentos procesados.",
     "points": 25,
     "estimated_minutes": 10,
     "suggested_level": "Nivel 1",
-    "educational_boundary": "No se evaluan marcas ni se hacen recomendaciones medicas."
+    "educational_boundary": "No evalúa marcas reales. No hace recomendaciones de consumo. Solo práctica de alfabetización alimentaria.",
+    "wellbe_hint": "Una etiqueta no decide por ti. Pero leerla con preguntas críticas te da más control sobre tus propias decisiones.",
+    "content": {
+      "intro": "Lee cada afirmación de etiquetas de alimentos imaginarios. Decide si es Verdadera (bien sustentada), Engañosa (parcialmente correcta pero distorsionada) o Falsa (incorrecta o sin base).",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "\"Sin azúcar añadida\" significa que el producto no contiene azúcares de ningún tipo.",
+          "verdict": "misleading",
+          "explanation": "\"Sin azúcar añadida\" solo indica que no se agregó azúcar durante el proceso. El alimento puede contener azúcares naturales (fructosa en frutas, lactosa en lácteos) o edulcorantes artificiales."
+        },
+        {
+          "id": "c2",
+          "text": "Un producto \"light\" tiene menos calorías o menos grasa que la versión original del mismo producto.",
+          "verdict": "true",
+          "explanation": "\"Light\" generalmente indica una reducción de al menos 30% en calorías o grasa comparado con el producto de referencia. Sin embargo, eso no lo convierte automáticamente en saludable para todos."
+        },
+        {
+          "id": "c3",
+          "text": "\"Natural\" en una etiqueta garantiza que el producto es orgánico y libre de pesticidas.",
+          "verdict": "false",
+          "explanation": "\"Natural\" no tiene una definición regulada estricta en la mayoría de países. No implica certificación orgánica, ausencia de pesticidas ni ningún proceso de producción específico."
+        },
+        {
+          "id": "c4",
+          "text": "\"Alto en proteína\" significa automáticamente que el producto es mejor para la salud.",
+          "verdict": "misleading",
+          "explanation": "El contenido de proteína es solo una parte del perfil nutricional. Un producto puede ser alto en proteína y también alto en sodio, grasas saturadas o azúcares añadidos. El contexto completo siempre importa."
+        }
+      ]
+    }
   },
   {
-    "id": "activity-cuatro-dimensiones",
-    "route_id": "route-seguridad-alimentaria",
-    "title": "Las cuatro dimensiones",
-    "type": "marco",
-    "story": "La seguridad alimentaria no vive en una sola pregunta; tiene varias puertas de entrada.",
-    "objective": "Reconocer disponibilidad, acceso, utilizacion y estabilidad.",
-    "instructions": "Define cada dimension con tus palabras y agrega un ejemplo cercano.",
-    "reflection_prompt": "Cual dimension parece mas vulnerable en tu comunidad o contexto educativo?",
-    "points": 25,
-    "estimated_minutes": 12,
+    "id": "activity-plato-contexto",
+    "route_id": "route-nutricion-humana",
+    "title": "El Plato en Contexto",
+    "type": "branching_case",
+    "story": "Una decisión alimentaria nunca ocurre en el vacío. El acceso, el tiempo, el costo, la cultura y el apoyo comunitario siempre forman parte del plato.",
+    "objective": "Explorar cómo el contexto social, económico y cultural influye en las decisiones alimentarias cotidianas.",
+    "points": 30,
+    "estimated_minutes": 10,
     "suggested_level": "Nivel 1",
-    "educational_boundary": "No recopila datos sensibles de hogares o ingresos."
+    "educational_boundary": "No juzga decisiones alimentarias. Reconoce que el contexto limita o habilita las elecciones de cada persona.",
+    "wellbe_hint": "Recuerda: una decisión alimentaria no ocurre en el vacío. También influyen acceso, costo, cultura, tiempo, territorio y apoyo comunitario.",
+    "content": {
+      "scenario": "Son las 7pm. Camila regresa del trabajo. Tiene 20 minutos antes de buscar a sus hijos en la escuela. La nevera tiene: arroz cocido, una lata de atún, un tomate y pan. Hay una tienda de conveniencia a una cuadra.",
+      "start": "step1",
+      "steps": {
+        "step1": {
+          "id": "step1",
+          "text": "Camila está cansada y hambrienta. ¿Qué consideración le parece más urgente en este momento?",
+          "choices": [
+            { "id": "a", "text": "Preparar algo rápido con lo que hay en casa", "next": "step2a" },
+            { "id": "b", "text": "Comprar algo en la tienda para ahorrar tiempo", "next": "step2b" }
+          ]
+        },
+        "step2a": {
+          "id": "step2a",
+          "text": "Camila decide usar el arroz, atún y tomate. En 15 minutos tiene una comida sencilla. Sus hijos comen bien. Pero nota que el presupuesto semanal ya está ajustado.",
+          "choices": [
+            { "id": "a", "text": "Reflexionar sobre qué factores facilitaron esta decisión", "next": "end-a" },
+            { "id": "b", "text": "Pensar en cómo esto se relaciona con seguridad alimentaria", "next": "end-b" }
+          ]
+        },
+        "step2b": {
+          "id": "step2b",
+          "text": "En la tienda, las opciones rápidas cuestan el triple que cocinar en casa. Camila compra algo procesado porque es lo más viable en ese momento. Siente culpa, aunque tomó la decisión más razonable dadas las condiciones.",
+          "choices": [
+            { "id": "a", "text": "¿Qué barreras estructurales influyeron en esta decisión?", "next": "end-c" },
+            { "id": "b", "text": "¿Cómo podría la culpa ser reemplazada por comprensión del contexto?", "next": "end-d" }
+          ]
+        },
+        "end-a": {
+          "id": "end-a",
+          "text": "Factores que facilitaron: tiempo ajustado pero manejable, ingredientes disponibles, habilidad para combinar alimentos, y conocimiento práctico de cocina rápida.",
+          "is_end": true,
+          "wellbe_closing": "Las decisiones alimentarias funcionan bien cuando acceso, tiempo, conocimiento y recursos se alinean. No siempre es así para todas las personas."
+        },
+        "end-b": {
+          "id": "end-b",
+          "text": "La seguridad alimentaria no es solo 'tener comida'. Incluye acceso económico, tiempo para preparar, variedad disponible y dignidad en la elección.",
+          "is_end": true,
+          "wellbe_closing": "Pensar en seguridad alimentaria desde lo cotidiano conecta política pública con experiencias reales de vida."
+        },
+        "end-c": {
+          "id": "end-c",
+          "text": "Barreras estructurales presentes: tiempo laboral extendido, ausencia de opciones asequibles cerca, carga del cuidado concentrada en una persona.",
+          "is_end": true,
+          "wellbe_closing": "Las barreras estructurales no son fallas personales. Son condiciones que requieren respuestas colectivas y políticas públicas."
+        },
+        "end-d": {
+          "id": "end-d",
+          "text": "La culpa alimentaria suele ignorar el contexto. Cuando las condiciones son difíciles, cualquier elección puede ser la más razonable posible en ese momento.",
+          "is_end": true,
+          "wellbe_closing": "Un lenguaje no estigmatizante reconoce el contexto antes de juzgar las decisiones individuales."
+        }
+      }
+    }
   },
   {
-    "id": "activity-mapa-acceso",
+    "id": "activity-mercado-real",
     "route_id": "route-seguridad-alimentaria",
-    "title": "Mapa de acceso cercano",
-    "type": "mapeo",
-    "story": "El acceso tambien es distancia, transporte, costo, horario, seguridad y dignidad.",
-    "objective": "Observar factores que facilitan o limitan acceso a alimentos.",
-    "instructions": "Haz una lista de tres lugares donde una persona podria conseguir alimentos y tres barreras posibles.",
-    "reflection_prompt": "Que barrera podria atenderse con una accion comunitaria o politica publica?",
+    "title": "El Mercado Real",
+    "type": "branching_case",
+    "story": "En muchas comunidades, el acceso a alimentos nutritivos no depende solo de preferencias personales, sino de lo que el mercado local ofrece, a qué precio y en qué condiciones.",
+    "objective": "Explorar las dimensiones de disponibilidad y acceso en la seguridad alimentaria desde un caso concreto.",
+    "points": 25,
+    "estimated_minutes": 10,
+    "suggested_level": "Nivel 1",
+    "educational_boundary": "Caso educativo. No solicita información personal de ingresos ni situación familiar.",
+    "wellbe_hint": "El mercado real incluye distancia, transporte, horario, precio, variedad y trato. Todos son parte del acceso alimentario.",
+    "content": {
+      "scenario": "Una familia en un barrio periférico tiene acceso a: una tienda de abarrotes (cara, poca variedad), un mercado municipal (a 40 minutos en autobús, abre lunes a sábado), y un supermercado (a 1 hora, acepta tarjeta). El presupuesto semanal para alimentos es de $35.",
+      "start": "step1",
+      "steps": {
+        "step1": {
+          "id": "step1",
+          "text": "Es lunes por la mañana. Necesitan comprar vegetales, proteína y granos para la semana. ¿Qué opción analizan primero?",
+          "choices": [
+            { "id": "a", "text": "Ir al mercado municipal (más variedad, mejor precio)", "next": "step2a" },
+            { "id": "b", "text": "Comprar en la tienda local (más cerca, más caro)", "next": "step2b" }
+          ]
+        },
+        "step2a": {
+          "id": "step2a",
+          "text": "El mercado tiene buena variedad y precio justo. Pero el viaje cuesta $4 en transporte y toma 2 horas entre ida y vuelta. Una persona de la familia debe faltar al trabajo.",
+          "choices": [
+            { "id": "a", "text": "El costo real incluye transporte y tiempo perdido", "next": "end-a" },
+            { "id": "b", "text": "¿Qué políticas podrían reducir esta brecha de acceso?", "next": "end-b" }
+          ]
+        },
+        "step2b": {
+          "id": "step2b",
+          "text": "La tienda local tiene lo básico pero el presupuesto alcanza para menos. Al final de la semana, la familia gasta más pero come menos variado.",
+          "choices": [
+            { "id": "a", "text": "Reflexionar sobre cómo la ubicación afecta la nutrición", "next": "end-c" },
+            { "id": "b", "text": "¿Qué rol tiene la organización comunitaria en esto?", "next": "end-d" }
+          ]
+        },
+        "end-a": {
+          "id": "end-a",
+          "text": "El costo real de acceder a alimentos nutritivos incluye transporte, tiempo, esfuerzo físico y oportunidades laborales perdidas. El precio en el mercado es solo una parte del costo total.",
+          "is_end": true,
+          "wellbe_closing": "La seguridad alimentaria real requiere medir el costo total del acceso, no solo el precio de los alimentos."
+        },
+        "end-b": {
+          "id": "end-b",
+          "text": "Posibles políticas: transporte subsidiado a mercados, mercados móviles en barrios periféricos, programas de compra colectiva, ferias agroecológicas locales.",
+          "is_end": true,
+          "wellbe_closing": "Las soluciones de acceso alimentario requieren intervención pública y comunitaria, no solo ajustes individuales."
+        },
+        "end-c": {
+          "id": "end-c",
+          "text": "Los 'desiertos alimentarios' son zonas donde el acceso a alimentos frescos y nutritivos es limitado por distancia o precio. No son fallas personales: son condiciones de territorio y planificación urbana.",
+          "is_end": true,
+          "wellbe_closing": "Hablar de desiertos alimentarios conecta nutrición con urbanismo, política territorial y justicia social."
+        },
+        "end-d": {
+          "id": "end-d",
+          "text": "Las comunidades organizadas pueden negociar con gobiernos locales, crear cooperativas de compra, apoyar mercados vecinales o promover huertos comunitarios como estrategias de acceso.",
+          "is_end": true,
+          "wellbe_closing": "La acción comunitaria es una respuesta legítima y poderosa frente a las barreras estructurales de acceso alimentario."
+        }
+      }
+    }
+  },
+  {
+    "id": "activity-barreras-camino",
+    "route_id": "route-seguridad-alimentaria",
+    "title": "Barreras del Camino",
+    "type": "mind_map",
+    "story": "Entre una persona y una alimentación nutritiva puede haber muchas barreras invisibles: económicas, culturales, geográficas, temporales o institucionales.",
+    "objective": "Identificar y clasificar barreras que limitan el acceso a una alimentación adecuada.",
     "points": 30,
     "estimated_minutes": 12,
     "suggested_level": "Nivel 2",
-    "educational_boundary": "No solicita direcciones personales ni informacion privada."
+    "educational_boundary": "Ejercicio educativo de mapeo de factores. No solicita información personal.",
+    "wellbe_hint": "Las barreras no son todas iguales: algunas las enfrenta una persona sola, otras requieren cambios colectivos o políticas públicas.",
+    "content": {
+      "center": "Acceso a alimentación nutritiva",
+      "reflection": "¿Cuál de estas barreras crees que es más común en tu contexto? ¿Cuál podría atenderse con acción comunitaria?",
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Económicas",
+          "color": "#a94e66",
+          "description": "Precio alto de alimentos frescos, ingresos insuficientes, falta de subsidios alimentarios.",
+          "examples": ["Vegetales frescos más caros que ultraprocesados", "Presupuesto familiar insuficiente", "Sin acceso a programas de apoyo alimentario"]
+        },
+        {
+          "id": "n2",
+          "label": "Geográficas",
+          "color": "#246b4f",
+          "description": "Distancia a mercados, ausencia de infraestructura local, desiertos alimentarios.",
+          "examples": ["Mercado lejano sin transporte accesible", "Barrios sin tiendas de productos frescos", "Comunidades rurales sin cadena de frío"]
+        },
+        {
+          "id": "n3",
+          "label": "Temporales",
+          "color": "#2f6f97",
+          "description": "Horarios laborales extensos, responsabilidades de cuidado, falta de tiempo para cocinar.",
+          "examples": ["Doble jornada laboral", "Carga de cuidado concentrada en mujeres", "Sin tiempo disponible para ir al mercado"]
+        },
+        {
+          "id": "n4",
+          "label": "Culturales",
+          "color": "#a46d15",
+          "description": "Estigma, presiones sociales, pérdida de saberes alimentarios tradicionales.",
+          "examples": ["Presión para consumir ciertos alimentos", "Desvalorización de cocinas tradicionales", "Publicidad dirigida a comunidades vulnerables"]
+        },
+        {
+          "id": "n5",
+          "label": "Institucionales",
+          "color": "#8b5740",
+          "description": "Políticas públicas insuficientes, falta de programas de apoyo, burocracia de acceso.",
+          "examples": ["Programas alimentarios con requisitos excluyentes", "Ausencia de mercados públicos accesibles", "Sin regulación de publicidad de ultraprocesados"]
+        }
+      ]
+    }
   },
   {
-    "id": "activity-decision-publica",
+    "id": "activity-decisiones-dignidad",
     "route_id": "route-seguridad-alimentaria",
-    "title": "Una decision publica",
-    "type": "salud-publica",
-    "story": "Las decisiones publicas pueden acercar o alejar el derecho a una alimentacion adecuada.",
-    "objective": "Imaginar una intervencion educativa o comunitaria de bajo riesgo.",
-    "instructions": "Propone una accion para mejorar seguridad alimentaria en escuela, barrio o institucion.",
-    "reflection_prompt": "A quien beneficiaria, que recursos necesita y como evitarias estigmatizar?",
+    "title": "Decisiones con Dignidad",
+    "type": "branching_case",
+    "story": "Hablar de alimentación sin considerar el contexto puede convertirse fácilmente en estigma. Esta actividad practica un lenguaje que reconoce el contexto antes de juzgar.",
+    "objective": "Identificar formas de comunicar sobre alimentación sin estigmatizar ni ignorar el contexto socioeconómico.",
     "points": 30,
     "estimated_minutes": 10,
     "suggested_level": "Nivel 2",
-    "educational_boundary": "No sustituye evaluacion profesional ni politica publica formal."
+    "educational_boundary": "Actividad educativa sobre comunicación y ética nutricional. No emite juicios sobre elecciones individuales.",
+    "wellbe_hint": "Un lenguaje no estigmatizante no simplifica ni juzga. Reconoce la complejidad real del contexto de cada persona.",
+    "content": {
+      "scenario": "Eres facilitador/a en un taller comunitario sobre alimentación. Una participante dice: 'Mi familia come mucho refresco y frituras porque no nos alcanza para más.' ¿Cómo respondes?",
+      "start": "step1",
+      "steps": {
+        "step1": {
+          "id": "step1",
+          "text": "Elige la respuesta que usarías como facilitador/a:",
+          "choices": [
+            { "id": "a", "text": "'Entiendo. Cuéntame más sobre qué opciones tienen disponibles cerca y qué funciona para su familia.'", "next": "step2a" },
+            { "id": "b", "text": "'Sería mejor cambiar esos hábitos porque el refresco hace daño.'", "next": "step2b" },
+            { "id": "c", "text": "'¿Han intentado cocinar más en casa? Es más económico y saludable.'", "next": "step2c" }
+          ]
+        },
+        "step2a": {
+          "id": "step2a",
+          "text": "La participante se siente escuchada y comparte que cerca solo hay una tienda cara. El grupo empieza a hablar de barreras reales. La conversación se vuelve colectiva y propositiva.",
+          "choices": [
+            { "id": "a", "text": "¿Qué principios comunicativos usó esta respuesta?", "next": "end-a" },
+            { "id": "b", "text": "¿Cómo continuar la conversación de forma constructiva?", "next": "end-b" }
+          ]
+        },
+        "step2b": {
+          "id": "step2b",
+          "text": "La participante se pone a la defensiva y deja de participar. Otros en el grupo también se callan. La persona se siente juzgada y la sesión pierde dinamismo.",
+          "choices": [
+            { "id": "a", "text": "¿Qué elementos de esta respuesta generaron estigma?", "next": "end-c" },
+            { "id": "b", "text": "¿Cómo reformularías esta respuesta?", "next": "end-d" }
+          ]
+        },
+        "step2c": {
+          "id": "step2c",
+          "text": "La sugerencia asume que cocinar más en casa es fácil o posible para todos. Ignora la posible falta de tiempo, energía, equipamiento o habilidades. La participante puede sentir que su situación no fue escuchada.",
+          "choices": [
+            { "id": "a", "text": "¿Qué suposición oculta tuvo esta respuesta?", "next": "end-e" },
+            { "id": "b", "text": "¿Cómo responder sin asumir que todas las opciones son accesibles?", "next": "end-f" }
+          ]
+        },
+        "end-a": {
+          "id": "end-a",
+          "text": "Principios usados: escucha activa, preguntas abiertas, validación del contexto, sin juicio previo, enfoque en factores reales, invitación a explorar opciones colectivamente.",
+          "is_end": true,
+          "wellbe_closing": "Escuchar antes de aconsejar es siempre el primer paso en comunicación no estigmatizante."
+        },
+        "end-b": {
+          "id": "end-b",
+          "text": "Continuación constructiva: explorar recursos disponibles en la comunidad, qué ha funcionado antes, qué cambiaría las condiciones, y cómo el grupo puede pensar soluciones colectivas.",
+          "is_end": true,
+          "wellbe_closing": "Las soluciones colectivas nacen de conversaciones donde todos se sienten seguros para hablar con honestidad."
+        },
+        "end-c": {
+          "id": "end-c",
+          "text": "Elementos estigmatizantes: foco en el daño sin contexto, asunción de que el cambio es simple, ausencia de reconocimiento de barreras reales, lenguaje imperativo que juzga.",
+          "is_end": true,
+          "wellbe_closing": "El estigma alimentario no siempre es intencional. Puede venir de simplificar lo que es genuinamente complejo."
+        },
+        "end-d": {
+          "id": "end-d",
+          "text": "Reformulación posible: 'El refresco y las frituras suelen ser más fáciles de encontrar y a veces más baratas. ¿Qué otros factores hacen que sean la opción más accesible para tu familia en este momento?'",
+          "is_end": true,
+          "wellbe_closing": "Reformular sin juzgar no es evasión: es respeto por la complejidad real de las decisiones cotidianas."
+        },
+        "end-e": {
+          "id": "end-e",
+          "text": "Suposición oculta: que cocinar en casa siempre es posible; que hay tiempo, energía, utensilios, espacio y habilidades disponibles. No siempre es así para todas las familias.",
+          "is_end": true,
+          "wellbe_closing": "Las suposiciones ocultas pueden hacer que una recomendación bien intencionada resulte excluyente."
+        },
+        "end-f": {
+          "id": "end-f",
+          "text": "Respuesta contextualizada: '¿Qué condiciones tendrían que cambiar para que cocinar en casa sea una opción más viable para su familia?'",
+          "is_end": true,
+          "wellbe_closing": "Preguntar por condiciones necesarias es más útil que dar consejos que asumen condiciones que quizás no existen."
+        }
+      }
+    }
   },
   {
-    "id": "activity-suelo-vivo",
+    "id": "activity-huerto-resiliente",
     "route_id": "route-agroecologia-comunidad",
-    "title": "Suelo vivo",
-    "type": "agroecologia",
-    "story": "El suelo no es solo soporte: es una comunidad de vida que sostiene alimentos.",
-    "objective": "Relacionar suelo, biodiversidad, agua y alimentacion.",
-    "instructions": "Observa una planta o espacio verde y enumera tres relaciones que la sostienen.",
-    "reflection_prompt": "Que pasaria con la alimentacion si una de esas relaciones se rompe?",
-    "points": 30,
-    "estimated_minutes": 12,
-    "suggested_level": "Nivel 2",
-    "educational_boundary": "Observacion educativa; no requiere manipular suelos ni herramientas."
-  },
-  {
-    "id": "activity-red-comunitaria",
-    "route_id": "route-agroecologia-comunidad",
-    "title": "Red comunitaria de alimentos",
-    "type": "comunidad",
-    "story": "Una comida puede conectar agricultoras, transportistas, cocineras, familias y saberes.",
-    "objective": "Identificar actores de una red alimentaria local.",
-    "instructions": "Elige un alimento y traza cinco personas, lugares o procesos que lo hacen posible.",
-    "reflection_prompt": "Que actor de la red suele ser menos visible y merece reconocimiento?",
+    "title": "Huerto Resiliente",
+    "type": "simple_simulation",
+    "story": "Un huerto pequeño puede ser muchas cosas: fuente de alimentos, espacio educativo, vínculo con la tierra, memoria cultural. Su resiliencia depende de las decisiones que tomamos al diseñarlo.",
+    "objective": "Explorar decisiones básicas de diseño agroecológico que aumentan la resiliencia de un huerto comunitario.",
     "points": 35,
     "estimated_minutes": 12,
     "suggested_level": "Nivel 2",
-    "educational_boundary": "No solicita nombres reales ni datos de contacto."
+    "educational_boundary": "Simulación educativa simplificada. No reemplaza formación agrícola ni técnica especializada.",
+    "wellbe_hint": "La agroecología no busca el huerto perfecto: busca el huerto que aprende y se adapta con la comunidad.",
+    "content": {
+      "intro": "Vas a diseñar un pequeño huerto comunitario de 4×4 metros. En cada paso tomarás una decisión que afecta su resiliencia. El medidor comienza en 5 sobre 10.",
+      "reflection": "¿Qué decisión de este huerto te resultó más sorprendente o conectó mejor con lo que conoces de tu territorio?",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "Paso 1: Elección de semillas",
+          "description": "Tienes presupuesto limitado para elegir qué sembrar este ciclo.",
+          "question": "¿Qué estrategia de siembra eliges?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Un solo cultivo en abundancia (monocultivo)",
+              "effect": "Alta producción inicial, pero más vulnerable a plagas y clima. Menor biodiversidad.",
+              "resilience_change": -1
+            },
+            {
+              "id": "b",
+              "text": "Varios cultivos mezclados (policultivo)",
+              "effect": "Menor cantidad de cada uno, pero el huerto se protege mejor. Más biodiversidad.",
+              "resilience_change": 2
+            },
+            {
+              "id": "c",
+              "text": "Semillas locales y variedades tradicionales",
+              "effect": "Mejor adaptación al clima local y conexión con saberes comunitarios. Muy resiliente.",
+              "resilience_change": 3
+            }
+          ]
+        },
+        {
+          "id": "s2",
+          "label": "Paso 2: Gestión del agua",
+          "description": "Ha llegado la época seca. El agua escasea en la zona.",
+          "question": "¿Cómo gestionas el agua disponible?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Regar todos los días a mediodía",
+              "effect": "Alta evaporación, se pierde mucha agua. El suelo se seca rápido.",
+              "resilience_change": -1
+            },
+            {
+              "id": "b",
+              "text": "Regar temprano y cubrir el suelo con mulch",
+              "effect": "Menor evaporación, humedad más estable. Buena práctica agroecológica.",
+              "resilience_change": 2
+            },
+            {
+              "id": "c",
+              "text": "Captar agua de lluvia y usarla en la época seca",
+              "effect": "Independencia hídrica, más sostenible a largo plazo. Requiere inversión inicial.",
+              "resilience_change": 3
+            }
+          ]
+        },
+        {
+          "id": "s3",
+          "label": "Paso 3: Manejo de plagas",
+          "description": "Aparecen insectos en algunas plantas del huerto.",
+          "question": "¿Cómo respondes a las plagas?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Aplicar pesticida químico de inmediato",
+              "effect": "Elimina la plaga rápido, pero también insectos beneficiosos y puede contaminar el suelo.",
+              "resilience_change": -2
+            },
+            {
+              "id": "b",
+              "text": "Observar primero e identificar si es una plaga real",
+              "effect": "Muchos insectos son parte del ecosistema. Observar antes de actuar es una práctica agroecológica clave.",
+              "resilience_change": 1
+            },
+            {
+              "id": "c",
+              "text": "Introducir plantas repelentes y fauna benéfica",
+              "effect": "Control natural integrado. Más lento pero sostiene el equilibrio del ecosistema del huerto.",
+              "resilience_change": 3
+            }
+          ]
+        }
+      ]
+    }
   },
   {
-    "id": "activity-temporada-local",
+    "id": "activity-suelo-plato",
     "route_id": "route-agroecologia-comunidad",
-    "title": "Temporada y territorio",
-    "type": "cultura-alimentaria",
-    "story": "Comer tambien puede ser escuchar estaciones, lluvia, suelo y memoria cultural.",
-    "objective": "Explorar alimentos de temporada y su relacion con territorio.",
-    "instructions": "Investiga de memoria, conversacion o observacion un alimento asociado a una temporada local.",
-    "reflection_prompt": "Que historia cultural o comunitaria acompana ese alimento?",
+    "title": "Del Suelo al Plato",
+    "type": "mind_map",
+    "story": "Entre el suelo y tu plato hay una cadena de relaciones: ecológicas, económicas, culturales y humanas. Explorarlas cambia la forma de ver lo que comemos.",
+    "objective": "Identificar las conexiones entre ecosistemas, producción, distribución, cocina y cultura alimentaria.",
     "points": 35,
     "estimated_minutes": 12,
     "suggested_level": "Nivel 2",
-    "educational_boundary": "No exige compras ni visitas; puede hacerse con conocimiento comunitario."
+    "educational_boundary": "Ejercicio educativo de pensamiento sistémico. No evalúa cadenas de producción específicas.",
+    "wellbe_hint": "El pensamiento sistémico en alimentación conecta lo que parece separado: suelo, agua, semilla, trabajo, cocina, cultura y política.",
+    "content": {
+      "center": "Del Suelo al Plato",
+      "reflection": "¿Qué elemento de esta red suele ser más invisible en los medios o en las conversaciones sobre alimentación? ¿Por qué crees que ocurre eso?",
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Suelo vivo",
+          "color": "#8b5740",
+          "description": "La salud del suelo determina la calidad nutritiva de los alimentos. Un suelo vivo tiene microorganismos, materia orgánica y estructura.",
+          "examples": ["Microbiota del suelo", "Humus y compost como nutrientes naturales", "Rotación de cultivos para no agotar el suelo"]
+        },
+        {
+          "id": "n2",
+          "label": "Agua y clima",
+          "color": "#2f6f97",
+          "description": "El agua disponible y el clima definen qué puede crecer y cuándo. El cambio climático ya está afectando los ciclos de cultivo.",
+          "examples": ["Sequías e inundaciones más frecuentes", "Cultivos de temporada en riesgo climático", "Gestión del agua como derecho comunitario"]
+        },
+        {
+          "id": "n3",
+          "label": "Semillas y biodiversidad",
+          "color": "#246b4f",
+          "description": "La diversidad de semillas es memoria genética y cultural. Las variedades locales son más adaptadas y resilientes.",
+          "examples": ["Bancos comunitarios de semillas", "Variedades nativas vs. comerciales", "Pérdida de biodiversidad agrícola global"]
+        },
+        {
+          "id": "n4",
+          "label": "Trabajo y conocimiento",
+          "color": "#a46d15",
+          "description": "Quién trabaja la tierra, quién tiene el saber, y en qué condiciones. El trabajo agrícola es frecuentemente invisibilizado.",
+          "examples": ["Agricultoras y agricultores locales", "Saberes indígenas y campesinos", "Condiciones laborales en el campo"]
+        },
+        {
+          "id": "n5",
+          "label": "Distribución y mercado",
+          "color": "#a94e66",
+          "description": "Cómo llega el alimento desde el campo hasta la ciudad o la mesa. Incluye logística, intermediarios, precios y acceso.",
+          "examples": ["Mercados locales vs. supermercados globales", "Precios que no reflejan costos reales de producción", "Pérdida de alimentos en la cadena de distribución"]
+        },
+        {
+          "id": "n6",
+          "label": "Cocina y cultura",
+          "color": "#607169",
+          "description": "La transformación del alimento en comida es un acto cultural, familiar y comunitario. La cocina es patrimonio vivo.",
+          "examples": ["Recetas tradicionales y memoria familiar", "Cocinas colectivas comunitarias", "Pérdida de habilidades culinarias generacionales"]
+        }
+      ]
+    }
   },
   {
-    "id": "activity-pregunta-ia",
+    "id": "activity-comunidad-siembra",
+    "route_id": "route-agroecologia-comunidad",
+    "title": "Comunidad que Siembra",
+    "type": "reflection",
+    "story": "Sembrar en comunidad no es solo producir alimentos: es reconstruir lazos, recuperar saberes y crear resiliencia colectiva frente a la inseguridad alimentaria.",
+    "objective": "Reflexionar sobre el rol de la acción comunitaria en la construcción de sistemas alimentarios más justos y resilientes.",
+    "points": 35,
+    "estimated_minutes": 10,
+    "suggested_level": "Nivel 2",
+    "educational_boundary": "Reflexión educativa. No requiere acción concreta inmediata. No solicita datos personales.",
+    "wellbe_hint": "Las comunidades que siembran juntas no solo producen alimentos: producen tejido social y memoria colectiva.",
+    "content": {
+      "wellbe_message": "Antes de responder, piensa en una comunidad que conoces: ¿qué recursos tiene para sembrar? ¿qué saberes? ¿qué barreras enfrenta?",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "¿Qué iniciativas comunitarias de producción o acceso alimentario conoces en tu contexto? ¿Qué las hace funcionar o qué las limita?"
+        },
+        {
+          "id": "p2",
+          "text": "¿Qué barreras concretas enfrenta una comunidad para crear o mantener un huerto o mercado comunitario?"
+        },
+        {
+          "id": "p3",
+          "text": "¿Qué tipo de apoyo institucional o político haría una diferencia real para estas iniciativas en tu territorio?"
+        }
+      ]
+    }
+  },
+  {
+    "id": "activity-datos-cuidado",
     "route_id": "route-ia-salud-buen-vivir",
-    "title": "Una buena pregunta para IA",
-    "type": "ia-educativa",
-    "story": "La IA responde mejor cuando la pregunta tiene contexto, limites y proposito educativo.",
-    "objective": "Redactar una pregunta responsable para aprender, no para diagnosticar.",
-    "instructions": "Escribe una pregunta sobre nutricion o salud publica que pida explicacion general y cite limites.",
-    "reflection_prompt": "Que parte de la respuesta deberia verificar una persona antes de usarla?",
+    "title": "Datos con Cuidado",
+    "type": "reflection",
+    "story": "Cuando usamos datos sobre alimentación y salud, estamos manejando información sobre vidas reales. El cuidado en cómo los recogemos, usamos y comunicamos es una responsabilidad ética.",
+    "objective": "Reflexionar sobre responsabilidades éticas en el uso de datos de salud y alimentación.",
     "points": 35,
     "estimated_minutes": 12,
     "suggested_level": "Nivel 3",
-    "educational_boundary": "No se consulta ninguna IA externa en este MVP."
+    "educational_boundary": "Reflexión ética educativa. No recoge datos personales ni de salud.",
+    "wellbe_hint": "Los datos no son neutros. Siempre reflejan quién los recopiló, con qué propósito, y qué quedó fuera de la muestra.",
+    "content": {
+      "wellbe_message": "Piensa en datos que hayas visto sobre alimentación o salud pública. ¿Quién los recopiló? ¿A quién representan? ¿A quién podrían afectar sus conclusiones?",
+      "prompts": [
+        {
+          "id": "p1",
+          "text": "¿Qué información personal compartirías con una app de nutrición? ¿Qué información no compartirías? ¿Por qué?"
+        },
+        {
+          "id": "p2",
+          "text": "Si una encuesta de alimentación solo incluye personas con smartphone y acceso a internet, ¿qué comunidades quedan fuera? ¿Cómo afecta eso a las conclusiones?"
+        },
+        {
+          "id": "p3",
+          "text": "¿Cuál debería ser el consentimiento mínimo que una persona debería dar antes de que sus datos de salud sean usados en investigación o entrenamiento de IA?"
+        }
+      ]
+    }
   },
   {
-    "id": "activity-sesgo-datos",
+    "id": "activity-detective-claims",
     "route_id": "route-ia-salud-buen-vivir",
-    "title": "Sesgo y datos incompletos",
-    "type": "pensamiento-critico",
-    "story": "Un dato puede parecer neutral y aun asi dejar fuera comunidades, idiomas o realidades.",
-    "objective": "Reconocer riesgos de sesgo en datos de salud publica y alimentacion.",
-    "instructions": "Imagina una encuesta alimentaria y anota tres grupos o contextos que podria omitir.",
-    "reflection_prompt": "Como cambiaria una decision publica si esos datos faltan?",
+    "title": "Detective de Claims",
+    "type": "claim_detector",
+    "story": "En internet, redes sociales y medios circulan afirmaciones sobre nutrición y salud que van desde lo bien fundamentado hasta lo completamente falso. Evaluarlas es una competencia esencial.",
+    "objective": "Evaluar afirmaciones nutricionales comunes usando criterios de evidencia, contexto y ética.",
     "points": 40,
-    "estimated_minutes": 14,
+    "estimated_minutes": 12,
     "suggested_level": "Nivel 3",
-    "educational_boundary": "No usa datos reales ni perfila personas."
+    "educational_boundary": "Actividad educativa. No diagnostica ni prescribe. Evalúa afirmaciones con fines pedagógicos únicamente.",
+    "wellbe_hint": "Antes de compartir una afirmación sobre salud, pregúntate: ¿quién lo dice? ¿con qué evidencia? ¿a quién beneficia si lo crees?",
+    "content": {
+      "intro": "Eres detective de claims. Para cada afirmación, decide si es Verdadera (bien sustentada por evidencia), Engañosa (parcialmente correcta pero distorsionada) o Falsa (incorrecta o sin base).",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "\"Beber 8 vasos de agua al día es la cantidad exacta que necesita cualquier persona adulta.\"",
+          "verdict": "misleading",
+          "explanation": "Las necesidades de agua varían según peso, clima, actividad física y condición de salud. La recomendación de '8 vasos' es una simplificación que no aplica igual para todas las personas en todos los contextos."
+        },
+        {
+          "id": "c2",
+          "text": "\"El consumo excesivo de azúcares libres se asocia con mayor riesgo de caries y enfermedades crónicas.\"",
+          "verdict": "true",
+          "explanation": "Esta afirmación está bien sustentada por evidencia científica. La OMS recomienda reducir el consumo de azúcares libres a menos del 10% de la ingesta energética total para reducir riesgos de salud."
+        },
+        {
+          "id": "c3",
+          "text": "\"Comer carbohidratos de noche engorda más que comerlos durante el día.\"",
+          "verdict": "misleading",
+          "explanation": "El momento del consumo importa menos que la cantidad total y la calidad de la dieta. No existe evidencia sólida de que comer carbohidratos de noche sea inherentemente más engordante que hacerlo durante el día."
+        },
+        {
+          "id": "c4",
+          "text": "\"Los alimentos orgánicos son siempre más nutritivos que los alimentos convencionales.\"",
+          "verdict": "misleading",
+          "explanation": "La evidencia sobre diferencias nutricionales entre orgánicos y convencionales es mixta. Los beneficios se relacionan más con menor exposición a pesticidas y sostenibilidad ambiental que con un perfil nutricional superior garantizado."
+        },
+        {
+          "id": "c5",
+          "text": "\"Una IA puede diagnosticar tu estado nutricional con solo una foto de tu comida.\"",
+          "verdict": "false",
+          "explanation": "Ninguna herramienta de IA puede hacer un diagnóstico nutricional clínicamente válido con una foto. Puede estimar porciones con márgenes de error amplios, pero el diagnóstico nutricional requiere evaluación clínica integral."
+        }
+      ]
+    }
   },
   {
-    "id": "activity-buen-vivir-futuro",
+    "id": "activity-ia-buen-vivir",
     "route_id": "route-ia-salud-buen-vivir",
-    "title": "Futuro de buen vivir",
-    "type": "sintesis",
-    "story": "El buen vivir pregunta como tecnologia, salud y comunidad pueden sostener dignidad.",
-    "objective": "Sintetizar aprendizajes en una propuesta educativa responsable.",
-    "instructions": "Redacta una idea de proyecto que conecte alimentacion, comunidad e IA con limites eticos claros.",
-    "reflection_prompt": "Que decision dejarias siempre en manos humanas y comunitarias?",
+    "title": "IA para el Buen Vivir",
+    "type": "branching_case",
+    "story": "La inteligencia artificial puede ser una herramienta poderosa para la salud pública y la educación nutricional. Pero su impacto depende de cómo se diseña, quién la controla y qué valores guían su uso.",
+    "objective": "Reflexionar sobre usos responsables e irresponsables de IA en salud pública y educación alimentaria.",
     "points": 45,
     "estimated_minutes": 14,
     "suggested_level": "Nivel 3",
-    "educational_boundary": "No promueve automatizar decisiones clinicas ni sociales sensibles."
+    "educational_boundary": "Reflexión educativa sobre ética de IA en salud. No usa IA externa. No diagnostica ni prescribe.",
+    "wellbe_hint": "La IA es tan responsable como las decisiones humanas que la diseñan, entrenan y despliegan en comunidades reales.",
+    "content": {
+      "scenario": "Un ministerio de salud evalúa propuestas de IA para mejorar la nutrición en comunidades vulnerables. Como asesor/a educativo/a, debes evaluar cada propuesta.",
+      "start": "step1",
+      "steps": {
+        "step1": {
+          "id": "step1",
+          "text": "Propuesta A: Una app que analiza fotos de comidas y genera un 'puntaje de salud' personalizado visible a todos en la comunidad.",
+          "choices": [
+            { "id": "a", "text": "Aprobar: es innovadora y usa tecnología accesible para motivar cambios", "next": "step2a" },
+            { "id": "b", "text": "Cuestionar: puede generar estigma y tiene límites reales de precisión", "next": "step2b" }
+          ]
+        },
+        "step2a": {
+          "id": "step2a",
+          "text": "Al implementarse, la app genera ansiedad alimentaria en varios usuarios y penaliza alimentos culturalmente importantes con puntajes bajos. ¿Qué aprendizaje surge de esto?",
+          "choices": [
+            { "id": "a", "text": "La innovación tecnológica necesita evaluación ética antes del despliegue", "next": "end-a" },
+            { "id": "b", "text": "Los sistemas de puntaje simplifican contextos que son genuinamente complejos", "next": "end-b" }
+          ]
+        },
+        "step2b": {
+          "id": "step2b",
+          "text": "Tu cuestionamiento abre una discusión sobre sesgos culturales en los datos de entrenamiento y los límites del diagnóstico por foto. El ministerio decide revisar la propuesta.",
+          "choices": [
+            { "id": "a", "text": "¿Qué criterios éticos debería cumplir una herramienta así?", "next": "end-c" },
+            { "id": "b", "text": "¿Qué rol debe tener la comunidad en el diseño de estas herramientas?", "next": "end-d" }
+          ]
+        },
+        "end-a": {
+          "id": "end-a",
+          "text": "La evaluación ética previa debería incluir: pruebas con diversas comunidades, revisión de sesgos culturales, análisis de impacto en grupos vulnerables y consentimiento informado real.",
+          "is_end": true,
+          "wellbe_closing": "La ética en IA no es un complemento opcional: es parte del diseño desde el inicio, no una revisión posterior."
+        },
+        "end-b": {
+          "id": "end-b",
+          "text": "Un 'puntaje de salud' único ignora que la alimentación incluye cultura, acceso, preferencias, condiciones médicas y contexto social. La simplificación puede ser más dañina que útil.",
+          "is_end": true,
+          "wellbe_closing": "Reducir la complejidad humana a un número es una forma de poder que necesita ser cuestionada y regulada."
+        },
+        "end-c": {
+          "id": "end-c",
+          "text": "Criterios éticos básicos: datos representativos de diversas poblaciones, transparencia sobre limitaciones, sin diagnóstico clínico, respeto por prácticas culturales, privacidad garantizada.",
+          "is_end": true,
+          "wellbe_closing": "Una herramienta de IA responsable es aquella que sabe lo que no sabe y lo comunica claramente a sus usuarios."
+        },
+        "end-d": {
+          "id": "end-d",
+          "text": "La participación comunitaria en el diseño de IA asegura que las herramientas reflejen necesidades reales, no solo posibilidades técnicas. El co-diseño reduce sesgos y aumenta adopción.",
+          "is_end": true,
+          "wellbe_closing": "Las comunidades no son solo usuarias de tecnología: tienen el derecho de participar en su diseño y evaluación."
+        }
+      }
+    }
   }
 ]
