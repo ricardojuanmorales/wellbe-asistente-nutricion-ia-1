@@ -23,8 +23,8 @@ Wellbe Study IA es una aplicación educativa gamificada donde pruebas tus destre
 
 ```bash
 # 1. Clona o descarga el repositorio
-git clone https://github.com/[org]/wellbe-study-ia.git
-cd wellbe-study-ia
+git clone https://github.com/ricardojuanmorales/wellbe-asistente-nutricion-ia-1.git
+cd wellbe-asistente-nutricion-ia-1
 
 # 2. Inicia un servidor local (necesario para cargar JSON)
 python3 -m http.server 8000

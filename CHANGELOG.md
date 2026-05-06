@@ -2,6 +2,20 @@
 
 ---
 
+## [1.0.1] — 2026-05-06
+
+### Corregido
+
+- Los archivos de datos ahora viven en `data/` para coincidir con las rutas usadas por `index.html`.
+- Se corrigieron los `404` al cargar `data/config.json`, `data/cases.json` y `data/badges.json` en GitHub Pages.
+- Se validó que los tres JSON sean parseables y respondan correctamente por HTTP local.
+
+### Sincronización
+
+- Commit publicado en `origin/main`: `eccf52e Fix JSON data paths`.
+
+---
+
 ## [1.0.0] — 2026-05-05
 
 ### 🎉 MVP inicial — Wellbe Study IA

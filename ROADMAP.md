@@ -1,6 +1,6 @@
 # ROADMAP.md — Wellbe Study IA
 
-**Versión:** 1.0 · **Última actualización:** 2026-05-05
+**Versión:** 1.0.1 · **Última actualización:** 2026-05-06
 
 ---
 
@@ -26,6 +26,8 @@
 | Diseño índigo académico | ✅ |
 | Documentación completa | ✅ |
 | 8 guías de usuario MD | ✅ |
+| Publicación en GitHub Pages | ✅ |
+| JSON externos servidos desde `/data/` | ✅ |
 
 ---
 
@@ -65,11 +67,20 @@ Usuario escribe prompt → API proxy → Anthropic API
 
 ---
 
+## Cierre de sesión — 2026-05-06
+
+- Repositorio sincronizado con `origin/main`.
+- Fix de carga JSON publicado en GitHub: `eccf52e Fix JSON data paths`.
+- Datos de la app ubicados en `data/config.json`, `data/cases.json` y `data/badges.json`.
+- Validación local completada: JSON válidos y rutas HTTP respondiendo `200 OK`.
+
+---
+
 ## Próximos 3 pasos
 
-1. **Publicar en GitHub Pages** + documentar el proceso de `python3 -m http.server`
-2. **Piloto con 5–10 usuarios** (mix estudiantes + docentes) — protocolo de 30 min
-3. **Retrotraer panel de docs** a Wellbe Explore y Wellbe Quest
+1. **Verificar GitHub Pages en navegador** después de que termine el despliegue.
+2. **Piloto con 5–10 usuarios** (mix estudiantes + docentes) — protocolo de 30 min.
+3. **Retrotraer panel de docs** a Wellbe Explore y Wellbe Quest.
 
 ---
 
