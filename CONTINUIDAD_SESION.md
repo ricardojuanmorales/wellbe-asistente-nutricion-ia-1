@@ -3,7 +3,7 @@
 **Fecha de cierre:** 2026-05-06  
 **Repositorio:** `git@github.com:ricardojuanmorales/wellbe-asistente-nutricion-ia-1.git`  
 **Rama:** `main`  
-**Estado:** MVP estático completado, corregido y sincronizado
+**Estado:** MVP estático completado, corregido, verificado localmente y sincronizado
 
 ---
 
@@ -32,8 +32,11 @@ El progreso del usuario se guarda en `localStorage`. No hay backend, cuentas, co
 | Export/import | JSON local |
 | Despliegue | Preparado para GitHub Pages |
 | Repo local/remoto | Sincronizado con `origin/main` |
+| Modal de casos | Tarjeta centrada, legible y con scroll interno corregido |
 
-### Incidente resuelto
+### Incidentes resueltos
+
+#### Carga de JSON
 
 Se detectó un error de carga en navegador: los archivos `badges.json`, `cases.json` y `config.json` devolvían `404` porque `index.html` los buscaba bajo `data/`, pero estaban en la raíz del repositorio.
 
@@ -45,12 +48,27 @@ Resolución aplicada:
 - Se verificó que las rutas HTTP locales respondieran `200 OK`.
 - Se publicó el arreglo en GitHub.
 
+#### Modal de caso y prompt modelo
+
+Se detectó que la caja de información del caso era demasiado pequeña y quedaba pegada arriba, lo que dificultaba la lectura. También se revisó el botón "Mostrar prompt modelo".
+
+Resolución aplicada:
+
+- El `dialog` ahora se centra explícitamente en pantalla y usa una anchura máxima mayor.
+- El contenido del modal se presenta como tarjetas centradas de lectura cómoda.
+- El contenedor `.m-scroll` dejó de colapsarse por `flex-basis: 0` y ahora conserva altura usable.
+- El botón "Mostrar prompt modelo" actualiza estado accesible con `aria-expanded`, revela la tarjeta modelo, oculta el botón y desplaza el scroll interno hacia el contenido revelado.
+- Se corrigió el cierre accidental del modal cuando el clic venía desde controles internos.
+- Se validó con servidor HTTP local y Chrome headless usando protocolo DevTools.
+
 Commits clave:
 
 | Commit | Descripción |
 |--------|-------------|
 | `eccf52e` | `Fix JSON data paths` |
 | `7bdf6e8` | `Update session closure docs` |
+| `be55ba9` | `Add continuity handoff docs` |
+| `2e65310` | `Improve case modal readability` |
 
 ### Documentación vigente
 
@@ -68,7 +86,7 @@ Commits clave:
 
 ## 2. Primer de continuidad
 
-Este proyecto debe continuarse como una herramienta educativa de bajo riesgo, privada por defecto y fácil de desplegar. La prioridad inmediata no es añadir complejidad técnica, sino validar la experiencia con usuarios reales y confirmar que el despliegue público carga correctamente los JSON.
+Este proyecto debe continuarse como una herramienta educativa de bajo riesgo, privada por defecto y fácil de desplegar. La prioridad inmediata no es añadir complejidad técnica, sino validar la experiencia con usuarios reales y confirmar que el despliegue público carga correctamente los JSON y el modal de casos se lee bien en navegadores reales.
 
 ### Próximo punto de partida
 
@@ -78,6 +96,7 @@ Este proyecto debe continuarse como una herramienta educativa de bajo riesgo, pr
    - crear perfil local;
    - abrir caso N1-01;
    - responder quiz;
+   - pulsar "Mostrar prompt modelo" y verificar que la tarjeta se lea correctamente;
    - completar caso;
    - confirmar puntos y badge;
    - exportar progreso JSON.
@@ -88,6 +107,7 @@ Este proyecto debe continuarse como una herramienta educativa de bajo riesgo, pr
 | Prioridad | Acción |
 |-----------|--------|
 | Alta | Verificar GitHub Pages en navegador real |
+| Alta | Confirmar modal de caso y prompt modelo en desktop y móvil |
 | Alta | Hacer piloto con 5-10 usuarios |
 | Media | Corregir README público si todavía muestra placeholder de clonación |
 | Media | Añadir protocolo breve de prueba docente |
@@ -108,7 +128,7 @@ Este proyecto debe continuarse como una herramienta educativa de bajo riesgo, pr
 - GitHub Pages puede tardar en reflejar cambios después del push.
 - Si se abre `index.html` con `file://`, los JSON pueden fallar por CORS.
 - El README principal aún debe revisarse contra el nombre real del repositorio si se usa como documentación pública primaria.
-- No hay pruebas automatizadas; la validación actual es manual y por HTTP local.
+- No hay suite automatizada permanente; la validación actual combina revisión manual, servidor HTTP local y prueba puntual con Chrome headless.
 
 ---
 
@@ -132,6 +152,9 @@ Estado reciente:
 - Se corrigió un error de `404` porque los JSON estaban en la raíz y `index.html` los buscaba en `data/`.
 - Commit del fix: `eccf52e Fix JSON data paths`.
 - Commit de cierre documental: `7bdf6e8 Update session closure docs`.
+- Se agregó documentación de continuidad: `be55ba9 Add continuity handoff docs`.
+- Se corrigió el modal de caso para que la información sea una tarjeta centrada, legible, con scroll interno correcto, y se verificó el botón "Mostrar prompt modelo".
+- Commit del modal: `2e65310 Improve case modal readability`.
 - El repo quedó sincronizado con `origin/main`.
 
 Antes de editar:
@@ -140,7 +163,7 @@ Antes de editar:
 3. No reviertas cambios del usuario.
 
 Objetivo sugerido para continuar:
-Verificar GitHub Pages en navegador real, confirmar que `data/*.json` carga sin `404`, hacer una prueba manual del caso N1-01 y documentar cualquier hallazgo.
+Verificar GitHub Pages en navegador real, confirmar que `data/*.json` carga sin `404`, hacer una prueba manual del caso N1-01, confirmar que el modal y el botón "Mostrar prompt modelo" funcionan en desktop/móvil, y documentar cualquier hallazgo.
 
 Si vas a modificar el repo:
 - Mantén los cambios acotados.
@@ -157,5 +180,7 @@ Si vas a modificar el repo:
 - [x] Fix publicado en GitHub.
 - [x] Documentos de cierre actualizados.
 - [x] Compendio de continuidad creado.
+- [x] Modal de caso corregido y verificado localmente.
+- [x] Botón "Mostrar prompt modelo" verificado localmente.
 - [ ] Verificación final en GitHub Pages desde navegador.
 - [ ] Piloto con usuarios.

@@ -2,6 +2,32 @@
 
 ---
 
+## [1.0.2] — 2026-05-06
+
+### Corregido
+
+- La caja de información del caso ahora se muestra como tarjeta centrada, más ancha y legible.
+- El modal de casos ya no colapsa el área de contenido por `flex-basis: 0`.
+- El cierre por clic fuera del modal ya no se activa accidentalmente desde controles internos.
+- El botón "Mostrar prompt modelo" revela la tarjeta del prompt, actualiza `aria-expanded` y desplaza el scroll interno hacia el contenido mostrado.
+
+### Verificación
+
+- Se validó la sintaxis del JavaScript extraído de `index.html` con `node --check`.
+- Se probó la app desde servidor HTTP local y Chrome headless mediante protocolo DevTools.
+- Se confirmó que el modal queda abierto, centrado y que la tarjeta del prompt modelo contiene texto visible.
+
+### Documentación
+
+- Se actualizó `CONTINUIDAD_SESION.md` con cierre, compendio, primer de continuidad y prompt de activación alineados al estado actual.
+- Se actualizó `ROADMAP.md` con el cierre 1.0.2 y próximos pasos.
+
+### Sincronización
+
+- Commit publicado en `origin/main`: `2e65310 Improve case modal readability`.
+
+---
+
 ## [1.0.1] — 2026-05-06
 
 ### Corregido

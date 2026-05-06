@@ -1,6 +1,6 @@
 # ROADMAP.md — Wellbe Study IA
 
-**Versión:** 1.0.1 · **Última actualización:** 2026-05-06
+**Versión:** 1.0.2 · **Última actualización:** 2026-05-06
 
 ---
 
@@ -28,6 +28,8 @@
 | 8 guías de usuario MD | ✅ |
 | Publicación en GitHub Pages | ✅ |
 | JSON externos servidos desde `/data/` | ✅ |
+| Modal de caso centrado y legible | ✅ |
+| Botón "Mostrar prompt modelo" verificado | ✅ |
 
 ---
 
@@ -71,14 +73,15 @@ Usuario escribe prompt → API proxy → Anthropic API
 
 - Repositorio sincronizado con `origin/main`.
 - Fix de carga JSON publicado en GitHub: `eccf52e Fix JSON data paths`.
+- Mejora de legibilidad del modal publicada en GitHub: `2e65310 Improve case modal readability`.
 - Datos de la app ubicados en `data/config.json`, `data/cases.json` y `data/badges.json`.
-- Validación local completada: JSON válidos y rutas HTTP respondiendo `200 OK`.
+- Validación local completada: JSON válidos, rutas HTTP respondiendo `200 OK`, modal centrado con altura usable y botón "Mostrar prompt modelo" revelando la tarjeta correcta.
 
 ---
 
 ## Próximos 3 pasos
 
-1. **Verificar GitHub Pages en navegador** después de que termine el despliegue.
+1. **Verificar GitHub Pages en navegador** después de que termine el despliegue, incluyendo carga JSON y modal de caso.
 2. **Piloto con 5–10 usuarios** (mix estudiantes + docentes) — protocolo de 30 min.
 3. **Retrotraer panel de docs** a Wellbe Explore y Wellbe Quest.
 
