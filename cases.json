@@ -1,0 +1,477 @@
+[
+  {
+    "id": "case-n1-01",
+    "level": "N1",
+    "order": 1,
+    "title": "¿Cómo le pregunto a Wellbe?",
+    "type": "prompt_builder",
+    "domain": "meta-wellbe",
+    "points": 150,
+    "estimated_minutes": 10,
+    "story": "Ana es estudiante de primer año en ciencias de la salud. Quiere saber qué son los macronutrientes pero no sabe cómo formular una pregunta a Wellbe que le dé una respuesta clara, con fuente y sin recomendaciones médicas.",
+    "objective": "Comprender la anatomía de un buen prompt para Wellbe: nivel, modo, tema, límite y fuente.",
+    "wellbe_hint": "Un buen prompt para Wellbe tiene cinco partes: 1) el nivel deseado, 2) el modo de interacción, 3) el tema específico, 4) un ejemplo o contexto, y 5) una indicación de límites. En N1 te doy el prompt completo.",
+    "scaffolding": {
+      "level": "alta",
+      "given_prompt": "Wellbe, explícame qué son los macronutrientes en nivel básico, con un ejemplo cotidiano usando alimentos caribeños, y sin entrar en recomendaciones clínicas.",
+      "fill_in_blank": null,
+      "hints": [
+        "Fíjate cómo el prompt especifica 'nivel básico' — eso activa el Modo Claro",
+        "El pedido de 'ejemplo cotidiano usando alimentos caribeños' contextualiza culturalmente",
+        "'Sin recomendaciones clínicas' establece el límite de seguridad"
+      ]
+    },
+    "model_answer": {
+      "wellbe_response": "Los macronutrientes son los tres nutrientes que el cuerpo necesita en mayor cantidad: carbohidratos, proteínas y grasas. Un plato de arroz con habichuelas te da los tres: el arroz aporta carbohidratos (energía), las habichuelas aportan proteína vegetal (estructura) y el aceite del sofrito aporta grasas (protección y absorción de vitaminas). Fuente: National Academy of Medicine, DRI 2023.",
+      "prompt_analysis": "Este prompt es efectivo porque: 1) pide nivel básico (Modo Claro N1), 2) contextualiza con cocina caribeña, 3) pide ejemplo cotidiano para anclaje, 4) establece límite clínico explícito. En N2 aprenderás a construir prompts como este tú mismo/a.",
+      "source": "National Academy of Medicine. Dietary Reference Intakes (2023)."
+    },
+    "quiz": {
+      "questions": [
+        {
+          "q": "¿Cuál de estas partes NO es esencial en un prompt para Wellbe?",
+          "opts": ["El nivel deseado (básico, intermedio, avanzado)", "El color favorito del usuario", "El contexto cultural del ejemplo", "La indicación de límites clínicos"],
+          "ok": 1,
+          "fb": "Correcto. El color favorito no aporta nada. Un buen prompt incluye nivel, modo, tema, contexto y límites.",
+          "wfb": "El color favorito no es relevante para un prompt educativo. Los cinco elementos son: nivel, modo, tema, contexto cultural y límites de seguridad."
+        },
+        {
+          "q": "¿Por qué el prompt incluye 'sin recomendaciones clínicas'?",
+          "opts": ["Porque Wellbe no sabe de nutrición", "Porque Wellbe no debe diagnosticar, prescribir ni sustituir a un RDN", "Porque las recomendaciones clínicas aburren", "Porque el nivel básico no tiene acceso a datos médicos"],
+          "ok": 1,
+          "fb": "Exacto. Wellbe es un asistente educativo. Sus límites absolutos incluyen no diagnosticar, no prescribir y no sustituir a profesionales licenciados (RDN/NDTR).",
+          "wfb": "Wellbe sí sabe de nutrición, pero tiene límites éticos claros: no diagnostica, no prescribe y no sustituye profesionales. Incluir 'sin recomendaciones clínicas' activa esos guardarraíles."
+        },
+        {
+          "q": "El prompt pide 'ejemplo cotidiano con alimentos caribeños'. ¿Qué principio de Wellbe activa esto?",
+          "opts": ["Confidencialidad", "Equidad cultural", "Supervisión humana", "Responsabilidad informacional"],
+          "ok": 1,
+          "fb": "Correcto. La equidad cultural implica respetar y usar las tradiciones alimentarias de la audiencia como punto de conexión, no imponer ejemplos de otras culturas.",
+          "wfb": "La equidad cultural es el principio que pide respetar tradiciones alimentarias y usar ejemplos relevantes para la audiencia. Pedir alimentos caribeños lo activa directamente."
+        }
+      ]
+    },
+    "wellbe_principle": "veracidad",
+    "safety_note": "Esta información es educativa. Para orientación nutricional personalizada, consulta a un RDN."
+  },
+  {
+    "id": "case-n1-02",
+    "level": "N1",
+    "order": 2,
+    "title": "Un post viral sobre gandules",
+    "type": "claim_audit",
+    "domain": "nutricion-comunicacion",
+    "points": 150,
+    "estimated_minutes": 12,
+    "story": "En un grupo de WhatsApp familiar aparece este mensaje: '¡Los gandules curan la anemia! Come una taza diaria durante dos semanas y tus niveles de hierro se normalizan. Es natural y no tiene efectos secundarios. 💪🫘'",
+    "objective": "Identificar si el claim tiene respaldo científico, clasificar su tipo y determinar si es seguro compartirlo.",
+    "wellbe_hint": "En N1 te doy el prompt de auditoría completo. Tu tarea es analizar el claim paso a paso y comparar tu análisis con el de Wellbe.",
+    "scaffolding": {
+      "level": "alta",
+      "given_prompt": "Wellbe, activa Modo Auditor Ético. Evalúa este claim: 'Los gandules curan la anemia. Come una taza diaria durante dos semanas y tus niveles de hierro se normalizan.' ¿Tiene respaldo científico? ¿Qué tipo de claim es según la FDA? ¿Es seguro compartirlo?",
+      "hints": [
+        "Recuerda: los tipos de claim FDA son: nutriente, salud, estructura/función, sin respaldo",
+        "El hierro en legumbres es no-hemo — su absorción depende de otros factores (vitamina C, fitatos)",
+        "Una promesa de resultado específico en tiempo definido es señal de alerta clásica"
+      ]
+    },
+    "claims": [
+      {
+        "text": "Los gandules curan la anemia",
+        "verdict": "false",
+        "explanation": "Claim terapéutico sin respaldo de ensayo clínico. Los gandules contienen hierro no-hemo (~3.5mg/100g cocido), pero 'curar' la anemia requiere diagnóstico médico y tratamiento supervisado. La absorción de hierro no-hemo depende de vitamina C, fitatos y estado del huésped."
+      },
+      {
+        "text": "Come una taza diaria durante dos semanas y tus niveles se normalizan",
+        "verdict": "false",
+        "explanation": "Promesa de resultado clínico específico en tiempo definido — una de las señales de alerta más claras de desinformación nutricional. No hay estudio que respalde esta dosis-tiempo-resultado."
+      },
+      {
+        "text": "Es natural y no tiene efectos secundarios",
+        "verdict": "misleading",
+        "explanation": "Falacia naturalista. 'Natural' no significa 'sin riesgos'. La FDA no tiene definición regulada de 'natural' para alimentos procesados. Además, el exceso de hierro puede ser problemático en ciertas condiciones (hemocromatosis)."
+      }
+    ],
+    "model_answer": {
+      "verdict": "Claim problemático — promesa clínica sin respaldo",
+      "prompt_analysis": "El prompt de auditoría activa el Modo Auditor Ético, presenta el claim textual, y hace tres preguntas evaluativas precisas. Este patrón es replicable en N2.",
+      "source": "USDA FoodData Central; FDA Claims Guidelines; Academy of Nutrition and Dietetics."
+    },
+    "wellbe_principle": "veracidad",
+    "safety_note": "Ante preguntas sobre anemia o estado nutricional individual, consultar a un RDN o médico."
+  },
+  {
+    "id": "case-n1-03",
+    "level": "N1",
+    "order": 3,
+    "title": "La abuela pregunta sobre la yuca",
+    "type": "prompt_builder",
+    "domain": "meta-wellbe",
+    "points": 150,
+    "estimated_minutes": 10,
+    "story": "Tu abuela te pregunta: '¿Es verdad que la yuca engorda? Mi vecina me dijo que no la coma más porque tiene mucho azúcar.' Quieres usar Wellbe para darle una respuesta educativa, respetuosa y con fuente.",
+    "objective": "Construir un prompt que active el modo correcto, respete el contexto cultural y evite estigmatizar un alimento tradicional.",
+    "wellbe_hint": "Este caso tiene sensibilidad cultural alta. El alimento que se menciona (yuca) tiene significado histórico y cultural profundo en el Caribe. Wellbe nunca debe decir que un alimento cultural 'engorda' sin contexto completo.",
+    "scaffolding": {
+      "level": "alta",
+      "given_prompt": "Wellbe, explícame el perfil nutricional de la yuca en nivel básico, con tono respetuoso para una persona adulta mayor. Incluye dato de composición con fuente de USDA FoodData Central. Evita lenguaje que estigmatice la yuca como alimento 'que engorda'.",
+      "hints": [
+        "Fíjate cómo el prompt pide tono 'respetuoso para adulta mayor' — adapta la audiencia",
+        "Pide explícitamente evitar lenguaje estigmatizante — principio de comunicación no estigmatizante",
+        "Especifica la fuente deseada (USDA) — responsabilidad informacional"
+      ]
+    },
+    "model_answer": {
+      "wellbe_response": "La yuca (Manihot esculenta) aporta aproximadamente 38g de carbohidratos por 100g cocida. Es libre de gluten, fuente de vitamina C y potasio, y tiene carga glucémica moderada. Ningún alimento individual 'engorda' o 'adelgaza' — lo que importa es el patrón alimentario completo. La yuca ha sido alimento central del Caribe durante miles de años y sigue siendo fuente de energía accesible y nutritiva.",
+      "prompt_analysis": "Este prompt es excelente porque: adapta el tono a la audiencia, pide fuente específica, y explícitamente protege contra estigmatización. El principio de equidad cultural y de comunicación no estigmatizante están activos.",
+      "source": "USDA FoodData Central."
+    },
+    "quiz": {
+      "questions": [
+        {
+          "q": "¿Por qué el prompt pide explícitamente 'evitar lenguaje que estigmatice'?",
+          "opts": ["Porque a Wellbe no le gusta el lenguaje negativo", "Porque decir que un alimento cultural 'engorda' puede generar vergüenza y alejar a la persona de su tradición", "Porque la yuca es el mejor alimento del Caribe", "Porque la FDA prohíbe decir que los alimentos engordan"],
+          "ok": 1,
+          "fb": "Correcto. Estigmatizar un alimento cultural puede generar vergüenza, culpa y alejamiento de tradiciones nutritivas. El principio de comunicación no estigmatizante de Wellbe existe precisamente para esto.",
+          "wfb": "El problema no es legal ni de preferencia. Decir que un alimento cultural 'engorda' puede generar vergüenza y desconexión con tradiciones nutritivas valiosas."
+        },
+        {
+          "q": "¿Qué principio de Wellbe se activa al adaptar el tono para una persona adulta mayor?",
+          "opts": ["Confidencialidad", "Prudencia", "Justicia alimentaria", "Equidad cultural"],
+          "ok": 3,
+          "fb": "Correcto. La equidad cultural incluye adaptar la comunicación al contexto, edad y tradición de la audiencia.",
+          "wfb": "La equidad cultural no solo se refiere a tradiciones alimentarias sino también a adaptar la comunicación al contexto, edad y realidad de la persona."
+        }
+      ]
+    },
+    "wellbe_principle": "equidad_cultural",
+    "safety_note": "Para orientación nutricional personalizada, consulta a un RDN."
+  },
+  {
+    "id": "case-n2-01",
+    "level": "N2",
+    "order": 4,
+    "title": "Crea un carrusel sobre seguridad alimentaria",
+    "type": "case_simulation",
+    "domain": "justicia-alimentaria",
+    "points": 200,
+    "estimated_minutes": 15,
+    "story": "Trabajas como comunicadora en una ONG de salud comunitaria en San Juan. Te piden crear un carrusel de Instagram de 5 slides sobre seguridad alimentaria en Puerto Rico para audiencia general. Necesitas usar Wellbe para investigar, verificar datos y producir un borrador revisable.",
+    "objective": "Construir un prompt N2 que active el modo correcto, especifique formato, audiencia, fuente y límites éticos.",
+    "wellbe_hint": "En N2 te doy la estructura del prompt pero tú completas los detalles. Recuerda: un prompt operativo necesita formato, público, tema, contexto cultural, fuente esperada y nota de límites.",
+    "scaffolding": {
+      "level": "media",
+      "fill_in_blank": "Wellbe, crea un _______ sobre _______ para _______. Usa lenguaje _______, considera el contexto de _______ e incluye _______.",
+      "given_prompt": null,
+      "hints": [
+        "Formato: carrusel de 5 slides para Instagram",
+        "Tema: seguridad alimentaria y las 4 dimensiones FAO",
+        "Público: audiencia general en Puerto Rico",
+        "Contexto: PR importa ~85% de sus alimentos",
+        "Incluir: fuente verificable + nota de que es contenido educativo"
+      ]
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, crea un carrusel de 5 slides para Instagram sobre las 4 dimensiones de la seguridad alimentaria (FAO) para audiencia general en Puerto Rico. Usa lenguaje claro y no técnico, considera que PR importa aproximadamente el 85% de sus alimentos e incluye al menos una fuente verificable (FAO, USDA ERS) y una nota final de que es contenido educativo, no consejo clínico.",
+      "prompt_analysis": "Este prompt es operativo N2 porque: 1) especifica formato (carrusel 5 slides), 2) define público (audiencia general PR), 3) establece contexto territorial (importación 85%), 4) pide fuente nivel 1, 5) incluye límite ético. El Modo Docente se activa implícitamente por la naturaleza del pedido.",
+      "source": "FAO. Cumbre Mundial sobre la Alimentación (1996); USDA ERS Puerto Rico."
+    },
+    "evaluation_criteria": [
+      "El prompt especifica formato y número de slides",
+      "Define la audiencia claramente",
+      "Incluye contexto de Puerto Rico",
+      "Pide fuente verificable de nivel 1",
+      "Incluye nota de límites o derivación"
+    ],
+    "wellbe_principle": "justicia_alimentaria",
+    "safety_note": "Si experimentas inseguridad alimentaria, contacta al Banco de Alimentos de PR o programas SNAP."
+  },
+  {
+    "id": "case-n2-02",
+    "level": "N2",
+    "order": 5,
+    "title": "El semáforo de un suplemento en TikTok",
+    "type": "claim_audit",
+    "domain": "ia-responsable",
+    "points": 200,
+    "estimated_minutes": 15,
+    "story": "Un influencer en TikTok con 500K seguidores promociona un suplemento de 'colágeno marino hidrolizado' diciendo: 'Este colágeno me quitó el dolor de rodillas en una semana. 100% natural, sin contraindicaciones. Link en bio para comprarlo con mi código de descuento.' Un estudiante te pregunta si debería comprarlo.",
+    "objective": "Construir tu propio prompt de auditoría de claim en Modo Auditor y evaluar el contenido del video.",
+    "wellbe_hint": "En N2 te sugiero la estructura del prompt pero tú lo construyes. Recuerda las señales de alerta: promesa de resultado rápido, testimonial individual, link de venta con código de descuento, 'sin contraindicaciones'.",
+    "scaffolding": {
+      "level": "media",
+      "fill_in_blank": "Wellbe, activa Modo _______. Evalúa este claim de un influencer: '_______'. Analiza: tipo de claim según _______, señales de _______, conflicto de _______ y si es seguro _______.",
+      "given_prompt": null,
+      "hints": [
+        "¿Qué modo de Wellbe es apropiado para auditoría de claims? (Auditor Ético)",
+        "¿Qué tipo de claim es 'me quitó el dolor de rodillas'? (terapéutico / testimonial)",
+        "¿Qué conflicto de interés tiene un influencer con código de descuento?",
+        "La evidencia sobre colágeno oral y articulaciones es limitada y contradictoria"
+      ]
+    },
+    "claims": [
+      {
+        "text": "Este colágeno me quitó el dolor de rodillas en una semana",
+        "verdict": "misleading",
+        "explanation": "Testimonial individual, no evidencia clínica. La evidencia sobre suplementos de colágeno hidrolizado y salud articular es limitada: algunos estudios muestran efectos modestos a 3-6 meses, no en una semana. Un testimonial no es un ensayo clínico."
+      },
+      {
+        "text": "100% natural, sin contraindicaciones",
+        "verdict": "false",
+        "explanation": "Falacia naturalista + afirmación absoluta de seguridad. 'Natural' no tiene definición regulada. Todo suplemento puede tener interacciones con medicamentos o contraindicaciones en condiciones específicas."
+      },
+      {
+        "text": "Link en bio para comprarlo con mi código de descuento",
+        "verdict": "misleading",
+        "explanation": "Conflicto de interés declarado: el influencer gana comisión por venta. Esto no invalida automáticamente el producto, pero debe evaluarse como sesgo."
+      }
+    ],
+    "model_answer": {
+      "ideal_prompt": "Wellbe, activa Modo Auditor Ético. Evalúa este claim de un influencer de TikTok: 'Este colágeno me quitó el dolor de rodillas en una semana. 100% natural, sin contraindicaciones.' Analiza: tipo de claim según la FDA, señales de alerta de desinformación, conflicto de interés por link de venta con código, y si es seguro compartir o recomendar este producto sin consulta profesional.",
+      "source": "FDA. Structure/Function Claims; NIH Office of Dietary Supplements; AND Position Paper on Supplements."
+    },
+    "wellbe_principle": "veracidad",
+    "safety_note": "Antes de usar suplementos, consulta a un RDN o médico, especialmente si tomas medicamentos."
+  },
+  {
+    "id": "case-n2-03",
+    "level": "N2",
+    "order": 6,
+    "title": "Prepara una clase de 20 minutos",
+    "type": "case_simulation",
+    "domain": "nutricion-comunicacion",
+    "points": 200,
+    "estimated_minutes": 15,
+    "story": "Eres docente en una universidad en Mayagüez. Debes dar una clase de 20 minutos sobre etiquetas nutricionales a estudiantes de primer año que nunca han leído una etiqueta. Quieres usar Wellbe para diseñar la actividad.",
+    "objective": "Construir un prompt N2 que pida a Wellbe diseñar una actividad educativa con estructura, timing y materiales.",
+    "wellbe_hint": "Un prompt para diseño educativo N2 incluye: formato de la actividad, duración, nivel de la audiencia, objetivo de aprendizaje, y materiales o recursos necesarios.",
+    "scaffolding": {
+      "level": "media",
+      "fill_in_blank": "Wellbe, diseña una actividad de _______ minutos sobre _______ para _______. Incluye: estructura con _______, al menos un ejercicio _______ y una nota sobre _______.",
+      "hints": [
+        "Formato: actividad presencial de 20 minutos con estructura cronometrada",
+        "Los estudiantes nunca han leído una etiqueta — empieza desde cero",
+        "Incluye un ejercicio práctico con una etiqueta real",
+        "Indica que los % VD asumen una dieta de 2,000 kcal — no es universal"
+      ]
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, diseña una actividad educativa de 20 minutos sobre cómo leer etiquetas nutricionales para estudiantes universitarios de primer año sin experiencia previa. Incluye: estructura cronometrada (intro, explicación, ejercicio práctico, cierre), al menos un ejercicio con una etiqueta real de un producto de Puerto Rico, y una nota sobre las limitaciones del % VD (asume 2,000 kcal, no es universal). Usa tono accesible, no técnico.",
+      "source": "FDA. How to Understand and Use the Nutrition Facts Label (2022)."
+    },
+    "evaluation_criteria": [
+      "Especifica duración exacta",
+      "Define nivel de la audiencia",
+      "Pide estructura cronometrada",
+      "Incluye ejercicio práctico",
+      "Menciona limitaciones del formato de etiqueta"
+    ],
+    "wellbe_principle": "responsabilidad_informacional",
+    "safety_note": "Las etiquetas son herramientas de información, no prescripciones."
+  },
+  {
+    "id": "case-n3-01",
+    "level": "N3",
+    "order": 7,
+    "title": "Matriz de evidencia: Food is Medicine en PR",
+    "type": "evidence_matrix",
+    "domain": "salud-publica",
+    "points": 300,
+    "estimated_minutes": 20,
+    "story": "Estás desarrollando una propuesta para un programa de Food is Medicine (FIM) en el sistema de salud de Puerto Rico. Necesitas construir una matriz de evidencia que justifique el programa ante un comité de salud pública.",
+    "objective": "Construir un prompt N3 de investigación que active el Modo Investigador, pida matriz de fuentes con diseño de estudio y limitaciones, y contextualice para Puerto Rico.",
+    "wellbe_hint": "En N3 no hay prompts dados. Construyes desde cero. Un prompt investigador incluye: modo, tema, formato de salida (matriz), diseño de estudio esperado, contexto regional, y declaración explícita de incertidumbre.",
+    "scaffolding": {
+      "level": "baja",
+      "hints": [
+        "Activa 'Modo Investigador N3' explícitamente en tu prompt",
+        "Pide formato de matriz con columnas: Referencia, Diseño, Muestra, Hallazgo, Limitaciones",
+        "Incluye el contexto de Puerto Rico: alta prevalencia de diabetes, sistema de salud en transición",
+        "Pide que Wellbe declare qué sabe, qué sugiere y qué no puede responder"
+      ]
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, activa Modo Investigador N3. Construye una matriz de evidencia sobre programas Food is Medicine (FIM) con enfoque en medically tailored meals y Produce Prescription. Formato: tabla con columnas Referencia, Diseño de estudio, Muestra, Hallazgo principal, Limitaciones, Nivel de evidencia. Incluye al menos 5 fuentes de nivel 1 (JAMA, NEJM, Cochrane, USDA ERS). Contextualiza para Puerto Rico: alta prevalencia de diabetes tipo 2, ~85% de alimentos importados, sistema de salud en transición. Declara explícitamente: qué establece la evidencia, qué sugiere pero no demuestra, y qué no puede responder todavía.",
+      "evidence_summary": {
+        "established": "Medically tailored meals reducen hospitalizaciones y costos en adultos con enfermedades crónicas serias (Downer et al., JAMA Network Open 2020; Berkowitz et al., 2019).",
+        "suggested": "Los programas Produce Prescription pueden mejorar la ingesta de frutas y vegetales en hogares con inseguridad alimentaria, pero la evidencia de impacto clínico a largo plazo es limitada.",
+        "unknown": "No hay estudios de FIM específicamente en Puerto Rico ni en poblaciones hispano-caribeñas con representación suficiente para generalizar."
+      },
+      "source": "Downer et al., JAMA Network Open 2020; Berkowitz et al., Health Affairs 2019; White House Conference on Hunger 2022."
+    },
+    "wellbe_principle": "prudencia",
+    "safety_note": "Los programas FIM complementan el cuidado médico, no lo sustituyen."
+  },
+  {
+    "id": "case-n3-02",
+    "level": "N3",
+    "order": 8,
+    "title": "¿Fue ético este uso de Wellbe?",
+    "type": "ethics_review",
+    "domain": "ia-responsable",
+    "points": 300,
+    "estimated_minutes": 18,
+    "story": "Un nutricionista usa Wellbe para generar un plan de alimentación personalizado para un paciente con diabetes tipo 2 y enfermedad renal crónica. Le envía el resultado directamente al paciente por email diciendo: 'Aquí tienes tu plan de dieta generado por inteligencia artificial.'",
+    "objective": "Evaluar si este uso viola los principios de Wellbe y construir un prompt N3 que analice los riesgos éticos.",
+    "wellbe_hint": "Este caso toca tres principios simultáneamente: prudencia (no prescribir), supervisión humana (el resultado no fue revisado), y comunicación (el paciente cree que la IA hizo un diagnóstico).",
+    "scaffolding": {
+      "level": "baja",
+      "hints": [
+        "¿Wellbe puede generar planes de alimentación personalizados? (No — es un límite absoluto)",
+        "¿El nutricionista revisó el resultado antes de enviarlo? (No se indica)",
+        "¿El paciente entendió que esto no es un diagnóstico? (Probablemente no)",
+        "¿Qué principios de Wellbe se violaron? (prudencia, supervisión humana, comunicación)"
+      ]
+    },
+    "ethics_scenarios": [
+      {
+        "action": "Wellbe genera un plan de alimentación personalizado para un paciente con diagnóstico médico",
+        "violation": true,
+        "principle": "Prudencia",
+        "explanation": "Wellbe no prescribe, no diagnostica y no genera planes terapéuticos individualizados. Un paciente con diabetes tipo 2 Y enfermedad renal crónica requiere manejo por equipo interprofesional, no por IA educativa."
+      },
+      {
+        "action": "El nutricionista envía el resultado sin revisión humana adicional",
+        "violation": true,
+        "principle": "Supervisión humana",
+        "explanation": "Todo contenido generado por Wellbe que se use en contexto clínico o profesional requiere revisión humana experta antes de ser compartido o implementado."
+      },
+      {
+        "action": "El paciente recibe el mensaje como 'plan generado por IA' sin contexto",
+        "violation": true,
+        "principle": "Comunicación no estigmatizante / Responsabilidad informacional",
+        "explanation": "El paciente puede interpretar que la IA hizo un diagnóstico o prescripción, lo cual genera expectativas falsas y potencialmente peligrosas."
+      }
+    ],
+    "model_answer": {
+      "verdict": "Uso inadecuado — viola tres principios de Wellbe simultáneamente",
+      "ideal_prompt": "Wellbe, activa Modo Auditor Ético N3. Evalúa este escenario: un profesional de nutrición usa Wellbe para generar un plan personalizado para un paciente con diabetes tipo 2 y ERC, y envía el resultado al paciente como 'plan generado por IA'. ¿Qué principios éticos de Wellbe se violan? ¿Cuáles son los riesgos para el paciente? ¿Qué debería haber hecho el profesional diferente?"
+    },
+    "wellbe_principle": "supervision_humana",
+    "safety_note": "Para manejo nutricional de condiciones crónicas, siempre consulta a un equipo interprofesional de salud."
+  },
+  {
+    "id": "case-n3-03",
+    "level": "N3",
+    "order": 9,
+    "title": "Desiertos alimentarios en Caguas",
+    "type": "evidence_matrix",
+    "domain": "justicia-alimentaria",
+    "points": 300,
+    "estimated_minutes": 20,
+    "story": "Una organización comunitaria en Caguas quiere presentar evidencia ante la Legislatura de Puerto Rico sobre la relación entre desiertos alimentarios y calidad de dieta en su municipio. Te piden apoyo para construir la base documental.",
+    "objective": "Construir un prompt N3 que genere una matriz de evidencia sobre desiertos alimentarios contextualizada para Puerto Rico.",
+    "scaffolding": {
+      "level": "baja",
+      "hints": [
+        "Distingue entre desierto alimentario y pantano alimentario",
+        "Incluye datos de USDA ERS sobre acceso a supermercados en PR",
+        "El colmado es el punto de acceso principal en muchas comunidades",
+        "La evidencia sobre acceso vs. calidad de dieta es multifactorial (ingreso + tiempo + distancia)"
+      ]
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, activa Modo Investigador N3. Construye una matriz de evidencia sobre la relación entre desiertos alimentarios y calidad de dieta, contextualizada para Puerto Rico (Caguas específicamente). Incluye: definición de desierto vs. pantano alimentario, evidencia del USDA ERS sobre acceso, el rol del colmado como punto de acceso alimentario en comunidades sin supermercados, y las limitaciones de la investigación actual (ingreso y tiempo como factores igual de determinantes). Formato: Referencia, Diseño, Hallazgo, Limitaciones, Aplicabilidad para PR. Declara qué puede y qué no puede establecer la evidencia actual.",
+      "source": "USDA ERS. Food Access Research Atlas; USDA ERS. Access to Affordable and Nutritious Food (2022)."
+    },
+    "wellbe_principle": "justicia_alimentaria",
+    "safety_note": "Las estrategias de justicia alimentaria deben involucrar a las comunidades en su diseño."
+  },
+  {
+    "id": "case-n4-01",
+    "level": "N4",
+    "order": 10,
+    "title": "Diseña un piloto de 8 semanas",
+    "type": "policy_design",
+    "domain": "institucional",
+    "points": 400,
+    "estimated_minutes": 25,
+    "story": "La Escuela de Salud Pública del RCM-UPR quiere implementar Wellbe IA como herramienta de apoyo en un curso de nutrición comunitaria. Te piden diseñar un piloto de 8 semanas con evaluación, roles y criterios de éxito.",
+    "objective": "Sin andamiaje. Construir un prompt N4 completo que active el Modo Evaluador y diseñe una implementación institucional con gobernanza.",
+    "wellbe_hint": "N4 es autonomía total. No hay hints ni estructura sugerida. Tú decides qué pedirle a Wellbe. Lo que sí puedo recordarte: AGENTS.md, SKILL.md, portafolio, IEPA-Wellbe, triple memoria y criterios de éxito deben formar parte de tu diseño.",
+    "scaffolding": {
+      "level": "ninguna",
+      "hints": []
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, activa Modo Evaluador N4. Diseña un piloto de 8 semanas para implementar Wellbe IA en un curso de nutrición comunitaria en el RCM-UPR. Incluye: 1) roles humanos (responsable, docente, estudiantes, evaluador), 2) estructura de cartapacios (GitHub + Obsidian), 3) AGENTS.md con agentes mínimos, 4) skills operativos (evidencia_nutricional, comunicación_social, auditoría_ética), 5) workflows semanales con checkpoints, 6) evaluación: IEPA-Wellbe, rúbricas de producto, portafolio estudiantil, 7) criterios de éxito medibles (cuántos estudiantes completan, calidad de productos, satisfacción), 8) riesgos éticos y plan de mitigación, 9) ciclo de mejora: diagnóstico → ajuste → nueva prueba → evaluación → decisión. Todo con supervisión humana obligatoria.",
+      "source": "Framework V4.1.x de Wellbe IA; Guías de Usuario N4."
+    },
+    "evaluation_criteria": [
+      "El prompt activa el Modo Evaluador N4 explícitamente",
+      "Incluye roles humanos con responsabilidades",
+      "Diseña estructura de documentación y gobernanza",
+      "Define criterios de éxito medibles",
+      "Incluye plan de evaluación (IEPA-Wellbe o equivalente)",
+      "Contempla riesgos éticos y mitigación",
+      "Establece ciclo de mejora continua"
+    ],
+    "wellbe_principle": "supervision_humana",
+    "safety_note": "La implementación institucional de IA educativa requiere supervisión y gobernanza humana."
+  },
+  {
+    "id": "case-n4-02",
+    "level": "N4",
+    "order": 11,
+    "title": "Gobernanza de IA educativa",
+    "type": "policy_design",
+    "domain": "ia-responsable",
+    "points": 400,
+    "estimated_minutes": 22,
+    "story": "Una fundación quiere crear un comité de gobernanza para el uso de Wellbe IA en 5 organizaciones comunitarias de salud en Puerto Rico. Te piden diseñar la estructura del comité, los protocolos de uso y los mecanismos de rendición de cuentas.",
+    "objective": "Diseñar un sistema de gobernanza para IA educativa en salud sin andamiaje.",
+    "scaffolding": {
+      "level": "ninguna",
+      "hints": []
+    },
+    "model_answer": {
+      "ideal_prompt": "Wellbe, activa Modo Evaluador N4. Diseña un marco de gobernanza para el uso de Wellbe IA en 5 organizaciones comunitarias de salud en Puerto Rico. Incluye: composición del comité (roles, diversidad, representación comunitaria), protocolos de uso por nivel N1-N4, mecanismos de rendición de cuentas (auditoría ética trimestral, reporte de incidentes, revisión de contenido), criterios de pausa o suspensión del sistema, política de datos y privacidad, entrenamiento obligatorio para facilitadores, y un plan de evaluación semestral con indicadores de impacto, ética y satisfacción. Todo enmarcado en los 8 principios éticos de Wellbe.",
+      "source": "Wellbe Base de Conocimientos v1.0; Framework V4.1.x."
+    },
+    "wellbe_principle": "justicia_alimentaria",
+    "safety_note": "La gobernanza de IA en salud comunitaria requiere representación de las comunidades afectadas."
+  },
+  {
+    "id": "case-n4-03",
+    "level": "N4",
+    "order": 12,
+    "title": "Evaluación y mejora: ¿funcionó?",
+    "type": "ethics_review",
+    "domain": "meta-wellbe",
+    "points": 400,
+    "estimated_minutes": 22,
+    "story": "El piloto de 8 semanas terminó. Los datos muestran: 78% de estudiantes completaron, satisfacción 4.2/5, pero dos estudiantes reportaron que Wellbe les dio información que interpretaron como consejo médico. El docente no documentó estas incidencias. Debes evaluar el piloto y decidir: mantener, ajustar, rediseñar o suspender.",
+    "objective": "Evaluar un piloto completo de IA educativa con datos reales y tomar una decisión documentada.",
+    "scaffolding": {
+      "level": "ninguna",
+      "hints": []
+    },
+    "ethics_scenarios": [
+      {
+        "action": "78% completaron y satisfacción 4.2/5",
+        "violation": false,
+        "principle": "Evaluación",
+        "explanation": "Indicadores de participación y satisfacción son positivos, pero no suficientes por sí solos."
+      },
+      {
+        "action": "Dos estudiantes interpretaron contenido como consejo médico",
+        "violation": true,
+        "principle": "Prudencia + Comunicación",
+        "explanation": "Este es un incidente ético que requiere análisis de causa raíz: ¿fue el prompt del docente? ¿fue la respuesta de Wellbe? ¿faltó la nota de derivación? ¿los guardarraíles fallaron?"
+      },
+      {
+        "action": "El docente no documentó las incidencias",
+        "violation": true,
+        "principle": "Supervisión humana + Responsabilidad informacional",
+        "explanation": "La falta de documentación de incidencias es una falla de gobernanza. Sin registro no hay mejora posible."
+      }
+    ],
+    "model_answer": {
+      "verdict": "Decisión recomendada: AJUSTAR — no suspender, no mantener sin cambios",
+      "reasoning": "Los indicadores de participación son buenos, pero los incidentes éticos requieren: 1) análisis de causa raíz de los 2 casos, 2) reforzar las notas de derivación en los prompts, 3) crear protocolo de documentación de incidencias, 4) sesión de entrenamiento para el docente sobre guardarraíles de Wellbe. Rediseñar sería desproporcionado; suspender desperdiciaría lo positivo.",
+      "source": "Ciclo de mejora de Wellbe: Diagnóstico → Ajuste → Nueva prueba → Evaluación → Decisión."
+    },
+    "wellbe_principle": "supervision_humana",
+    "safety_note": "Ninguna mejora debe declararse sin evidencia."
+  }
+]

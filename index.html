@@ -1,1622 +1,922 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WellBe — Asistente de Aprendizaje Transdisciplinario</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg:        #f5f3ff;
-      --surface:   #ffffff;
-      --surface-2: #ede9fe;
-      --ink:       #1e1b4b;
-      --muted:     #6b7280;
-      --line:      #ddd6fe;
-      --primary:   #4f46e5;
-      --primary-dk:#3730a3;
-      --emerald:   #059669;
-      --amber:     #d97706;
-      --rose:      #e11d48;
-      --focus:     #6d28d9;
-      --radius:    10px;
-      --shadow:    0 12px 32px rgba(79,70,229,.08);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(rgba(79,70,229,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79,70,229,.04) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, #000, transparent 68%);
-    }
-    a { color: var(--primary); }
-    button, input, select, textarea { font: inherit; }
-    button { border: 0; }
-    button:focus-visible, a:focus-visible, input:focus-visible,
-    select:focus-visible, textarea:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
-    .shell {
-      position: relative;
-      width: min(1160px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-    header { padding: 52px 0 36px; }
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .brand-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 900;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .brand strong { display: block; font-size: 1rem; color: var(--ink); }
-    .eyebrow {
-      display: block;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    h1 { margin: 0 0 10px; font-size: clamp(1.5rem, 4vw, 2.3rem); line-height: 1.2; }
-    h2 { margin: 0 0 10px; font-size: clamp(1.1rem, 3vw, 1.55rem); }
-    h3 { margin: 0 0 6px; font-size: 1rem; }
-    p { margin: 0 0 10px; }
-    p:last-child { margin-bottom: 0; }
-    .subtitle { color: var(--muted); font-size: 1.05rem; max-width: 62ch; }
-    .muted { color: var(--muted); }
-    .chip {
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 99px;
-      background: var(--surface-2);
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--primary);
-      border: 1px solid var(--line);
-    }
-    .chip.error { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(245,243,255,.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-      margin: 0 0 28px;
-    }
-    .nav-list {
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      padding: 8px 0;
-      scrollbar-width: none;
-    }
-    .nav-list::-webkit-scrollbar { display: none; }
-    .nav-list a {
-      white-space: nowrap;
-      padding: 5px 14px;
-      border-radius: 99px;
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      transition: background .15s, color .15s;
-    }
-    .nav-list a:hover { background: var(--surface-2); color: var(--primary); }
-    main { display: grid; gap: 24px; padding-bottom: 56px; }
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 20px;
-      align-items: start;
-    }
-    .hero-card { padding: 28px; }
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .route-card { border-top: 3px solid var(--route-color, var(--primary)); }
-    .activity-card.completed { opacity: .72; }
-    .activity-card.completed h3::after { content: " ✓"; color: var(--emerald); }
-    .route-progress {
-      height: 6px;
-      background: var(--line);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .route-progress span {
-      display: block;
-      height: 100%;
-      width: var(--progress, 0%);
-      background: var(--route-color, var(--primary));
-      border-radius: 99px;
-      transition: width .4s ease;
-    }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 99px;
-      background: var(--surface-2);
-      font-size: .75rem;
-      color: var(--muted);
-      border: 1px solid var(--line);
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: var(--radius);
-      font-size: .88rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: filter .15s, opacity .15s;
-      text-decoration: none;
-    }
-    .btn:disabled { opacity: .42; cursor: not-allowed; }
-    .btn:not(:disabled):hover { filter: brightness(.92); }
-    .btn.good { background: var(--primary); color: #fff; }
-    .btn.secondary { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
-    .btn.warn { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
-    .btn.danger { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; }
-    .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .wellbe-panel {
-      background: linear-gradient(135deg, #f0f4ff 0%, #ede9fe 100%);
-      border: 1px solid rgba(79,70,229,.18);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .wellbe-face {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 900;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 12px;
-      margin: 16px 0;
-    }
-    .stat {
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-    .stat strong { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
-    .stat span { font-size: .72rem; color: var(--muted); }
-    .avatar-option {
-      display: grid;
-      gap: 10px;
-      text-align: left;
-      cursor: pointer;
-      background: var(--surface);
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      transition: border-color .15s, background .15s;
-    }
-    .avatar-option.selected { border-color: var(--primary); background: #f0f0ff; }
-    .badge-card.earned { border-color: rgba(217,119,6,.4); background: #fffbeb; }
-    .notice {
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface-2);
-      color: var(--ink);
-      font-size: .88rem;
-    }
-    .notice.warn { border-color: #fde68a; background: #fffbeb; color: #92400e; }
-    .notice.error { border-color: #fecdd3; background: #fff1f2; color: #9f1239; }
-    .notice.info { border-color: #bfdbfe; background: #eff6ff; color: #1e3a5f; }
-    .file-input {
-      max-width: 100%;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-    .privacy-list { display: grid; gap: 10px; padding-left: 20px; color: var(--muted); }
-    .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-    footer { padding: 0 0 36px; color: var(--muted); text-align: center; font-size: .88rem; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellbe Study IA — Ruta de estudio asistida por IA</title>
+<meta name="description" content="Demuestra lo que sabes. Aprende a usar Wellbe IA paso a paso, desde preguntas básicas hasta diseño institucional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F3FB;--surface:#FFFFFE;--surface2:#EDEAFC;
+  --ink:#1A1A2E;--muted:#605E7A;--light:#8E8CA8;
+  --line:rgba(58,47,138,0.12);--line2:rgba(58,47,138,0.22);
+  --accent:#3A2F8A;--accent-l:#E8E5FA;--accent-b:rgba(58,47,138,0.2);
+  --n1:#5B8DEF;--n2:#3A2F8A;--n3:#7B2D8E;--n4:#1A1A2E;
+  --ok:#2D6B28;--ok-bg:#E5F0E4;--ko:#B83030;--ko-bg:#FCEAEA;
+  --warn:#B07010;--warn-bg:#FBF0DC;
+  --wellbe:#2D6B28;--wellbe-bg:#E8F2E7;
+  --r:8px;--rl:14px;--shadow:0 4px 20px rgba(26,26,46,0.07);
+  --ff-d:'Playfair Display',Georgia,serif;--ff-b:'Nunito',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-b);background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6;font-size:16px;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(transparent,transparent 31px,rgba(58,47,138,0.03) 31px,rgba(58,47,138,0.03) 32px);}
+a{color:var(--accent);}
+button,input,select,textarea{font:inherit;}
 
-    /* ── Perfil ── */
-    .profile-form { display: grid; gap: 14px; max-width: 480px; }
-    .field { display: grid; gap: 6px; }
-    .field label { font-size: .88rem; font-weight: 600; }
-    .field input, .field select {
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--ink);
-    }
-    .consent-row { display: flex; align-items: flex-start; gap: 10px; }
-    .consent-row input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
-    .consent-row label { font-size: .85rem; color: var(--muted); }
-    .profile-display { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .profile-avatar-circle {
-      width: 52px; height: 52px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .profile-info strong { display: block; font-size: 1.05rem; }
-    .profile-info span { font-size: .85rem; color: var(--muted); }
+/* ── Shell ── */
+.shell{position:relative;width:min(960px,calc(100% - 28px));margin:0 auto;}
+header{padding:38px 0 22px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-icon{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:800;flex-shrink:0;}
+.brand strong{font-family:var(--ff-d);font-size:1.1rem;font-weight:700;}
+.brand small{display:block;font-size:.72rem;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.chip{display:inline-block;padding:3px 10px;border-radius:99px;background:var(--accent-l);font-size:.75rem;font-weight:700;color:var(--accent);border:1px solid var(--accent-b);}
+.chip.error{background:var(--ko-bg);color:var(--ko);border-color:rgba(184,48,48,0.2);}
+h1{font-family:var(--ff-d);margin:0 0 8px;font-size:clamp(1.45rem,4vw,2.2rem);line-height:1.2;}
+h1 em{font-style:italic;color:var(--accent);}
+h2{font-family:var(--ff-d);margin:0 0 8px;font-size:clamp(1rem,3vw,1.4rem);}
+h3{margin:0 0 4px;font-size:.95rem;font-weight:700;}
+p{margin:0 0 8px;}p:last-child{margin-bottom:0;}
+.sub{color:var(--muted);font-size:1rem;max-width:60ch;}
+.eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.muted{color:var(--muted);}
 
-    /* ── Modal ── */
-    dialog {
-      border: none;
-      border-radius: 18px;
-      box-shadow: 0 24px 64px rgba(30,27,75,.22);
-      padding: 0;
-      width: min(740px, calc(100vw - 32px));
-      max-height: calc(100vh - 48px);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    dialog::backdrop { background: rgba(20,15,50,.55); backdrop-filter: blur(4px); }
-    .modal-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 22px 24px 16px;
-      border-bottom: 1px solid var(--line);
-      flex-shrink: 0;
-    }
-    .modal-scroll {
-      overflow-y: auto;
-      padding: 20px 24px;
-      display: grid;
-      gap: 16px;
-      flex: 1 1 0;
-    }
-    .modal-footer {
-      padding: 14px 24px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-shrink: 0;
-      flex-wrap: wrap;
-    }
-    .modal-story { color: var(--muted); }
-    .modal-wellbe {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 12px 14px;
-      background: var(--surface-2);
-      border: 1px solid rgba(79,70,229,.18);
-      border-radius: var(--radius);
-    }
-    .modal-wellbe-face {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 900;
-      font-size: .82rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .modal-wellbe p { font-size: .88rem; margin: 0; }
-    .activity-type-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 99px;
-      font-size: .72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      background: var(--surface-2);
-      color: var(--primary);
-      border: 1px solid var(--line);
-    }
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:10;background:rgba(244,243,251,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:0;margin:0 0 22px;}
+.nav-list{display:flex;gap:2px;overflow-x:auto;padding:5px 0;scrollbar-width:none;}
+.nav-list::-webkit-scrollbar{display:none;}
+.nav-list a{white-space:nowrap;padding:5px 11px;border-radius:var(--r);font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;transition:background .15s,color .15s;}
+.nav-list a:hover{background:var(--accent-l);color:var(--accent);}
 
-    /* ── Quiz ── */
-    .quiz-questions { display: grid; gap: 22px; }
-    .quiz-question { display: grid; gap: 10px; }
-    .question-text { font-weight: 600; margin: 0; }
-    .quiz-options { display: grid; gap: 8px; }
-    .quiz-option {
-      text-align: left;
-      padding: 10px 14px;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      cursor: pointer;
-      font-size: .88rem;
-      transition: border-color .15s, background .15s;
-    }
-    .quiz-option:not(:disabled):hover { border-color: var(--primary); background: #f0f0ff; }
-    .quiz-option.correct { border-color: var(--emerald); background: #f0fdf4; }
-    .quiz-option.wrong { border-color: var(--rose); background: #fff1f2; }
-    .explanation-box {
-      padding: 10px 12px;
-      background: var(--surface-2);
-      border-left: 3px solid var(--primary);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: .85rem;
-    }
+/* ── Panels & Cards ── */
+main{display:grid;gap:20px;padding-bottom:40px;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--rl);padding:24px;box-shadow:var(--shadow);}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;}
+.card.completed{opacity:.65;}
+.card.completed h3::after{content:" ✓";color:var(--ok);}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--accent-l);font-size:.72rem;color:var(--accent);border:1px solid var(--accent-b);font-weight:600;}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 
-    /* ── Claim detector ── */
-    .claims-list { display: grid; gap: 16px; }
-    .claim-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      display: grid;
-      gap: 10px;
-      background: var(--surface);
-    }
-    .claim-text { font-style: italic; margin: 0; }
-    .claim-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
-    .claim-result {
-      padding: 10px 12px;
-      background: var(--surface-2);
-      border-left: 3px solid var(--amber);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: .85rem;
-    }
-    .verdict-true { border-left-color: var(--emerald); }
-    .verdict-misleading { border-left-color: var(--amber); }
-    .verdict-false { border-left-color: var(--rose); }
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 16px;border-radius:var(--r);font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:filter .15s,opacity .15s;text-decoration:none;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn:not(:disabled):hover{filter:brightness(.92);}
+.btn.good{background:var(--accent);color:#fff;}
+.btn.secondary{background:var(--surface2);color:var(--ink);border:1px solid var(--line2);}
+.btn.wellbe-btn{background:var(--wellbe-bg);color:var(--wellbe);border:1px solid rgba(45,107,40,0.25);}
+.btn.warn{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(176,112,16,0.25);}
+.btn.danger{background:var(--ko-bg);color:var(--ko);border:1px solid rgba(184,48,48,0.2);}
 
-    /* ── Branching ── */
-    .branch-scenario {
-      padding: 14px;
-      background: var(--surface-2);
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      font-style: italic;
-    }
-    .branch-step { display: grid; gap: 14px; }
-    .branch-choices { display: grid; gap: 8px; }
-    .branch-choice {
-      text-align: left;
-      padding: 11px 15px;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      cursor: pointer;
-      font-size: .88rem;
-      transition: border-color .15s, background .15s;
-    }
-    .branch-choice:hover { border-color: var(--primary); background: #f0f0ff; }
-    .branch-end {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface-2);
-    }
+/* ── Stats ── */
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0;}
+.stat{background:var(--surface2);border:1px solid var(--line);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.stat strong{font-family:var(--ff-d);font-size:1.5rem;font-weight:700;color:var(--accent);}
+.stat span{font-size:.7rem;color:var(--muted);}
 
-    /* ── Mind map ── */
-    .mind-center {
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding: 14px;
-      background: var(--primary);
-      color: #fff;
-      border-radius: var(--radius);
-      margin-bottom: 4px;
-    }
-    .mind-map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-    .mind-node { border: 2px solid var(--node-color, var(--primary)); border-radius: var(--radius); overflow: hidden; }
-    .mind-node-btn {
-      width: 100%;
-      text-align: left;
-      padding: 11px 14px;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: .88rem;
-    }
-    .mind-node-btn strong { color: var(--node-color, var(--primary)); }
-    .mind-node-btn::after { content: "▸"; font-size: .75rem; color: var(--muted); transition: transform .15s; }
-    .mind-node-btn[aria-expanded="true"]::after { transform: rotate(90deg); }
-    .mind-node-body {
-      padding: 10px 14px 12px;
-      font-size: .82rem;
-      border-top: 1px solid var(--line);
-      background: var(--surface-2);
-    }
-    .mind-node-body p { margin: 0 0 6px; }
-    .mind-node-body ul { margin: 0; padding-left: 16px; color: var(--muted); }
-    .mind-reflection {
-      margin-top: 12px;
-      padding: 12px 14px;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: var(--radius);
-      font-size: .88rem;
-      color: #92400e;
-    }
+/* ── Level path ── */
+.lv-path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:18px 0;}
+.lv-tile{padding:14px;border:1px solid var(--line);background:var(--surface);text-align:center;position:relative;}
+.lv-tile:first-child{border-radius:var(--rl) 0 0 var(--rl);}
+.lv-tile:last-child{border-radius:0 var(--rl) var(--rl) 0;}
+.lv-tile.current{border-color:var(--accent);background:var(--accent-l);box-shadow:inset 0 -3px 0 var(--accent);}
+.lv-num{font-family:var(--ff-d);font-size:1.3rem;font-weight:700;color:var(--accent);}
+.lv-label{font-size:.72rem;color:var(--muted);font-weight:600;}
+.lv-pts{font-size:.68rem;color:var(--light);margin-top:2px;}
+.lv-bar{height:4px;background:var(--line);border-radius:99px;margin-top:8px;overflow:hidden;}
+.lv-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .4s ease;}
+.lv-check{color:var(--ok);font-size:.85rem;position:absolute;top:6px;right:8px;}
 
-    /* ── Simulation ── */
-    .sim-resilience {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      font-size: .88rem;
-      font-weight: 600;
-    }
-    .sim-resilience-bar { flex: 1; height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
-    .sim-resilience-fill { height: 100%; background: var(--emerald); border-radius: 99px; transition: width .4s ease; }
-    .sim-step { display: grid; gap: 12px; }
-    .sim-options { display: grid; gap: 8px; }
-    .sim-option {
-      text-align: left;
-      padding: 10px 14px;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      cursor: pointer;
-      font-size: .88rem;
-      transition: border-color .15s;
-    }
-    .sim-option.selected { border-color: var(--primary); background: #f0f0ff; }
-    .sim-effect {
-      padding: 10px 12px;
-      background: var(--surface-2);
-      border-left: 3px solid var(--amber);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: .85rem;
-    }
-    .sim-end { display: grid; gap: 10px; padding: 14px; background: var(--surface-2); border-radius: var(--radius); border: 1px solid var(--line); }
+/* ── Case cards ── */
+.case-card{border-top:3px solid var(--line2);transition:border-color .15s;}
+.case-card[data-lv="N1"]{border-top-color:var(--n1);}
+.case-card[data-lv="N2"]{border-top-color:var(--n2);}
+.case-card[data-lv="N3"]{border-top-color:var(--n3);}
+.case-card[data-lv="N4"]{border-top-color:var(--n4);}
+.type-badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--surface2);color:var(--muted);border:1px solid var(--line);}
+.scaff-badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.68rem;font-weight:700;}
+.scaff-alta{background:#EBF5FF;color:#1A5FAA;border:1px solid #B5D4F4;}
+.scaff-media{background:var(--accent-l);color:var(--accent);border:1px solid var(--accent-b);}
+.scaff-baja{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(176,112,16,0.2);}
+.scaff-ninguna{background:var(--ko-bg);color:var(--ko);border:1px solid rgba(184,48,48,0.15);}
 
-    /* ── Reflection ── */
-    .reflection-prompts { display: grid; gap: 16px; }
-    .reflection-prompt-item { display: grid; gap: 6px; }
-    .reflection-label { font-size: .88rem; font-weight: 600; }
-    .reflection-textarea {
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--ink);
-      resize: vertical;
-      min-height: 72px;
-    }
+/* ── Hero / Wellbe aside ── */
+.hero{display:grid;grid-template-columns:1fr 280px;gap:16px;align-items:start;}
+.copilot{background:var(--wellbe-bg);border:1px solid rgba(45,107,40,0.18);display:flex;flex-direction:column;gap:12px;}
+.wb-face{width:44px;height:44px;border-radius:50%;background:var(--wellbe);color:#fff;font-weight:800;font-size:1.15rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.notice{padding:10px 12px;border:1px solid rgba(176,112,16,0.3);border-radius:var(--r);background:var(--warn-bg);color:#61410d;font-size:.82rem;}
+.notice.error{border-color:rgba(184,48,48,0.3);background:var(--ko-bg);color:var(--ko);}
 
-    /* ── Lectura ── */
-    .lectura-text {
-      padding: 16px 18px;
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      font-size: .92rem;
-      line-height: 1.75;
-      white-space: pre-line;
-      color: var(--ink);
-    }
-    .lectura-divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--muted);
-      margin: 4px 0;
-    }
-    .lectura-divider::before, .lectura-divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
+/* ── Badge cards ── */
+.badge-card.earned{border-color:rgba(58,47,138,0.4);background:var(--accent-l);}
+.badge-icon{font-size:1.5rem;}
 
-    /* ── Reto ── */
-    .reto-challenge {
-      padding: 16px 18px;
-      background: linear-gradient(135deg, #faf5ff 0%, #f0f4ff 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      font-size: .95rem;
-      color: var(--ink);
-    }
-    .reto-steps { display: grid; gap: 10px; margin-top: 4px; }
-    .reto-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 14px;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      transition: border-color .15s, background .15s;
-      cursor: pointer;
-    }
-    .reto-step.checked { border-color: var(--primary); background: #f0f0ff; }
-    .reto-step input[type="checkbox"] { flex-shrink: 0; margin-top: 2px; accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
-    .reto-step label { font-size: .88rem; cursor: pointer; line-height: 1.5; }
-    .reto-step.checked label { color: var(--muted); text-decoration: line-through; }
-    .reto-progress {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .82rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .reto-progress-bar { flex: 1; height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
-    .reto-progress-fill { height: 100%; background: var(--primary); border-radius: 99px; transition: width .3s ease; }
-    .reto-closing {
-      padding: 12px 14px;
-      background: var(--surface-2);
-      border-left: 3px solid var(--primary);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: .85rem;
-    }
+/* ── Modal ── */
+dialog{border:none;border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.22);padding:0;width:min(740px,calc(100vw - 28px));max-height:calc(100vh - 40px);overflow:hidden;}
+dialog[open]{display:flex;flex-direction:column;}
+dialog::backdrop{background:rgba(26,26,46,0.5);backdrop-filter:blur(3px);}
+.m-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:18px 22px 14px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.m-scroll{overflow-y:auto;padding:18px 22px;display:grid;gap:14px;flex:1 1 0;}
+.m-ft{padding:12px 22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0;flex-wrap:wrap;}
+.m-story{color:var(--muted);font-style:italic;font-size:.9rem;}
+.m-wellbe{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--wellbe-bg);border:1px solid rgba(45,107,40,0.18);border-radius:var(--r);}
+.m-wellbe-face{width:30px;height:30px;border-radius:50%;background:var(--wellbe);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.m-wellbe p{font-size:.85rem;margin:0;color:var(--ink);}
 
-    @media (max-width: 800px) {
-      .topbar, .section-head { display: grid; }
-      .hero { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width: 520px) {
-      .shell { width: min(100% - 20px, 1160px); }
-      .panel, .card { padding: 14px; }
-      .stat-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+/* Scaffolding box */
+.scaff-box{background:var(--accent-l);border:1px solid var(--accent-b);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;font-size:.88rem;}
+.scaff-box code{background:rgba(58,47,138,0.08);padding:2px 6px;border-radius:4px;font-size:.82rem;font-family:var(--ff-b);}
+.scaff-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px;}
+.hint-list{display:grid;gap:6px;margin:8px 0 0;padding-left:18px;font-size:.82rem;color:var(--muted);}
+
+/* Model answer */
+.model-box{background:var(--surface2);border:1px solid var(--line2);border-radius:var(--r);padding:14px;display:none;}
+.model-box.show{display:block;}
+.model-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:6px;}
+.model-text{font-size:.85rem;line-height:1.7;}
+
+/* Quiz */
+.quiz-qs{display:grid;gap:16px;}
+.quiz-q{display:grid;gap:8px;}
+.q-text{font-weight:700;font-size:.9rem;margin:0;}
+.q-opts{display:grid;gap:6px;}
+.q-opt{text-align:left;padding:9px 12px;border:2px solid var(--line2);border-radius:var(--r);background:var(--surface);cursor:pointer;font-size:.85rem;transition:border-color .15s,background .15s;}
+.q-opt:not(:disabled):hover{border-color:var(--accent);background:var(--accent-l);}
+.q-opt.correct{border-color:var(--ok);background:var(--ok-bg);}
+.q-opt.wrong{border-color:var(--ko);background:var(--ko-bg);}
+.q-opt:disabled{cursor:default;}
+.q-fb{padding:8px 10px;background:var(--surface2);border-left:3px solid var(--ok);border-radius:0 var(--r) var(--r) 0;font-size:.82rem;display:none;}
+.q-fb.show{display:block;}
+.q-fb.ko{border-left-color:var(--ko);}
+
+/* Claims */
+.claims-list{display:grid;gap:14px;}
+.claim-card{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:8px;background:var(--surface);}
+.claim-text{font-style:italic;margin:0;font-size:.9rem;}
+.claim-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.claim-result{padding:8px 10px;border-left:3px solid var(--warn);border-radius:0 var(--r) var(--r) 0;font-size:.82rem;display:none;}
+.claim-result.show{display:block;}
+.v-true{border-left-color:var(--ok);}
+.v-misleading{border-left-color:var(--warn);}
+.v-false{border-left-color:var(--ko);}
+
+/* Ethics scenarios */
+.ethics-list{display:grid;gap:12px;}
+.eth-card{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:8px;}
+.eth-action{font-weight:600;font-size:.88rem;}
+.eth-btns{display:flex;gap:6px;}
+.eth-result{padding:8px 10px;border-left:3px solid var(--ok);border-radius:0 var(--r) var(--r) 0;font-size:.82rem;display:none;}
+.eth-result.show{display:block;}
+.eth-result.violation{border-left-color:var(--ko);}
+
+/* Safety note */
+.safety{background:var(--ok-bg);border:1px solid rgba(45,107,40,0.2);border-radius:var(--r);padding:8px 10px;font-size:.78rem;color:var(--ok);}
+
+/* Docs panel */
+#docs-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.3);z-index:150;display:none;}
+#docs-overlay.show{display:block;}
+#docs-panel{position:fixed;left:-420px;top:0;bottom:0;width:400px;background:var(--surface);border-right:1px solid var(--line);box-shadow:8px 0 32px rgba(26,26,46,0.12);z-index:200;display:flex;flex-direction:column;transition:left .3s ease;overflow:hidden;}
+#docs-panel.open{left:0;}
+.docs-hd{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:var(--accent-l);flex-shrink:0;}
+.docs-hd h3{font-family:var(--ff-d);color:var(--accent);flex:1;}
+.docs-close{background:none;border:none;font-size:1rem;cursor:pointer;color:var(--accent);padding:2px;opacity:.7;}
+.docs-close:hover{opacity:1;}
+.docs-body{flex:1;overflow-y:auto;padding:18px;}
+.docs-nav{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;}
+.docs-nav button{text-align:left;padding:8px 12px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted);transition:background .15s;}
+.docs-nav button:hover,.docs-nav button.active{background:var(--accent-l);color:var(--accent);border-color:var(--accent-b);}
+.docs-content{font-size:.84rem;line-height:1.7;color:var(--ink);}
+.docs-content h4{font-family:var(--ff-d);font-size:.95rem;margin:14px 0 6px;color:var(--accent);}
+.docs-content p{margin:0 0 8px;}
+.docs-content ul{padding-left:18px;margin:0 0 10px;}
+.docs-content li{margin-bottom:4px;}
+.docs-content .doc-tip{background:var(--accent-l);border:1px solid var(--accent-b);border-radius:var(--r);padding:8px 10px;margin:8px 0;font-size:.8rem;}
+
+/* Profile */
+.profile-form{display:grid;gap:12px;max-width:420px;}
+.field{display:grid;gap:4px;}
+.field label{font-size:.85rem;font-weight:600;}
+.field input,.field select{padding:8px 10px;border:1px solid var(--line2);border-radius:var(--r);background:var(--surface);color:var(--ink);}
+.profile-display{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.p-avatar{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:1.3rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.p-info strong{display:block;font-family:var(--ff-d);font-size:1rem;}
+.p-info span{font-size:.82rem;color:var(--muted);}
+
+/* Privacy */
+.privacy-list{display:grid;gap:8px;padding-left:18px;color:var(--muted);font-size:.88rem;}
+
+/* File input */
+.file-input{max-width:100%;padding:8px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+footer{padding:0 0 30px;color:var(--muted);text-align:center;font-size:.82rem;}
+
+@media(max-width:800px){
+  .topbar,.hero,.section-head{display:grid;}
+  .hero{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .lv-path{grid-template-columns:repeat(2,1fr);}
+  .lv-tile:first-child{border-radius:var(--rl) 0 0 0;}
+  .lv-tile:nth-child(2){border-radius:0 var(--rl) 0 0;}
+  .lv-tile:nth-child(3){border-radius:0 0 0 var(--rl);}
+  .lv-tile:last-child{border-radius:0 0 var(--rl) 0;}
+  #docs-panel{width:100%;}
+}
+@media(max-width:520px){
+  .shell{width:min(100% - 16px,960px);}
+  .panel,.card{padding:13px;}
+  .stat-grid{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <header>
-      <div class="topbar">
-        <div class="brand-mark">
-          <div class="brand-icon" aria-hidden="true">W</div>
-          <div class="brand">
-            <span class="eyebrow">Plataforma educativa</span>
-            <strong>WellBe — Aprendizaje Transdisciplinario</strong>
-          </div>
-        </div>
-        <span class="chip" id="load-status">Cargando datos</span>
-      </div>
-      <h1>Explora IA, nutrición, agroecología y salud pública<br>para el buen vivir.</h1>
-      <p class="subtitle">Una experiencia educativa gamificada, local y sin cuentas para practicar pensamiento crítico, cuidado colectivo y aprendizaje transdisciplinario.</p>
-    </header>
-
-    <nav aria-label="Navegación principal">
-      <div class="nav-list">
-        <a href="#perfil">Perfil</a>
-        <a href="#rutas">Rutas</a>
-        <a href="#actividades">Actividades</a>
-        <a href="#progreso">Progreso</a>
-        <a href="#badges">Badges</a>
-        <a href="#avatar">Avatar</a>
-        <a href="#privacidad">Privacidad</a>
-      </div>
-    </nav>
-
-    <main id="app">
-
-      <!-- Perfil -->
-      <section class="panel" id="perfil" aria-labelledby="perfil-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Tu perfil educativo</span>
-            <h2 id="perfil-title">Bienvenida/o a WellBe</h2>
-          </div>
-        </div>
-        <div id="profile-form-container">
-          <p class="muted">Crea un perfil local para personalizar tu experiencia. No se envía a ningún servidor.</p>
-          <form id="profile-form" class="profile-form" novalidate>
-            <div class="field">
-              <label for="prof-name">Nombre o alias (opcional)</label>
-              <input id="prof-name" type="text" placeholder="Explorador/a transdisciplinario/a" maxlength="60" autocomplete="off" />
-            </div>
-            <div class="field">
-              <label for="prof-role">Rol</label>
-              <select id="prof-role">
-                <option value="">— Selecciona un rol —</option>
-                <option value="estudiante">Estudiante</option>
-                <option value="docente">Docente</option>
-                <option value="investigador">Investigador/a</option>
-                <option value="comunidad">Comunidad</option>
-                <option value="otro">Otro</option>
-              </select>
-            </div>
-            <div class="consent-row">
-              <input type="checkbox" id="prof-consent" />
-              <label for="prof-consent">Acepto participar opcionalmente en investigación educativa futura (no activo en v0.1; sin recopilación de datos).</label>
-            </div>
-            <button class="btn good" type="submit">Crear perfil</button>
-          </form>
-        </div>
-        <div id="profile-display" hidden>
-          <div class="profile-display">
-            <div class="profile-avatar-circle" aria-hidden="true" id="profile-initial">E</div>
-            <div class="profile-info">
-              <strong id="profile-name-label">Explorador/a</strong>
-              <span id="profile-role-label">–</span>
-            </div>
-            <button class="btn secondary" type="button" id="profile-edit-btn">Editar perfil</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Hero / Asistente -->
-      <section class="hero" id="inicio">
-        <div class="panel hero-card">
-          <span class="eyebrow">Aprendizaje transdisciplinario</span>
-          <h2>Conecta salud, territorio, tecnología y comunidad.</h2>
-          <p class="muted" id="mission-copy">WellBe te acompaña para explorar la IA y las tecnologías emergentes en relación con la salud pública, la agroecología y el buen vivir.</p>
-          <div class="stat-grid" aria-label="Resumen de contenido">
-            <div class="stat"><strong id="route-count">0</strong><span>rutas</span></div>
-            <div class="stat"><strong id="activity-count">0</strong><span>actividades</span></div>
-            <div class="stat"><strong id="badge-count">0</strong><span>badges</span></div>
-            <div class="stat"><strong id="level-label">1</strong><span>nivel actual</span></div>
-          </div>
-        </div>
-        <aside class="panel wellbe-panel" aria-labelledby="wellbe-title">
-          <div class="wellbe-face" aria-hidden="true">W</div>
-          <div>
-            <span class="eyebrow">Asistente educativo</span>
-            <h2 id="wellbe-title">WellBe</h2>
-            <p id="wellbe-message">Elige una ruta, completa una actividad y usa la reflexión como evidencia de aprendizaje.</p>
-          </div>
-          <div class="notice">WellBe no diagnostica, no da tratamiento y no reemplaza profesionales de salud. Esta plataforma es exclusivamente educativa.</div>
-        </aside>
-      </section>
-
-      <!-- Rutas -->
-      <section class="panel" id="rutas" aria-labelledby="rutas-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">4 rutas de aprendizaje</span>
-            <h2 id="rutas-title">Rutas de aprendizaje</h2>
-          </div>
-          <p>Cada ruta combina historia, actividades interactivas y reflexión. Completa actividades para avanzar.</p>
-        </div>
-        <div class="grid" id="routes-list"></div>
-      </section>
-
-      <!-- Actividades -->
-      <section class="panel" id="actividades" aria-labelledby="actividades-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">12 actividades interactivas</span>
-            <h2 id="actividades-title">Actividades educativas</h2>
-          </div>
-          <p>Haz clic en "Comenzar" para abrir la actividad. Puedes reiniciar cualquier actividad cuando quieras.</p>
-        </div>
-        <div class="grid" id="activities-list"></div>
-      </section>
-
-      <!-- Progreso -->
-      <section class="panel" id="progreso" aria-labelledby="progreso-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Progreso local</span>
-            <h2 id="progreso-title">Panel de aprendizaje</h2>
-          </div>
-          <p>Estos datos se guardan en <code>localStorage</code> de este navegador. No se envían a ningún servidor.</p>
-        </div>
-        <div class="grid">
-          <div class="card">
-            <h3>Estadísticas locales</h3>
-            <div class="stat-grid">
-              <div class="stat"><strong id="points-stat">0</strong><span>puntos</span></div>
-              <div class="stat"><strong id="completed-stat">0</strong><span>completadas</span></div>
-              <div class="stat"><strong id="badges-stat">0</strong><span>badges</span></div>
-              <div class="stat"><strong id="routes-stat">0</strong><span>rutas completas</span></div>
-            </div>
-          </div>
-          <div class="card">
-            <h3>Exportar e importar progreso</h3>
-            <p class="muted">Exporta para guardar o continuar en otro dispositivo. La importación valida IDs conocidos.</p>
-            <div class="actions">
-              <button class="btn good" id="export-progress" type="button">Exportar progreso</button>
-              <label class="btn secondary" for="import-progress">Importar JSON</label>
-              <input class="sr-only" id="import-progress" type="file" accept="application/json,.json" />
-              <button class="btn warn" id="reset-progress" type="button">Reiniciar</button>
-            </div>
-            <p class="muted" id="import-status" role="status" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Badges -->
-      <section class="panel" id="badges" aria-labelledby="badges-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">6 badges</span>
-            <h2 id="badges-title">Reconocimientos</h2>
-          </div>
-          <p>Los badges celebran aprendizaje y exploración — no se usan para presionar ni comparar.</p>
-        </div>
-        <div class="grid" id="badges-list"></div>
-      </section>
-
-      <!-- Avatar -->
-      <section class="panel" id="avatar" aria-labelledby="avatar-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Compañía de aprendizaje</span>
-            <h2 id="avatar-title">Elige tu avatar</h2>
-          </div>
-          <p>Tu elección se guarda localmente y no requiere identidad personal.</p>
-        </div>
-        <div class="grid" id="avatars-list"></div>
-      </section>
-
-      <!-- Privacidad -->
-      <section class="panel" id="privacidad" aria-labelledby="privacidad-title">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Privacidad y límites</span>
-            <h2 id="privacidad-title">Educativo, local y transparente</h2>
-          </div>
-          <p>Esta plataforma evita cuentas, servicios externos, telemetría remota y recolección de datos personales.</p>
-        </div>
-        <ul class="privacy-list" id="privacy-list"></ul>
-      </section>
-
-    </main>
-
-    <footer>
-      WellBe — Asistente de Aprendizaje Transdisciplinario · v0.1.0 · Plataforma educativa estática.
-    </footer>
+<div class="shell">
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-icon">W</div>
+      <div><strong>Wellbe Study IA</strong><small>Ruta de estudio asistida por IA</small></div>
+    </div>
+    <span class="chip" id="load-status">Cargando datos…</span>
   </div>
+  <h1>Demuestra lo que sabes,<br><em>aprende a usar Wellbe IA.</em></h1>
+  <p class="sub">Una experiencia educativa donde pruebas tus destrezas resolviendo casos reales con Wellbe como mentor. Desde preguntas básicas hasta diseño institucional.</p>
+</header>
 
-  <!-- Modal de actividad -->
-  <dialog id="activity-modal" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-header">
+<nav aria-label="Navegación principal">
+  <div class="nav-list">
+    <a href="#perfil">Perfil</a>
+    <a href="#ruta">Ruta</a>
+    <a href="#casos">Casos</a>
+    <a href="#progreso">Progreso</a>
+    <a href="#badges">Badges</a>
+    <a href="#privacidad">Privacidad</a>
+    <a href="javascript:void(0)" onclick="openDocs()">📚 Guías</a>
+  </div>
+</nav>
+
+<main id="app">
+
+  <!-- 1. Perfil -->
+  <section class="panel" id="perfil">
+    <div class="section-head">
+      <div><span class="eyebrow">Tu perfil de estudio</span><h2>Bienvenido/a a Wellbe Study IA</h2></div>
+    </div>
+    <div id="profile-form-wrap">
+      <p class="muted">Crea un perfil local. No se envía a ningún servidor.</p>
+      <form id="profile-form" class="profile-form" novalidate>
+        <div class="field"><label for="pf-name">Nombre o alias</label><input id="pf-name" type="text" placeholder="Estudiante del buen vivir" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label for="pf-role">Rol</label>
+          <select id="pf-role"><option value="">— Selecciona —</option><option value="estudiante">Estudiante</option><option value="docente">Docente</option><option value="investigador">Investigador/a</option><option value="comunidad">Comunidad</option><option value="otro">Otro</option></select>
+        </div>
+        <button class="btn good" type="submit">Crear perfil</button>
+      </form>
+    </div>
+    <div id="profile-show" hidden>
+      <div class="profile-display">
+        <div class="p-avatar" id="p-init">E</div>
+        <div class="p-info"><strong id="p-name">Estudiante</strong><span id="p-role">–</span></div>
+        <button class="btn secondary" type="button" id="p-edit">Editar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Hero + Wellbe -->
+  <section class="hero" id="ruta">
+    <div class="panel">
+      <span class="eyebrow">Ruta de progreso</span>
+      <h2>Tu camino con Wellbe IA</h2>
+      <p class="muted" id="mission-text">Cada nivel agrega complejidad y reduce el andamiaje. Tú decides cuándo avanzar.</p>
+      <div class="lv-path" id="level-path"></div>
+      <div class="stat-grid">
+        <div class="stat"><strong id="pts-stat">0</strong><span>puntos</span></div>
+        <div class="stat"><strong id="done-stat">0</strong><span>completados</span></div>
+        <div class="stat"><strong id="bdg-stat">0</strong><span>badges</span></div>
+        <div class="stat"><strong id="lv-stat">1</strong><span>nivel</span></div>
+      </div>
+    </div>
+    <aside class="panel copilot">
+      <div class="wb-face">W</div>
       <div>
-        <span class="eyebrow" id="modal-route-name"></span>
-        <h2 id="modal-title" style="margin:0"></h2>
+        <span class="eyebrow">Mentor educativo</span>
+        <h2 style="font-size:1rem;">Wellbe IA</h2>
+        <p id="wb-msg" style="font-size:.88rem;">Soy Wellbe, tu mentor de praxis educativa.</p>
       </div>
-      <button class="btn secondary" id="modal-close" type="button" aria-label="Cerrar actividad">✕ Cerrar</button>
+      <div class="notice">Wellbe no diagnostica, no prescribe y no sustituye profesionales de salud. Este MVP es educativo.</div>
+    </aside>
+  </section>
+
+  <!-- 3. Casos -->
+  <section class="panel" id="casos">
+    <div class="section-head">
+      <div><span class="eyebrow">12 casos de estudio</span><h2>Casos por nivel</h2></div>
+      <button class="btn wellbe-btn" type="button" onclick="openDocs()">📚 Consultar guías</button>
     </div>
-    <div class="modal-scroll">
-      <p class="modal-story muted" id="modal-story"></p>
-      <div class="modal-wellbe" id="modal-wellbe-hint">
-        <div class="modal-wellbe-face" aria-hidden="true">W</div>
-        <p id="modal-wellbe-text"></p>
+    <div id="level-tabs" style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap;"></div>
+    <div class="grid" id="cases-list"></div>
+  </section>
+
+  <!-- 4. Progreso -->
+  <section class="panel" id="progreso">
+    <div class="section-head">
+      <div><span class="eyebrow">Progreso local</span><h2>Panel de aprendizaje</h2></div>
+      <p class="muted" style="font-size:.82rem;">Datos guardados en <code>localStorage</code>. No se envían a ningún servidor.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>Exportar e importar</h3>
+        <p class="muted" style="font-size:.82rem;">Exporta para guardar o transferir tu progreso.</p>
+        <div class="actions">
+          <button class="btn good" id="export-btn" type="button">Exportar JSON</button>
+          <label class="btn secondary" for="import-inp">Importar</label>
+          <input class="sr-only" id="import-inp" type="file" accept=".json">
+          <button class="btn warn" id="reset-btn" type="button">Reiniciar</button>
+        </div>
+        <p class="muted" id="import-status" style="font-size:.78rem;" role="status"></p>
       </div>
-      <div id="modal-content"></div>
     </div>
-    <div class="modal-footer">
-      <button class="btn good" id="modal-complete" type="button" disabled>Completar actividad</button>
+  </section>
+
+  <!-- 5. Badges -->
+  <section class="panel" id="badges">
+    <div class="section-head">
+      <div><span class="eyebrow">6 reconocimientos</span><h2>Badges de Wellbe Study IA</h2></div>
+      <p class="muted" style="font-size:.82rem;">Vinculados a principios éticos de Wellbe IA.</p>
     </div>
-  </dialog>
+    <div class="grid" id="badges-list"></div>
+  </section>
 
-  <script>
-    /* ── Constantes ── */
-    const STORAGE_KEY = "wellbeAsistentev01Progress";
-    const PROFILE_KEY = "wellbeAsistentev01Profile";
-    const DATA_FILES  = {
-      routes:     "data/routes.json",
-      activities: "data/activities.json",
-      badges:     "data/badges.json",
-      avatars:    "data/avatars.json",
-      config:     "data/game_config.json"
-    };
+  <!-- 6. Privacidad -->
+  <section class="panel" id="privacidad">
+    <div class="section-head">
+      <div><span class="eyebrow">Privacidad y límites</span><h2>Educativo, local y transparente</h2></div>
+    </div>
+    <ul class="privacy-list" id="privacy-list"></ul>
+  </section>
 
-    const data = { routes: [], activities: [], badges: [], avatars: [], config: {} };
-    let progress = createDefaultProgress();
-    let profile  = createDefaultProfile();
+</main>
+<footer>Wellbe Study IA v1.0 — Ruta de estudio asistida por IA. Prototipo educativo.</footer>
+</div>
 
-    /* ── Perfil ── */
-    function createDefaultProfile() {
-      return { name: "", role: "", researchConsent: false, createdAt: "", profileVersion: "0.1" };
-    }
-    function saveProfile()  { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); }
-    function loadProfile()  {
-      try {
-        const s = localStorage.getItem(PROFILE_KEY);
-        return s ? { ...createDefaultProfile(), ...JSON.parse(s) } : createDefaultProfile();
-      } catch { return createDefaultProfile(); }
-    }
-    function renderProfile() {
-      const has = profile.name || profile.role;
-      document.querySelector("#profile-form-container").hidden = !!has;
-      document.querySelector("#profile-display").hidden = !has;
-      if (has) {
-        const initial = (profile.name || "E").charAt(0).toUpperCase();
-        document.querySelector("#profile-initial").textContent = initial;
-        document.querySelector("#profile-name-label").textContent = profile.name || "Explorador/a";
-        const labels = { estudiante: "Estudiante", docente: "Docente", investigador: "Investigador/a", comunidad: "Comunidad", otro: "Otro" };
-        document.querySelector("#profile-role-label").textContent = labels[profile.role] || "Sin rol especificado";
-      }
-    }
+<!-- Case modal -->
+<dialog id="case-modal" aria-modal="true" aria-labelledby="m-title">
+  <div class="m-hd">
+    <div><span class="eyebrow" id="m-level"></span><h2 id="m-title" style="margin:0;font-size:1.1rem;"></h2></div>
+    <button class="btn secondary" id="m-close" type="button">✕ Cerrar</button>
+  </div>
+  <div class="m-scroll">
+    <p class="m-story" id="m-story"></p>
+    <div class="m-wellbe" id="m-wb"><div class="m-wellbe-face">W</div><p id="m-wb-text"></p></div>
+    <div id="m-scaff"></div>
+    <div id="m-content"></div>
+    <div class="model-box" id="m-model"><div class="model-lbl">✨ Prompt modelo y análisis de Wellbe</div><div class="model-text" id="m-model-text"></div></div>
+    <div class="safety" id="m-safety"></div>
+  </div>
+  <div class="m-ft">
+    <button class="btn secondary" id="m-reveal" type="button">Mostrar prompt modelo</button>
+    <button class="btn good" id="m-complete" type="button" disabled>Completar caso</button>
+  </div>
+</dialog>
 
-    /* ── Progreso ── */
-    function createDefaultProgress() {
-      return {
-        version: "0.1.0",
-        selectedAvatarId: "",
-        completedActivityIds: [],
-        earnedBadgeIds: [],
-        points: 0,
-        level: 1,
-        routeProgress: {},
-        stats: { completedActivities: 0, completedRoutes: 0, exportedCount: 0, importedCount: 0 },
-        updatedAt: new Date().toISOString()
-      };
-    }
-    function escapeHtml(v) {
-      return String(v ?? "")
-        .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;").replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-    function uniqueKnownIds(ids, knownSet) {
-      return [...new Set(Array.isArray(ids) ? ids : [])].filter(id => knownSet.has(id));
-    }
-    async function loadJson(path) {
-      const r = await fetch(path);
-      if (!r.ok) throw new Error(`No se pudo cargar ${path}`);
-      return r.json();
-    }
-    function saveProgress() {
-      progress.updatedAt = new Date().toISOString();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-    }
-    function loadProgress() {
-      try {
-        const s = localStorage.getItem(STORAGE_KEY);
-        return s ? { ...createDefaultProgress(), ...JSON.parse(s) } : createDefaultProgress();
-      } catch { return createDefaultProgress(); }
-    }
-    function calculateLevel(points) {
-      const levels = data.config.levels || [];
-      return levels.reduce((sel, lv) => points >= lv.min_points ? lv : sel, levels[0])?.level || 1;
-    }
-    function calculateRouteProgress(completedIds) {
-      const done = new Set(completedIds);
-      const rp = {};
-      data.routes.forEach(route => {
-        const total = route.activity_ids.length;
-        const count = route.activity_ids.filter(id => done.has(id)).length;
-        rp[route.id] = { completed: count, total, percent: total ? Math.round((count / total) * 100) : 0, complete: total > 0 && count === total };
-      });
-      return rp;
-    }
-    function evaluateBadges(completedIds) {
-      const done = new Set(completedIds);
-      const rp   = calculateRouteProgress(completedIds);
-      const completedActivities   = data.activities.filter(a => done.has(a.id));
-      const completedRoutesCount  = Object.values(rp).filter(r => r.complete).length;
-      const iaRouteComplete       = rp["route-ia-responsable"]?.complete || false;
-      const hasCompletedReto      = completedActivities.some(a => a.type === "reto");
-      return data.badges.filter(badge => {
-        if (badge.trigger === "complete_1_activity")  return done.size >= 1;
-        if (badge.trigger === "complete_1_route")     return completedRoutesCount >= 1;
-        if (badge.trigger === "complete_6_activities")  return done.size >= 6;
-        if (badge.trigger === "complete_12_activities") return done.size >= 12;
-        if (badge.trigger === "complete_ia_route")    return iaRouteComplete;
-        if (badge.trigger === "complete_reto")        return hasCompletedReto;
-        return false;
-      }).map(b => b.id);
-    }
-    function normalizeProgress(input) {
-      const activityIds = new Set(data.activities.map(a => a.id));
-      const avatarIds   = new Set(data.avatars.map(a => a.id));
-      const completedActivityIds = uniqueKnownIds(input?.completedActivityIds, activityIds);
-      const selectedAvatarId     = avatarIds.has(input?.selectedAvatarId) ? input.selectedAvatarId : (data.config.default_avatar_id || "");
-      const points = data.activities.filter(a => completedActivityIds.includes(a.id)).reduce((sum, a) => sum + Number(a.points || 0), 0);
-      const routeProgress  = calculateRouteProgress(completedActivityIds);
-      const earnedBadgeIds = evaluateBadges(completedActivityIds);
-      return {
-        ...createDefaultProgress(),
-        version: input?.version || data.config.progress_version || "0.1.0",
-        selectedAvatarId,
-        completedActivityIds,
-        earnedBadgeIds,
-        points,
-        level: calculateLevel(points),
-        routeProgress,
-        stats: {
-          completedActivities: completedActivityIds.length,
-          completedRoutes: Object.values(routeProgress).filter(r => r.complete).length,
-          exportedCount: Number(input?.stats?.exportedCount || 0),
-          importedCount: Number(input?.stats?.importedCount || 0)
-        },
-        updatedAt: new Date().toISOString()
-      };
-    }
-    function recalculateAndSave() {
-      progress = normalizeProgress(progress);
-      saveProgress();
-      render();
-    }
-    function completeActivity(id) {
-      if (!progress.completedActivityIds.includes(id)) progress.completedActivityIds.push(id);
-      recalculateAndSave();
-    }
-    function resetActivity(id) {
-      progress.completedActivityIds = progress.completedActivityIds.filter(x => x !== id);
-      recalculateAndSave();
-    }
-    function selectAvatar(id) {
-      progress.selectedAvatarId = id;
-      recalculateAndSave();
-    }
-    function exportProgress() {
-      progress.stats.exportedCount += 1;
-      recalculateAndSave();
-      const today = new Date().toISOString().slice(0, 10);
-      const blob  = new Blob([JSON.stringify(progress, null, 2)], { type: "application/json" });
-      const link  = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `wellbe-asistente-progreso-${today}.json`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(link.href);
-    }
-    function importProgress(file) {
-      const status = document.querySelector("#import-status");
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const parsed   = JSON.parse(String(reader.result || "{}"));
-          const imported = normalizeProgress(parsed);
-          imported.stats.importedCount = Number(progress.stats.importedCount || 0) + 1;
-          progress = imported;
-          saveProgress();
-          render();
-          status.textContent = "Progreso importado correctamente.";
-        } catch {
-          status.textContent = "No se pudo importar. Verifica que sea un JSON válido de WellBe.";
-        }
-      };
-      reader.readAsText(file);
-    }
-    function resetProgress() {
-      if (!confirm("¿Reiniciar todo el progreso? Esta acción no se puede deshacer.")) return;
-      progress = normalizeProgress(createDefaultProgress());
-      saveProgress();
-      render();
-      document.querySelector("#import-status").textContent = "Progreso reiniciado en este navegador.";
-    }
+<!-- Docs panel -->
+<div id="docs-overlay" onclick="closeDocs()"></div>
+<aside id="docs-panel">
+  <div class="docs-hd"><h3>📚 Guías de Wellbe</h3><button class="docs-close" onclick="closeDocs()">✕</button></div>
+  <div class="docs-body">
+    <div class="docs-nav" id="docs-nav"></div>
+    <div class="docs-content" id="docs-content"></div>
+  </div>
+</aside>
 
-    /* ── Modal ── */
-    let currentActivityId = null;
-    let activityState     = {};
+<script>
+const DF={cases:'data/cases.json',badges:'data/badges.json',config:'data/config.json'};
+const D={cases:[],badges:[],config:{}};
+let P,PF;
+let curCase=null,caseState={};
 
-    function openActivity(activityId) {
-      const activity = data.activities.find(a => a.id === activityId);
-      if (!activity) return;
-      currentActivityId = activityId;
-      activityState     = {};
-      const routeById = Object.fromEntries(data.routes.map(r => [r.id, r]));
-      const route     = routeById[activity.route_id] || {};
-      document.querySelector("#modal-route-name").textContent  = route.short_title || "";
-      document.querySelector("#modal-title").textContent       = activity.title;
-      document.querySelector("#modal-story").textContent       = activity.story;
-      document.querySelector("#modal-wellbe-text").textContent = activity.wellbe_hint || "";
-      document.querySelector("#modal-wellbe-hint").hidden      = !activity.wellbe_hint;
-      document.querySelector("#modal-complete").disabled       = true;
-      renderActivityContent(activity);
-      document.querySelector("#activity-modal").showModal();
-    }
-    function closeModal() {
-      document.querySelector("#activity-modal").close();
-      currentActivityId = null;
-      activityState     = {};
-    }
-    function enableComplete() {
-      document.querySelector("#modal-complete").disabled = false;
-    }
+/* ── Defaults ── */
+function defP(){return{version:'1.0.0',completedIds:[],points:0,level:1,earnedBadges:[],updatedAt:new Date().toISOString()};}
+function defPF(){return{name:'',role:'',createdAt:''};}
+function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-    /* ── Renderers ── */
-    function renderActivityContent(activity) {
-      const container = document.querySelector("#modal-content");
-      if (!activity.content) { container.innerHTML = ""; enableComplete(); return; }
-      switch (activity.type) {
-        case "quiz":              renderQuiz(container, activity);             break;
-        case "claim_detector":    renderClaimDetector(container, activity);    break;
-        case "branching_case":    renderBranchingCase(container, activity);    break;
-        case "mind_map":          renderMindMap(container, activity);          break;
-        case "simple_simulation": renderSimulation(container, activity);       break;
-        case "reflection":        renderReflection(container, activity);       break;
-        case "lectura":           renderLectura(container, activity);          break;
-        case "reto":              renderReto(container, activity);             break;
-        default: container.innerHTML = ""; enableComplete();
-      }
-    }
+/* ── Storage ── */
+async function loadJ(p){const r=await fetch(p);if(!r.ok)throw new Error(p);return r.json();}
+function saveP(){P.updatedAt=new Date().toISOString();localStorage.setItem(D.config.storage_key||'wellbeStudyV1Progress',JSON.stringify(P));}
+function loadP(){try{const s=localStorage.getItem(D.config.storage_key||'wellbeStudyV1Progress');return s?{...defP(),...JSON.parse(s)}:defP();}catch{return defP();}}
+function savePF(){localStorage.setItem(D.config.profile_key||'wellbeStudyV1Profile',JSON.stringify(PF));}
+function loadPF(){try{const s=localStorage.getItem(D.config.profile_key||'wellbeStudyV1Profile');return s?{...defPF(),...JSON.parse(s)}:defPF();}catch{return defPF();}}
 
-    /* Quiz */
-    function renderQuiz(container, activity) {
-      const questions = activity.content.questions || [];
-      activityState.quizAnswers = {};
-      activityState.quizTotal   = questions.length;
-      container.innerHTML = `<div class="quiz-questions">${questions.map((q, qi) => `
-        <div class="quiz-question" id="qq-${qi}">
-          <p class="question-text">${qi + 1}. ${escapeHtml(q.text)}</p>
-          <div class="quiz-options">${q.options.map(opt => `
-            <button class="quiz-option" type="button" data-qi="${qi}" data-opt="${escapeHtml(opt.id)}" data-correct="${q.correct === opt.id}">
-              ${escapeHtml(opt.text)}
-            </button>`).join("")}
-          </div>
-          <div class="explanation-box" id="exp-${qi}" hidden></div>
-        </div>`).join("")}
-      </div>`;
-      container.addEventListener("click", handleQuizClick);
-    }
-    function handleQuizClick(e) {
-      const btn = e.target.closest(".quiz-option");
-      if (!btn || btn.disabled) return;
-      const qi       = Number(btn.dataset.qi);
-      const optId    = btn.dataset.opt;
-      const isCorrect = btn.dataset.correct === "true";
-      const activity = data.activities.find(a => a.id === currentActivityId);
-      const q        = activity.content.questions[qi];
-      document.querySelectorAll(`#qq-${qi} .quiz-option`).forEach(b => {
-        b.disabled = true;
-        if (b.dataset.opt === q.correct) b.classList.add("correct");
-        else if (b.dataset.opt === optId && !isCorrect) b.classList.add("wrong");
-      });
-      const expEl = document.querySelector(`#exp-${qi}`);
-      expEl.textContent = q.explanation;
-      expEl.hidden = false;
-      activityState.quizAnswers[qi] = optId;
-      if (Object.keys(activityState.quizAnswers).length === activityState.quizTotal) enableComplete();
-    }
+/* ── Level calc ── */
+function calcLv(pts){const ls=D.config.levels||[];return ls.reduce((s,l)=>pts>=l.min_points?l:s,ls[0]);}
+function recalc(){
+  const ids=new Set(D.cases.map(c=>c.id));
+  P.completedIds=P.completedIds.filter(id=>ids.has(id));
+  P.points=D.cases.filter(c=>P.completedIds.includes(c.id)).reduce((s,c)=>s+(c.points||0),0);
+  const lv=calcLv(P.points);
+  P.level=lv?.level||1;
+  P.earnedBadges=evalBadges();
+  saveP();render();
+}
 
-    /* Claim detector */
-    function renderClaimDetector(container, activity) {
-      const claims = activity.content.claims || [];
-      activityState.claimVerdicts = {};
-      activityState.claimTotal    = claims.length;
-      container.innerHTML = `
-        <p class="muted">${escapeHtml(activity.content.intro || "")}</p>
-        <div class="claims-list">${claims.map((claim, ci) => `
-          <div class="claim-card" id="claim-${ci}">
-            <p class="claim-text">${escapeHtml(claim.text)}</p>
-            <div class="claim-buttons">
-              <button class="btn good" type="button" data-ci="${ci}" data-verdict="true">Verdadera</button>
-              <button class="btn warn" type="button" data-ci="${ci}" data-verdict="misleading">Engañosa</button>
-              <button class="btn danger" type="button" data-ci="${ci}" data-verdict="false">Falsa</button>
-            </div>
-            <div class="claim-result" id="claim-result-${ci}" hidden></div>
-          </div>`).join("")}
-        </div>`;
-      container.addEventListener("click", handleClaimClick);
-    }
-    function handleClaimClick(e) {
-      const btn = e.target.closest("[data-verdict]");
-      if (!btn || btn.disabled) return;
-      const ci      = Number(btn.dataset.ci);
-      const chosen  = btn.dataset.verdict;
-      const activity = data.activities.find(a => a.id === currentActivityId);
-      const claim   = activity.content.claims[ci];
-      const correct = chosen === claim.verdict;
-      const verdictLabels = { true: "Verdadera", misleading: "Engañosa", false: "Falsa" };
-      document.querySelectorAll(`#claim-${ci} [data-verdict]`).forEach(b => {
-        b.disabled = true;
-        if (b.dataset.verdict === claim.verdict) b.classList.add("good");
-      });
-      const resultEl = document.querySelector(`#claim-result-${ci}`);
-      resultEl.className = `claim-result verdict-${claim.verdict}`;
-      resultEl.innerHTML = `<strong>${correct ? "✓ Correcto" : "✗ No del todo"} — Es ${verdictLabels[claim.verdict]}.</strong> ${escapeHtml(claim.explanation)}`;
-      resultEl.hidden = false;
-      activityState.claimVerdicts[ci] = chosen;
-      if (Object.keys(activityState.claimVerdicts).length === activityState.claimTotal) enableComplete();
-    }
+/* ── Badges ── */
+function evalBadges(){
+  const done=new Set(P.completedIds);
+  const cases=D.cases.filter(c=>done.has(c.id));
+  const byLv=lv=>cases.filter(c=>c.level===lv).length;
+  const byType=t=>cases.filter(c=>c.type===t);
+  return D.badges.filter(b=>{
+    if(b.trigger==='complete_first_case')return done.has('case-n1-01');
+    if(b.trigger==='complete_claim_audits')return byType('claim_audit').length>=2;
+    if(b.trigger==='complete_n2')return byLv('N2')>=3;
+    if(b.trigger==='complete_evidence_matrices')return byType('evidence_matrix').length>=2;
+    if(b.trigger==='complete_ethics_reviews')return byType('ethics_review').length>=2;
+    if(b.trigger==='complete_n4')return byLv('N4')>=3;
+    return false;
+  }).map(b=>b.id);
+}
 
-    /* Branching case */
-    function renderBranchingCase(container, activity) {
-      activityState.branchStep = activity.content.start;
-      container.innerHTML = `
-        <p class="branch-scenario">${escapeHtml(activity.content.scenario)}</p>
-        <div id="branch-current"></div>`;
-      renderBranchStep(activity);
-    }
-    function renderBranchStep(activity) {
-      const steps  = activity.content.steps;
-      const stepId = activityState.branchStep;
-      const step   = steps[stepId];
-      if (!step) return;
-      const el = document.querySelector("#branch-current");
-      if (step.is_end) {
-        el.innerHTML = `<div class="branch-end">
-          <p>${escapeHtml(step.text)}</p>
-          ${step.wellbe_closing ? `<div class="notice"><strong>WellBe:</strong> ${escapeHtml(step.wellbe_closing)}</div>` : ""}
-        </div>`;
-        enableComplete();
-        return;
-      }
-      el.innerHTML = `<div class="branch-step">
-        <p>${escapeHtml(step.text)}</p>
-        <div class="branch-choices">${(step.choices || []).map(c => `
-          <button class="branch-choice" type="button" data-next="${escapeHtml(c.next)}">${escapeHtml(c.text)}</button>`).join("")}
-        </div>
-      </div>`;
-      el.querySelectorAll(".branch-choice").forEach(btn => {
-        btn.addEventListener("click", () => {
-          activityState.branchStep = btn.dataset.next;
-          renderBranchStep(activity);
-        });
-      });
-    }
+/* ── Complete / reset ── */
+function completeCase(id){
+  if(!P.completedIds.includes(id))P.completedIds.push(id);
+  recalc();
+}
+function resetCase(id){
+  P.completedIds=P.completedIds.filter(x=>x!==id);
+  recalc();
+}
 
-    /* Mind map */
-    function renderMindMap(container, activity) {
-      const nodes = activity.content.nodes || [];
-      activityState.nodesViewed = new Set();
-      container.innerHTML = `
-        <div class="mind-center">${escapeHtml(activity.content.center)}</div>
-        <div class="mind-map-grid">${nodes.map((node, ni) => `
-          <div class="mind-node" id="mnode-${ni}" style="--node-color:${escapeHtml(node.color || '#4f46e5')}">
-            <button class="mind-node-btn" type="button" data-ni="${ni}" aria-expanded="false" aria-controls="mnode-body-${ni}">
-              <strong>${escapeHtml(node.label)}</strong>
-            </button>
-            <div class="mind-node-body" id="mnode-body-${ni}" hidden>
-              <p>${escapeHtml(node.description)}</p>
-              <ul>${(node.examples || []).map(ex => `<li>${escapeHtml(ex)}</li>`).join("")}</ul>
-            </div>
-          </div>`).join("")}
-        </div>
-        <div class="mind-reflection">${escapeHtml(activity.content.reflection || "")}</div>`;
-      const threshold = Math.min(nodes.length, 3);
-      container.querySelectorAll(".mind-node-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const ni   = Number(btn.dataset.ni);
-          const body = document.querySelector(`#mnode-body-${ni}`);
-          const open = !body.hidden;
-          body.hidden = open;
-          btn.setAttribute("aria-expanded", String(!open));
-          activityState.nodesViewed.add(ni);
-          if (activityState.nodesViewed.size >= threshold) enableComplete();
-        });
-      });
-    }
+/* ── Export / import ── */
+function exportP(){
+  P.stats={...P.stats,exportedCount:((P.stats||{}).exportedCount||0)+1};recalc();
+  const b=new Blob([JSON.stringify(P,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download=`wellbe-study-progress-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href);
+}
+function importP(file){
+  if(!file)return;const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result);Object.assign(P,d);recalc();
+    document.getElementById('import-status').textContent='Importado correctamente.';}
+  catch{document.getElementById('import-status').textContent='Error: JSON inválido.';}};
+  r.readAsText(file);
+}
+function resetP(){
+  if(!confirm('¿Reiniciar todo el progreso?'))return;
+  P=defP();recalc();
+  document.getElementById('import-status').textContent='Progreso reiniciado.';
+}
 
-    /* Simulation */
-    function renderSimulation(container, activity) {
-      activityState.simStep       = 0;
-      activityState.simResilience = 5;
-      container.innerHTML = `
-        <p class="muted">${escapeHtml(activity.content.intro || "")}</p>
-        <div class="sim-resilience">
-          <span>Resiliencia:</span>
-          <div class="sim-resilience-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="10">
-            <div class="sim-resilience-fill" id="resilience-fill" style="width:50%"></div>
-          </div>
-          <span id="resilience-score">5</span>/10
-        </div>
-        <div id="sim-current"></div>`;
-      renderSimStep(activity);
-    }
-    function renderSimStep(activity) {
-      const steps = activity.content.steps || [];
-      const si    = activityState.simStep;
-      const el    = document.querySelector("#sim-current");
-      if (si >= steps.length) {
-        el.innerHTML = `<div class="sim-end">
-          <p><strong>Simulación completada.</strong></p>
-          <p>${escapeHtml(activity.content.reflection || "")}</p>
-        </div>`;
-        enableComplete();
-        return;
-      }
-      const step = steps[si];
-      el.innerHTML = `<div class="sim-step">
-        <span class="eyebrow">${escapeHtml(step.label)}</span>
-        <p>${escapeHtml(step.description)}</p>
-        <p><strong>${escapeHtml(step.question)}</strong></p>
-        <div class="sim-options">${(step.options || []).map(opt => `
-          <button class="sim-option" type="button" data-oi="${escapeHtml(opt.id)}" data-change="${Number(opt.resilience_change || 0)}">
-            ${escapeHtml(opt.text)}
-          </button>`).join("")}
-        </div>
-        <div id="sim-feedback-${si}" class="sim-effect" hidden></div>
-      </div>`;
-      el.querySelectorAll(".sim-option").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const oi     = btn.dataset.oi;
-          const change = Number(btn.dataset.change || 0);
-          const opt    = step.options.find(o => o.id === oi);
-          el.querySelectorAll(".sim-option").forEach(b => { b.disabled = true; });
-          btn.classList.add("selected");
-          const fb = document.querySelector(`#sim-feedback-${si}`);
-          fb.textContent = opt?.effect || "";
-          fb.hidden = false;
-          activityState.simResilience = Math.max(0, Math.min(10, activityState.simResilience + change));
-          const pct = (activityState.simResilience / 10) * 100;
-          document.querySelector("#resilience-score").textContent = activityState.simResilience;
-          const fill = document.querySelector("#resilience-fill");
-          fill.style.width = pct + "%";
-          fill.closest("[role=progressbar]").setAttribute("aria-valuenow", activityState.simResilience);
-          setTimeout(() => { activityState.simStep++; renderSimStep(activity); }, 1600);
-        });
-      });
-    }
+/* ══════════════════════════════
+   RENDER
+   ══════════════════════════════ */
+const typeLabels={prompt_builder:'Prompt',claim_audit:'Auditoría',case_simulation:'Caso',evidence_matrix:'Matriz',policy_design:'Diseño',ethics_review:'Ética'};
+const scaffLabels={alta:'Andamiaje alto',media:'Andamiaje medio',baja:'Andamiaje bajo',ninguna:'Sin andamiaje'};
 
-    /* Reflection */
-    function renderReflection(container, activity) {
-      const prompts = activity.content.prompts || [];
-      container.innerHTML = `
-        ${activity.content.wellbe_message ? `<div class="notice">${escapeHtml(activity.content.wellbe_message)}</div>` : ""}
-        <div class="reflection-prompts">${prompts.map((p, pi) => `
-          <div class="reflection-prompt-item">
-            <label class="reflection-label" for="ref-${pi}">${escapeHtml(p.text)}</label>
-            <textarea id="ref-${pi}" class="reflection-textarea" rows="3" placeholder="Escribe tu reflexión aquí…"></textarea>
-          </div>`).join("")}
-        </div>`;
-      container.querySelectorAll(".reflection-textarea").forEach(ta => {
-        ta.addEventListener("input", () => {
-          const any = [...container.querySelectorAll(".reflection-textarea")].some(t => t.value.trim().length > 10);
-          if (any) enableComplete();
-        });
-      });
-    }
+function render(){
+  renderSummary();renderLevels();renderCases();renderBadges();renderPrivacy();renderProfile();
+}
 
-    /* Lectura */
-    function renderLectura(container, activity) {
-      const questions = activity.content.questions || [];
-      activityState.lecturaAnswers = {};
-      activityState.lecturaTotal   = questions.length;
-      container.innerHTML = `
-        <div class="lectura-text">${escapeHtml(activity.content.text || "")}</div>
-        <div class="lectura-divider">Preguntas de comprensión</div>
-        <div class="quiz-questions">${questions.map((q, qi) => `
-          <div class="quiz-question" id="lq-${qi}">
-            <p class="question-text">${qi + 1}. ${escapeHtml(q.text)}</p>
-            <div class="quiz-options">${q.options.map(opt => `
-              <button class="quiz-option" type="button" data-lqi="${qi}" data-opt="${escapeHtml(opt.id)}" data-correct="${q.correct === opt.id}">
-                ${escapeHtml(opt.text)}
-              </button>`).join("")}
-            </div>
-            <div class="explanation-box" id="lexp-${qi}" hidden></div>
-          </div>`).join("")}
-        </div>`;
-      container.addEventListener("click", handleLecturaClick);
-    }
-    function handleLecturaClick(e) {
-      const btn = e.target.closest("[data-lqi]");
-      if (!btn || btn.disabled) return;
-      const qi       = Number(btn.dataset.lqi);
-      const optId    = btn.dataset.opt;
-      const isCorrect = btn.dataset.correct === "true";
-      const activity = data.activities.find(a => a.id === currentActivityId);
-      const q        = activity.content.questions[qi];
-      document.querySelectorAll(`#lq-${qi} .quiz-option`).forEach(b => {
-        b.disabled = true;
-        if (b.dataset.opt === q.correct) b.classList.add("correct");
-        else if (b.dataset.opt === optId && !isCorrect) b.classList.add("wrong");
-      });
-      const expEl = document.querySelector(`#lexp-${qi}`);
-      expEl.textContent = q.explanation;
-      expEl.hidden = false;
-      activityState.lecturaAnswers[qi] = optId;
-      if (Object.keys(activityState.lecturaAnswers).length === activityState.lecturaTotal) enableComplete();
-    }
+function renderSummary(){
+  const lv=calcLv(P.points);
+  document.getElementById('pts-stat').textContent=P.points;
+  document.getElementById('done-stat').textContent=P.completedIds.length;
+  document.getElementById('bdg-stat').textContent=P.earnedBadges.length;
+  document.getElementById('lv-stat').textContent=P.level;
+  document.getElementById('wb-msg').textContent=lv?.wellbe_message||D.config.wellbe?.default_message||'';
+  document.getElementById('mission-text').textContent=D.config.mission||'';
+}
 
-    /* Reto */
-    function renderReto(container, activity) {
-      const steps = activity.content.steps || [];
-      activityState.retoChecked = new Set();
-      activityState.retoTotal   = steps.length;
-      container.innerHTML = `
-        ${activity.content.intro ? `<p class="muted">${escapeHtml(activity.content.intro)}</p>` : ""}
-        <div class="reto-challenge">${escapeHtml(activity.content.challenge || "")}</div>
-        <div class="reto-progress">
-          <span id="reto-count">0/${steps.length} pasos</span>
-          <div class="reto-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="${steps.length}">
-            <div class="reto-progress-fill" id="reto-fill" style="width:0%"></div>
-          </div>
-        </div>
-        <div class="reto-steps">${steps.map((s, si) => `
-          <div class="reto-step" id="reto-step-${si}">
-            <input type="checkbox" id="reto-cb-${si}" data-si="${si}" />
-            <label for="reto-cb-${si}">${escapeHtml(s.text)}</label>
-          </div>`).join("")}
-        </div>
-        <div class="reto-closing" id="reto-closing" hidden>${escapeHtml(activity.content.wellbe_closing || "")}</div>`;
-      container.querySelectorAll("[data-si]").forEach(cb => {
-        cb.addEventListener("change", () => {
-          const si = Number(cb.dataset.si);
-          if (cb.checked) activityState.retoChecked.add(si);
-          else activityState.retoChecked.delete(si);
-          document.querySelector(`#reto-step-${si}`).classList.toggle("checked", cb.checked);
-          const count = activityState.retoChecked.size;
-          const total = activityState.retoTotal;
-          const pct   = Math.round((count / total) * 100);
-          document.querySelector("#reto-count").textContent = `${count}/${total} pasos`;
-          const fill = document.querySelector("#reto-fill");
-          fill.style.width = pct + "%";
-          fill.closest("[role=progressbar]").setAttribute("aria-valuenow", count);
-          if (count === total) {
-            document.querySelector("#reto-closing").hidden = false;
-            enableComplete();
-          }
-        });
-      });
-    }
+function renderLevels(){
+  const ls=D.config.levels||[];
+  document.getElementById('level-path').innerHTML=ls.map(l=>{
+    const isCur=P.level===l.level;
+    const casesInLv=D.cases.filter(c=>c.level==='N'+l.level);
+    const doneInLv=casesInLv.filter(c=>P.completedIds.includes(c.id)).length;
+    const pct=casesInLv.length?Math.round(doneInLv/casesInLv.length*100):0;
+    const allDone=pct===100;
+    return`<div class="lv-tile${isCur?' current':''}">
+      ${allDone?'<span class="lv-check">✓</span>':''}
+      <div class="lv-num">N${l.level}</div>
+      <div class="lv-label">${esc(l.label.split('·')[1]||l.label)}</div>
+      <div class="lv-pts">${l.min_points}+ pts</div>
+      <div class="lv-bar"><div class="lv-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
 
-    /* ── Render DOM ── */
-    function renderRoutes() {
-      document.querySelector("#routes-list").innerHTML = data.routes.map(route => {
-        const rs = progress.routeProgress[route.id] || { completed: 0, total: route.activity_ids.length, percent: 0 };
-        return `<article class="card route-card" style="--route-color:${escapeHtml(route.color)}">
-          <span class="eyebrow">${escapeHtml(route.domain)}</span>
-          <h3>${escapeHtml(route.title)}</h3>
-          <p class="muted">${escapeHtml(route.story)}</p>
-          <p>${escapeHtml(route.learning_goal)}</p>
-          <div class="route-progress" role="progressbar" aria-valuenow="${rs.percent}" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso ${rs.percent}%">
-            <span style="--progress:${rs.percent}%"></span>
-          </div>
-          <div class="tag-row">
-            <span class="tag">${rs.completed}/${rs.total} actividades</span>
-            <span class="tag">${route.estimated_minutes} min</span>
-            <span class="tag">${escapeHtml(route.level)}</span>
-          </div>
-        </article>`;
-      }).join("");
-    }
+function renderCases(){
+  const done=new Set(P.completedIds);
+  const activeLv=document.querySelector('#level-tabs .active')?.dataset.lv||'all';
+  const filtered=activeLv==='all'?D.cases:D.cases.filter(c=>c.level===activeLv);
+  const lvs=['all','N1','N2','N3','N4'];
+  document.getElementById('level-tabs').innerHTML=lvs.map(lv=>`
+    <button class="btn secondary${activeLv===lv?' active':''}" style="font-size:.78rem;padding:5px 12px;${activeLv===lv?'background:var(--accent);color:#fff;border-color:var(--accent);':''}" data-lv="${lv}" onclick="filterLv('${lv}')">${lv==='all'?'Todos':lv}</button>`).join('');
 
-    const typeLabels = {
-      quiz: "Quiz", claim_detector: "Semáforo", branching_case: "Decisiones",
-      mind_map: "Mapa mental", simple_simulation: "Simulación",
-      reflection: "Reflexión", lectura: "Lectura", reto: "Reto"
-    };
+  document.getElementById('cases-list').innerHTML=filtered.map(c=>{
+    const isDone=done.has(c.id);
+    const sl=c.scaffolding?.level||'alta';
+    return`<article class="card case-card${isDone?' completed':''}" data-lv="${c.level}">
+      <div>
+        <span class="eyebrow">${esc(c.level)} · Caso ${c.order}</span>
+        <h3>${esc(c.title)}</h3>
+        <p class="muted" style="font-size:.82rem">${esc(c.story).slice(0,120)}…</p>
+      </div>
+      <div class="tag-row">
+        <span class="type-badge">${esc(typeLabels[c.type]||c.type)}</span>
+        <span class="scaff-badge scaff-${sl}">${esc(scaffLabels[sl]||sl)}</span>
+        <span class="tag">${c.estimated_minutes} min</span>
+        <span class="tag">${c.points} pts</span>
+      </div>
+      <div class="actions">
+        <button class="btn good" type="button" data-action="open" data-id="${esc(c.id)}">${isDone?'Revisar':'Comenzar'}</button>
+        ${isDone?`<button class="btn secondary" type="button" data-action="reset" data-id="${esc(c.id)}">Reiniciar</button>`:''}
+      </div>
+    </article>`;
+  }).join('');
+}
+function filterLv(lv){
+  document.querySelectorAll('#level-tabs button').forEach(b=>{
+    const isA=b.dataset.lv===lv;
+    b.classList.toggle('active',isA);
+    b.style.background=isA?'var(--accent)':'';
+    b.style.color=isA?'#fff':'';
+    b.style.borderColor=isA?'var(--accent)':'';
+  });
+  renderCases();
+}
 
-    function renderActivities() {
-      const completed = new Set(progress.completedActivityIds);
-      const routeById = Object.fromEntries(data.routes.map(r => [r.id, r]));
-      document.querySelector("#activities-list").innerHTML = data.activities.map(activity => {
-        const route     = routeById[activity.route_id] || {};
-        const isDone    = completed.has(activity.id);
-        const typeLabel = typeLabels[activity.type] || activity.type;
-        return `<article class="card activity-card ${isDone ? "completed" : ""}">
-          <div>
-            <span class="eyebrow">${escapeHtml(route.short_title || "")}</span>
-            <h3>${escapeHtml(activity.title)}</h3>
-            <p class="muted" style="font-size:.85rem">${escapeHtml(activity.story)}</p>
-            <p style="font-size:.82rem"><strong>Objetivo:</strong> ${escapeHtml(activity.objective)}</p>
-          </div>
-          <div class="tag-row">
-            <span class="activity-type-badge">${escapeHtml(typeLabel)}</span>
-            <span class="tag">${activity.estimated_minutes} min</span>
-            <span class="tag">${activity.points} pts</span>
-          </div>
-          <p class="muted" style="font-size:.78rem">${escapeHtml(activity.educational_boundary)}</p>
-          <div class="actions">
-            <button class="btn good" type="button" data-action="open" data-id="${escapeHtml(activity.id)}">
-              ${isDone ? "Ver actividad" : "Comenzar actividad"}
-            </button>
-            ${isDone ? `<button class="btn secondary" type="button" data-action="reset" data-id="${escapeHtml(activity.id)}">Reiniciar</button>` : ""}
-          </div>
-        </article>`;
-      }).join("");
-    }
+function renderBadges(){
+  const earned=new Set(P.earnedBadges);
+  document.getElementById('badges-list').innerHTML=D.badges.map(b=>`
+    <article class="card badge-card${earned.has(b.id)?' earned':''}">
+      <span class="eyebrow">${earned.has(b.id)?'✓ Ganado':'Pendiente'}</span>
+      <div class="badge-icon">${esc(b.icon)}</div>
+      <h3>${esc(b.name)}</h3>
+      <p class="muted" style="font-size:.8rem">${esc(b.description)}</p>
+      <div class="tag-row"><span class="tag">${esc(b.trigger_label)}</span></div>
+    </article>`).join('');
+}
 
-    function renderBadges() {
-      const earned = new Set(progress.earnedBadgeIds);
-      document.querySelector("#badges-list").innerHTML = data.badges.map(badge => `
-        <article class="card badge-card ${earned.has(badge.id) ? "earned" : ""}">
-          <span class="eyebrow">${earned.has(badge.id) ? "✓ Ganado" : "Pendiente"}</span>
-          <h3>${escapeHtml(badge.name)}</h3>
-          <p class="muted">${escapeHtml(badge.description)}</p>
-          <div class="tag-row">
-            <span class="tag">${escapeHtml(badge.category)}</span>
-            <span class="tag">${escapeHtml(badge.trigger_label)}</span>
-          </div>
-        </article>`).join("");
-    }
+function renderPrivacy(){
+  const items=[...(D.config.privacy?.commitments||[]),...(D.config.content_boundaries||[])];
+  document.getElementById('privacy-list').innerHTML=items.map(i=>`<li>${esc(i)}</li>`).join('');
+}
 
-    function renderAvatars() {
-      document.querySelector("#avatars-list").innerHTML = data.avatars.map(avatar => `
-        <button class="card avatar-option ${progress.selectedAvatarId === avatar.id ? "selected" : ""}" type="button" data-action="avatar" data-id="${escapeHtml(avatar.id)}">
-          <span class="eyebrow">${escapeHtml(avatar.role)}</span>
-          <h3>${escapeHtml(avatar.name)}</h3>
-          <p class="muted">${escapeHtml(avatar.description)}</p>
-          <div class="tag-row">${avatar.traits.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>
-        </button>`).join("");
-    }
+function renderProfile(){
+  const has=PF.name||PF.role;
+  document.getElementById('profile-form-wrap').hidden=!!has;
+  document.getElementById('profile-show').hidden=!has;
+  if(has){
+    document.getElementById('p-name').textContent=PF.name||'Estudiante';
+    document.getElementById('p-role').textContent=PF.role||'–';
+    document.getElementById('p-init').textContent=(PF.name||'E')[0].toUpperCase();
+  }
+}
 
-    function renderPrivacy() {
-      const items = [...(data.config.privacy?.commitments || []), ...(data.config.content_boundaries || [])];
-      document.querySelector("#privacy-list").innerHTML = items.map(item => `<li>${escapeHtml(item)}</li>`).join("");
-    }
+/* ══════════════════════════════
+   CASE MODAL
+   ══════════════════════════════ */
+function openCase(id){
+  const c=D.cases.find(x=>x.id===id);if(!c)return;
+  curCase=c;caseState={answered:0,total:0,revealed:false};
 
-    function renderSummary() {
-      const level      = (data.config.levels || []).find(l => l.level === progress.level);
-      document.querySelector("#route-count").textContent    = data.routes.length;
-      document.querySelector("#activity-count").textContent = data.activities.length;
-      document.querySelector("#badge-count").textContent    = data.badges.length;
-      document.querySelector("#level-label").textContent    = progress.level;
-      document.querySelector("#points-stat").textContent    = progress.points;
-      document.querySelector("#completed-stat").textContent = progress.stats.completedActivities;
-      document.querySelector("#badges-stat").textContent    = progress.earnedBadgeIds.length;
-      document.querySelector("#routes-stat").textContent    = progress.stats.completedRoutes;
-      document.querySelector("#mission-copy").textContent   = data.config.mission || "";
-      document.querySelector("#wellbe-message").textContent = level?.wellbe_message || data.config.wellbe?.default_message || "";
-    }
+  document.getElementById('m-level').textContent=c.level+' · '+esc(typeLabels[c.type]||c.type)+' · '+c.points+' pts';
+  document.getElementById('m-title').textContent=c.title;
+  document.getElementById('m-story').textContent=c.story;
+  document.getElementById('m-wb-text').textContent=c.wellbe_hint||'';
+  document.getElementById('m-safety').textContent='ℹ️ '+c.safety_note;
+  document.getElementById('m-complete').disabled=true;
+  document.getElementById('m-model').classList.remove('show');
+  document.getElementById('m-reveal').style.display='';
 
-    function render() {
-      renderSummary();
-      renderRoutes();
-      renderActivities();
-      renderBadges();
-      renderAvatars();
-      renderPrivacy();
-      renderProfile();
-    }
+  renderScaffolding(c);
+  renderCaseContent(c);
+  renderModelAnswer(c);
 
-    /* ── Eventos ── */
-    function attachEvents() {
-      document.querySelector("#profile-form").addEventListener("submit", e => {
-        e.preventDefault();
-        profile.name            = document.querySelector("#prof-name").value.trim() || "Explorador/a";
-        profile.role            = document.querySelector("#prof-role").value;
-        profile.researchConsent = document.querySelector("#prof-consent").checked;
-        if (!profile.createdAt) profile.createdAt = new Date().toISOString();
-        saveProfile();
-        renderProfile();
-      });
-      document.querySelector("#profile-edit-btn").addEventListener("click", () => {
-        document.querySelector("#profile-form-container").hidden = false;
-        document.querySelector("#profile-display").hidden = true;
-        document.querySelector("#prof-name").value     = profile.name === "Explorador/a" ? "" : profile.name;
-        document.querySelector("#prof-role").value     = profile.role;
-        document.querySelector("#prof-consent").checked = profile.researchConsent;
-      });
-      document.querySelector("#modal-close").addEventListener("click", closeModal);
-      document.querySelector("#activity-modal").addEventListener("click", e => {
-        if (e.target === e.currentTarget) closeModal();
-      });
-      document.querySelector("#activity-modal").addEventListener("keydown", e => {
-        if (e.key === "Escape") closeModal();
-      });
-      document.querySelector("#modal-complete").addEventListener("click", () => {
-        if (currentActivityId) { completeActivity(currentActivityId); closeModal(); }
-      });
-      document.addEventListener("click", e => {
-        const target = e.target.closest("[data-action]");
-        if (!target) return;
-        const { action, id } = target.dataset;
-        if (action === "open")   openActivity(id);
-        if (action === "reset")  resetActivity(id);
-        if (action === "avatar") selectAvatar(id);
-      });
-      document.querySelector("#export-progress").addEventListener("click", exportProgress);
-      document.querySelector("#import-progress").addEventListener("change", e => importProgress(e.target.files[0]));
-      document.querySelector("#reset-progress").addEventListener("click", resetProgress);
-    }
+  document.getElementById('case-modal').showModal();
+}
 
-    /* ── Init ── */
-    async function init() {
-      const status = document.querySelector("#load-status");
-      try {
-        const [routes, activities, badges, avatars, config] = await Promise.all([
-          loadJson(DATA_FILES.routes),
-          loadJson(DATA_FILES.activities),
-          loadJson(DATA_FILES.badges),
-          loadJson(DATA_FILES.avatars),
-          loadJson(DATA_FILES.config)
-        ]);
-        Object.assign(data, { routes, activities, badges, avatars, config });
-        progress = normalizeProgress(loadProgress());
-        profile  = loadProfile();
-        saveProgress();
-        render();
-        attachEvents();
-        status.textContent = "Datos cargados";
-      } catch (err) {
-        status.textContent = "Error al cargar";
-        status.classList.add("error");
-        document.querySelector("#app").insertAdjacentHTML("afterbegin", `
-          <div class="notice error">
-            No se pudieron cargar los datos. Ejecuta un servidor estático:<br>
-            <code>python3 -m http.server 8000</code> y abre <code>localhost:8000</code>
-          </div>`);
-      }
-    }
+function renderScaffolding(c){
+  const s=c.scaffolding;if(!s){document.getElementById('m-scaff').innerHTML='';return;}
+  const sl=s.level||'alta';
+  let html=`<div class="scaff-box"><div class="scaff-label">🧩 Andamiaje: ${esc(scaffLabels[sl]||sl)}</div>`;
 
-    init();
-  </script>
+  if(s.given_prompt){
+    html+=`<p style="font-size:.82rem;margin:0 0 6px;"><strong>Prompt dado:</strong></p>
+    <code style="display:block;padding:8px;background:rgba(58,47,138,0.06);border-radius:4px;font-size:.8rem;line-height:1.6;white-space:pre-wrap;">${esc(s.given_prompt)}</code>`;
+  }
+  if(s.fill_in_blank){
+    html+=`<p style="font-size:.82rem;margin:0 0 6px;"><strong>Completa el prompt:</strong></p>
+    <code style="display:block;padding:8px;background:rgba(58,47,138,0.06);border-radius:4px;font-size:.8rem;line-height:1.6;white-space:pre-wrap;">${esc(s.fill_in_blank)}</code>`;
+  }
+  if(s.hints&&s.hints.length){
+    html+=`<ul class="hint-list">${s.hints.map(h=>`<li>${esc(h)}</li>`).join('')}</ul>`;
+  }
+  if(sl==='ninguna'){
+    html+=`<p style="font-size:.82rem;color:var(--ko);margin:6px 0 0;">Sin andamiaje en este nivel. Construye el prompt completo tú mismo/a.</p>`;
+  }
+  html+='</div>';
+  document.getElementById('m-scaff').innerHTML=html;
+}
+
+function renderCaseContent(c){
+  const el=document.getElementById('m-content');
+  if(c.type==='prompt_builder'&&c.quiz) renderQuiz(el,c.quiz);
+  else if(c.type==='claim_audit'&&c.claims) renderClaims(el,c.claims);
+  else if(c.type==='ethics_review'&&c.ethics_scenarios) renderEthics(el,c.ethics_scenarios);
+  else if(c.type==='case_simulation'||c.type==='evidence_matrix'||c.type==='policy_design') renderOpen(el,c);
+  else el.innerHTML='<p class="muted">Actividad de reflexión abierta. Revisa el prompt modelo al finalizar.</p>';
+}
+
+/* Quiz renderer */
+function renderQuiz(el,quiz){
+  caseState.total=quiz.questions.length;caseState.answered=0;
+  el.innerHTML=`<div class="quiz-qs">${quiz.questions.map((q,qi)=>`
+    <div class="quiz-q" data-qi="${qi}">
+      <p class="q-text">${qi+1}. ${esc(q.q)}</p>
+      <div class="q-opts">${q.opts.map((o,oi)=>`
+        <button class="q-opt" type="button" data-qi="${qi}" data-oi="${oi}">${esc(o)}</button>`).join('')}</div>
+      <div class="q-fb" id="qfb-${qi}"></div>
+    </div>`).join('')}</div>`;
+}
+
+/* Claims renderer */
+function renderClaims(el,claims){
+  caseState.total=claims.length;caseState.answered=0;
+  el.innerHTML=`<div class="claims-list">${claims.map((c,ci)=>`
+    <div class="claim-card" data-ci="${ci}">
+      <p class="claim-text">"${esc(c.text)}"</p>
+      <div class="claim-btns">
+        <button class="btn secondary" style="font-size:.78rem;" type="button" data-ci="${ci}" data-v="true">✅ Con respaldo</button>
+        <button class="btn secondary" style="font-size:.78rem;" type="button" data-ci="${ci}" data-v="misleading">⚠️ Engañoso</button>
+        <button class="btn secondary" style="font-size:.78rem;" type="button" data-ci="${ci}" data-v="false">❌ Sin respaldo</button>
+      </div>
+      <div class="claim-result" id="cr-${ci}"></div>
+    </div>`).join('')}</div>`;
+}
+
+/* Ethics renderer */
+function renderEthics(el,scenarios){
+  caseState.total=scenarios.length;caseState.answered=0;
+  el.innerHTML=`<div class="ethics-list">${scenarios.map((s,si)=>`
+    <div class="eth-card" data-si="${si}">
+      <p class="eth-action">${esc(s.action)}</p>
+      <div class="eth-btns">
+        <button class="btn secondary" style="font-size:.78rem;" type="button" data-si="${si}" data-v="ok">✅ Uso correcto</button>
+        <button class="btn secondary" style="font-size:.78rem;" type="button" data-si="${si}" data-v="violation">❌ Violación ética</button>
+      </div>
+      <div class="eth-result" id="er-${si}"></div>
+    </div>`).join('')}</div>`;
+}
+
+/* Open case (simulation, matrix, policy) */
+function renderOpen(el,c){
+  caseState.total=1;caseState.answered=0;
+  const criteria=c.evaluation_criteria||[];
+  el.innerHTML=`<div>
+    <p style="font-size:.88rem;font-weight:600;margin-bottom:8px;">📋 Criterios de evaluación:</p>
+    <ul style="padding-left:18px;font-size:.82rem;color:var(--muted);margin-bottom:12px;">
+      ${criteria.map(cr=>`<li>${esc(cr)}</li>`).join('')}
+    </ul>
+    <p style="font-size:.82rem;color:var(--muted);">Construye tu prompt considerando estos criterios, luego revisa el prompt modelo para comparar.</p>
+    <textarea style="width:100%;min-height:90px;padding:10px;border:1px solid var(--line2);border-radius:var(--r);font-family:var(--ff-b);font-size:.85rem;resize:vertical;margin-top:8px;" placeholder="Escribe tu prompt aquí…" oninput="caseState.answered=1;checkDone()"></textarea>
+  </div>`;
+}
+
+/* Model answer */
+function renderModelAnswer(c){
+  const ma=c.model_answer;if(!ma){document.getElementById('m-model-text').innerHTML='';return;}
+  let html='';
+  if(ma.ideal_prompt||ma.prompt){
+    html+=`<p style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Prompt modelo:</p>
+    <code style="display:block;padding:10px;background:rgba(58,47,138,0.06);border-radius:4px;font-size:.8rem;line-height:1.6;white-space:pre-wrap;margin-bottom:10px;">${esc(ma.ideal_prompt||ma.prompt)}</code>`;
+  }
+  if(ma.prompt_analysis||ma.prompt_quality){
+    html+=`<p style="font-size:.82rem;"><strong>Análisis:</strong> ${esc(ma.prompt_analysis||ma.prompt_quality)}</p>`;
+  }
+  if(ma.wellbe_response){
+    html+=`<p style="font-size:.82rem;margin-top:8px;"><strong>Respuesta de Wellbe:</strong> ${esc(ma.wellbe_response)}</p>`;
+  }
+  if(ma.verdict){
+    html+=`<p style="font-size:.82rem;margin-top:8px;"><strong>Veredicto:</strong> ${esc(ma.verdict)}</p>`;
+  }
+  if(ma.reasoning){
+    html+=`<p style="font-size:.82rem;margin-top:8px;"><strong>Razonamiento:</strong> ${esc(ma.reasoning)}</p>`;
+  }
+  if(ma.evidence_summary){
+    const es=ma.evidence_summary;
+    html+=`<div style="margin-top:10px;font-size:.82rem;">
+      <p><strong>La evidencia establece:</strong> ${esc(es.established||'')}</p>
+      <p><strong>Sugiere pero no demuestra:</strong> ${esc(es.suggested||'')}</p>
+      <p><strong>No puede responder aún:</strong> ${esc(es.unknown||'')}</p></div>`;
+  }
+  if(ma.source){html+=`<p style="font-size:.78rem;color:var(--muted);margin-top:8px;">📄 ${esc(ma.source)}</p>`;}
+  document.getElementById('m-model-text').innerHTML=html;
+}
+
+function checkDone(){
+  const ok=caseState.answered>=caseState.total;
+  document.getElementById('m-complete').disabled=!ok;
+}
+
+/* ── Event handlers inside modal ── */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-action]');
+  if(t){
+    if(t.dataset.action==='open')openCase(t.dataset.id);
+    if(t.dataset.action==='reset')resetCase(t.dataset.id);
+    return;
+  }
+  /* Quiz opt */
+  const qo=e.target.closest('.q-opt');
+  if(qo&&!qo.disabled&&curCase?.quiz){
+    const qi=+qo.dataset.qi,oi=+qo.dataset.oi;
+    const q=curCase.quiz.questions[qi];
+    const opts=qo.parentElement.querySelectorAll('.q-opt');
+    opts.forEach(b=>b.disabled=true);
+    const ok=oi===q.ok;
+    opts.forEach((b,i)=>{if(i===q.ok)b.classList.add('correct');else if(i===oi&&!ok)b.classList.add('wrong');});
+    const fb=document.getElementById('qfb-'+qi);
+    fb.className='q-fb show'+(ok?'':' ko');
+    fb.textContent=(ok?'✅ ':'❌ ')+(ok?q.fb:q.wfb);
+    caseState.answered++;checkDone();
+    return;
+  }
+  /* Claim btn */
+  const cb=e.target.closest('.claim-btns button');
+  if(cb&&curCase?.claims){
+    const ci=+cb.dataset.ci,v=cb.dataset.v;
+    const claim=curCase.claims[ci];
+    const btns=cb.parentElement.querySelectorAll('button');
+    btns.forEach(b=>b.disabled=true);
+    const res=document.getElementById('cr-'+ci);
+    res.className='claim-result show v-'+claim.verdict;
+    const ok=v===claim.verdict;
+    res.textContent=(ok?'✅ Correcto. ':'⚠️ La clasificación correcta es: '+claim.verdict+'. ')+claim.explanation;
+    caseState.answered++;checkDone();
+    return;
+  }
+  /* Ethics btn */
+  const eb=e.target.closest('.eth-btns button');
+  if(eb&&curCase?.ethics_scenarios){
+    const si=+eb.dataset.si,v=eb.dataset.v;
+    const s=curCase.ethics_scenarios[si];
+    const btns=eb.parentElement.querySelectorAll('button');
+    btns.forEach(b=>b.disabled=true);
+    const res=document.getElementById('er-'+si);
+    const isViol=s.violation;
+    const ok=(v==='violation')===isViol;
+    res.className='eth-result show'+(isViol?' violation':'');
+    res.innerHTML=(ok?'✅ Correcto. ':'❌ ')+`<strong>${esc(s.principle)}</strong>: ${esc(s.explanation)}`;
+    caseState.answered++;checkDone();
+    return;
+  }
+});
+
+document.getElementById('m-close').addEventListener('click',()=>document.getElementById('case-modal').close());
+document.getElementById('case-modal').addEventListener('click',e=>{
+  const r=e.currentTarget.getBoundingClientRect();
+  if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)document.getElementById('case-modal').close();
+});
+document.getElementById('case-modal').addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('case-modal').close();});
+document.getElementById('m-complete').addEventListener('click',()=>{
+  if(curCase){completeCase(curCase.id);document.getElementById('case-modal').close();}
+});
+document.getElementById('m-reveal').addEventListener('click',()=>{
+  document.getElementById('m-model').classList.add('show');
+  document.getElementById('m-reveal').style.display='none';
+  if(caseState.total<=1){caseState.answered=1;checkDone();}
+});
+
+/* Profile */
+document.getElementById('profile-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  PF.name=document.getElementById('pf-name').value.trim()||'Estudiante';
+  PF.role=document.getElementById('pf-role').value;
+  if(!PF.createdAt)PF.createdAt=new Date().toISOString();
+  savePF();renderProfile();
+});
+document.getElementById('p-edit').addEventListener('click',()=>{
+  document.getElementById('profile-form-wrap').hidden=false;
+  document.getElementById('profile-show').hidden=true;
+  document.getElementById('pf-name').value=PF.name==='Estudiante'?'':PF.name;
+  document.getElementById('pf-role').value=PF.role;
+});
+
+/* Export / import / reset */
+document.getElementById('export-btn').addEventListener('click',exportP);
+document.getElementById('import-inp').addEventListener('change',e=>importP(e.target.files[0]));
+document.getElementById('reset-btn').addEventListener('click',resetP);
+
+/* ══════════════════════════════
+   DOCUMENTATION PANEL
+   ══════════════════════════════ */
+const DOCS={
+  'inicio':{title:'Inicio rápido',content:`
+    <h4>¿Qué es Wellbe Study IA?</h4>
+    <p>Una aplicación educativa donde demuestras tus destrezas resolviendo casos reales asistido por Wellbe IA. Aprendes nutrición, comunicación, justicia alimentaria y IA responsable — y aprendes a usar Wellbe correctamente.</p>
+    <h4>3 formas de empezar</h4>
+    <p><strong>Opción A:</strong> Ve al primer caso (N1-01) y sigue las instrucciones. El andamiaje es completo.</p>
+    <p><strong>Opción B:</strong> Filtra por nivel y elige el caso que más te interese.</p>
+    <p><strong>Opción C:</strong> Haz clic en "📚 Guías" para leer la documentación primero.</p>
+    <div class="doc-tip">💡 Los niveles son sugeridos, no bloqueados. Puedes saltar a N3 si quieres, pero el andamiaje será mínimo.</div>`},
+  'prompts':{title:'Cómo formular prompts',content:`
+    <h4>Anatomía de un buen prompt para Wellbe</h4>
+    <p>Un prompt efectivo tiene cinco partes:</p>
+    <ul>
+      <li><strong>Nivel:</strong> básico, intermedio, avanzado</li>
+      <li><strong>Modo:</strong> Claro, Docente, Investigador, Auditor Ético, Evaluador</li>
+      <li><strong>Tema:</strong> específico y delimitado</li>
+      <li><strong>Contexto:</strong> público, territorio, cultura</li>
+      <li><strong>Límite:</strong> sin prescripción, fuente requerida, declarar incertidumbre</li>
+    </ul>
+    <h4>Ejemplo por nivel</h4>
+    <p><strong>N1:</strong> "Wellbe, explícame [tema] en nivel básico, con ejemplo cotidiano y sin recomendaciones clínicas."</p>
+    <p><strong>N2:</strong> "Wellbe, crea un [formato] sobre [tema] para [público]. Usa lenguaje claro, fuente confiable y tono no estigmatizante."</p>
+    <p><strong>N3:</strong> "Wellbe, activa Modo Investigador N3. Ayúdame con [tema]: matriz de fuentes, límites de evidencia, riesgos éticos."</p>
+    <p><strong>N4:</strong> "Wellbe, activa Modo Evaluador N4. Diseña una implementación con cartapacios, AGENTS.md, skills, portafolio, rúbricas y mejora continua."</p>
+    <div class="doc-tip">💡 A medida que subes de nivel, el andamiaje decrece y tú construyes más del prompt.</div>`},
+  'semaforo':{title:'Semáforo de riesgo',content:`
+    <h4>🟢 Verde — Educativo general</h4>
+    <p>Pregunta o actividad sin implicaciones clínicas. Explora libremente.</p>
+    <h4>🟡 Amarillo — Producto público</h4>
+    <p>Contenido que llegará a otras personas. Aplica checklist ético completo.</p>
+    <h4>🟠 Naranja — Investigación</h4>
+    <p>Fuentes, matrices, política pública. Revisión por par académico.</p>
+    <h4>🔴 Rojo — Institucional</h4>
+    <p>Múltiples usuarios, implementación sostenida. Gobernanza necesaria.</p>
+    <h4>⛔ Clínico — Derivar siempre</h4>
+    <p>Diagnóstico, tratamiento, síntomas, medicamentos, embarazo, menores, trastornos alimentarios. Wellbe NO responde. Derivar a RDN o médico.</p>
+    <div class="doc-tip">⚠️ Regla de oro: si tienes duda de si es 🟡 o ⛔, trátalo como ⛔.</div>`},
+  'principios':{title:'8 principios éticos',content:`
+    <h4>Principios de Wellbe IA</h4>
+    <ul>
+      <li><strong>Veracidad:</strong> fundamentar en fuentes verificables</li>
+      <li><strong>Prudencia:</strong> derivar a profesional cuando el tema es clínico</li>
+      <li><strong>Justicia alimentaria:</strong> reconocer acceso, costo y contexto</li>
+      <li><strong>Equidad cultural:</strong> respetar tradiciones alimentarias</li>
+      <li><strong>Responsabilidad informacional:</strong> citar, resumir con fidelidad</li>
+      <li><strong>Confidencialidad:</strong> no solicitar datos sensibles innecesarios</li>
+      <li><strong>Comunicación no estigmatizante:</strong> sin culpa, vergüenza o miedo</li>
+      <li><strong>Supervisión humana:</strong> revisión humana obligatoria en decisiones sensibles</li>
+    </ul>
+    <div class="doc-tip">💡 Los badges de esta app están vinculados a estos principios.</div>`},
+  'niveles':{title:'Niveles N1–N4',content:`
+    <h4>N1 — Modo Claro</h4>
+    <p>Consultas educativas básicas. Wellbe te da los prompts completos. Tu tarea: entender el caso y la estructura del prompt.</p>
+    <h4>N2 — Modo Operativo</h4>
+    <p>Crear materiales educativos. Wellbe te sugiere la estructura. Tu tarea: completar los detalles.</p>
+    <h4>N3 — Modo Investigador</h4>
+    <p>Investigación y matrices de evidencia. Wellbe te da hints mínimos. Tu tarea: construir el prompt desde cero.</p>
+    <h4>N4 — Modo Evaluador</h4>
+    <p>Diseño institucional y gobernanza. Sin andamiaje. Tu tarea: autonomía total.</p>
+    <div class="doc-tip">💡 Los niveles son sugeridos. Puedes probar cualquier caso en cualquier momento.</div>`}
+};
+
+function openDocs(tab){
+  document.getElementById('docs-panel').classList.add('open');
+  document.getElementById('docs-overlay').classList.add('show');
+  const navEl=document.getElementById('docs-nav');
+  if(!navEl.innerHTML){
+    navEl.innerHTML=Object.entries(DOCS).map(([k,v])=>`<button data-doc="${k}">${esc(v.title)}</button>`).join('');
+    navEl.addEventListener('click',e=>{
+      const b=e.target.closest('[data-doc]');if(!b)return;
+      navEl.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById('docs-content').innerHTML=DOCS[b.dataset.doc].content;
+    });
+  }
+  const first=tab||'inicio';
+  navEl.querySelector(`[data-doc="${first}"]`)?.click();
+}
+function closeDocs(){
+  document.getElementById('docs-panel').classList.remove('open');
+  document.getElementById('docs-overlay').classList.remove('show');
+}
+
+/* ══════════════════════════════
+   INIT
+   ══════════════════════════════ */
+async function init(){
+  const status=document.getElementById('load-status');
+  try{
+    const[cases,badges,config]=await Promise.all([loadJ(DF.cases),loadJ(DF.badges),loadJ(DF.config)]);
+    Object.assign(D,{cases,badges,config});
+    P=loadP();PF=loadPF();
+    recalc();
+    status.textContent='Datos cargados';
+  }catch(err){
+    status.textContent='Error al cargar datos';status.classList.add('error');
+    document.getElementById('app').insertAdjacentHTML('afterbegin',`<div class="notice error" style="margin-bottom:14px;">No se pudieron cargar los JSON. Si abres desde archivo, ejecuta: <code>python3 -m http.server 8000</code> y visita <code>localhost:8000</code>.</div>`);
+  }
+}
+init();
+</script>
 </body>
 </html>

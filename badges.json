@@ -1,0 +1,62 @@
+[
+  {
+    "id": "badge-primer-prompt",
+    "name": "Primer prompt",
+    "icon": "🌱",
+    "description": "Completaste tu primer caso y entendiste la anatomía de un buen prompt para Wellbe.",
+    "category": "inicio",
+    "trigger": "complete_first_case",
+    "trigger_label": "Completar caso N1-01",
+    "wellbe_principle": "veracidad"
+  },
+  {
+    "id": "badge-auditor-claims",
+    "name": "Auditor de claims",
+    "icon": "🔍",
+    "description": "Auditaste claims nutricionales problemáticos y sabes identificar señales de alerta.",
+    "category": "evidencia",
+    "trigger": "complete_claim_audits",
+    "trigger_label": "Completar los 2 casos de auditoría de claims",
+    "wellbe_principle": "veracidad"
+  },
+  {
+    "id": "badge-comunicador-n2",
+    "name": "Comunicador N2",
+    "icon": "📢",
+    "description": "Construiste prompts operativos para crear materiales educativos con Wellbe.",
+    "category": "operativo",
+    "trigger": "complete_n2",
+    "trigger_label": "Completar los 3 casos del nivel N2",
+    "wellbe_principle": "responsabilidad_informacional"
+  },
+  {
+    "id": "badge-investigador",
+    "name": "Investigador asistido",
+    "icon": "🔬",
+    "description": "Construiste matrices de evidencia con fuentes de nivel 1 y declaraste limitaciones.",
+    "category": "investigacion",
+    "trigger": "complete_evidence_matrices",
+    "trigger_label": "Completar los 2 casos de matriz de evidencia",
+    "wellbe_principle": "prudencia"
+  },
+  {
+    "id": "badge-guardian-etico",
+    "name": "Guardián ético",
+    "icon": "⚖️",
+    "description": "Evaluaste usos de Wellbe IA y detectaste violaciones a principios éticos.",
+    "category": "etica",
+    "trigger": "complete_ethics_reviews",
+    "trigger_label": "Completar los 2 casos de revisión ética",
+    "wellbe_principle": "supervision_humana"
+  },
+  {
+    "id": "badge-arquitecto",
+    "name": "Arquitecto institucional",
+    "icon": "🏛️",
+    "description": "Diseñaste implementaciones de IA educativa con gobernanza, evaluación y mejora continua.",
+    "category": "institucional",
+    "trigger": "complete_n4",
+    "trigger_label": "Completar los 3 casos del nivel N4",
+    "wellbe_principle": "justicia_alimentaria"
+  }
+]

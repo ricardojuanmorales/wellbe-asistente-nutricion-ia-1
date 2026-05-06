@@ -1,0 +1,68 @@
+{
+  "app_name": "Wellbe Study IA",
+  "version": "1.0.0",
+  "subtitle": "Ruta de estudio asistida por IA",
+  "storage_key": "wellbeStudyV1Progress",
+  "profile_key": "wellbeStudyV1Profile",
+  "progress_version": "1.0.0",
+  "mission": "Demuestra lo que sabes. Aprende a usar Wellbe IA paso a paso, desde preguntas básicas hasta diseño institucional.",
+  "levels": [
+    {
+      "level": 1,
+      "label": "N1 · Modo Claro",
+      "min_points": 0,
+      "color": "#5B8DEF",
+      "wellbe_message": "Bienvenido/a. En este nivel te doy los prompts completos para que veas cómo se le habla a Wellbe. Tu tarea es entender el caso, evaluar el contenido y aprender la estructura de un buen prompt."
+    },
+    {
+      "level": 2,
+      "label": "N2 · Modo Operativo",
+      "min_points": 450,
+      "color": "#3A2F8A",
+      "wellbe_message": "Ya tienes base. Ahora te sugiero la estructura del prompt pero tú completas los detalles: el modo, el público, las fuentes y los límites. Estás creando materiales reales."
+    },
+    {
+      "level": 3,
+      "label": "N3 · Investigador",
+      "min_points": 1050,
+      "color": "#7B2D8E",
+      "wellbe_message": "Construyes los prompts desde cero. Yo evalúo si activaste el modo correcto, si citaste fuentes de nivel 1 y si declaraste los límites de evidencia. El rigor es tuyo."
+    },
+    {
+      "level": 4,
+      "label": "N4 · Evaluador",
+      "min_points": 1950,
+      "color": "#1A1A2E",
+      "wellbe_message": "Autonomía total. Diseñas implementaciones, evalúas usos de IA y tomas decisiones de gobernanza. El juicio profesional es insustituible — y tú lo ejerces."
+    }
+  ],
+  "wellbe": {
+    "name": "Wellbe IA",
+    "role": "Mentor de praxis educativa",
+    "default_message": "Soy Wellbe, tu mentor de praxis educativa en nutrición. Cada caso es una oportunidad de demostrar que sabes usar la IA con evidencia, ética y sensibilidad cultural.",
+    "disclaimer": "Wellbe no diagnostica, no prescribe y no sustituye a nutricionistas-dietistas licenciados (RDN/NDTR). Este contenido es educativo."
+  },
+  "privacy": {
+    "commitments": [
+      "Tu progreso se guarda solo en el localStorage de este navegador.",
+      "No se envían datos a ningún servidor en esta versión.",
+      "No se solicitan datos personales de salud.",
+      "Puedes exportar, importar o eliminar tu progreso en cualquier momento.",
+      "No hay cookies, analytics ni rastreo de ningún tipo."
+    ]
+  },
+  "content_boundaries": [
+    "No se hacen diagnósticos ni prescripciones clínicas.",
+    "Toda afirmación nutricional incluye fuente verificable.",
+    "El lenguaje evita estigmatización alimentaria y corporal.",
+    "Cuando un tema es clínico, se deriva a profesional licenciado."
+  ],
+  "domains": [
+    { "id": "meta-wellbe", "name": "Meta-Wellbe", "icon": "🌿", "desc": "Aprender a usar Wellbe IA correctamente" },
+    { "id": "nutricion-comunicacion", "name": "Nutrición y comunicación", "icon": "📢", "desc": "Verificar claims y comunicar con responsabilidad" },
+    { "id": "justicia-alimentaria", "name": "Justicia alimentaria", "icon": "⚖️", "desc": "Acceso, equidad y sistemas alimentarios" },
+    { "id": "salud-publica", "name": "Salud pública", "icon": "🏥", "desc": "Alimentación y sistemas de salud" },
+    { "id": "ia-responsable", "name": "IA responsable", "icon": "🤖", "desc": "Límites éticos del uso de IA en nutrición" },
+    { "id": "institucional", "name": "Institucional", "icon": "🏛️", "desc": "Diseño de programas y gobernanza" }
+  ]
+}
