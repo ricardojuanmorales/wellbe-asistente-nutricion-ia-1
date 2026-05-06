@@ -1,78 +1,78 @@
 [
   {
-    "id": "route-nutricion-humana",
-    "title": "Ruta 1: Nutricion humana cotidiana",
-    "short_title": "Nutricion",
-    "domain": "nutricion humana",
-    "story": "Comienzas en una cocina comunitaria donde cada alimento cuenta una historia de energia, cultura y cuidado.",
-    "learning_goal": "Reconocer necesidades basicas del cuerpo, grupos de alimentos y decisiones cotidianas de alimentacion sin moralizar.",
+    "id": "route-ia-responsable",
+    "title": "IA Responsable",
+    "short_title": "IA Responsable",
+    "domain": "inteligencia artificial y ética",
+    "story": "La IA ya está en los sistemas de salud, en los algoritmos de nutrición y en las plataformas educativas. Esta ruta te invita a entenderla críticamente, no solo a usarla.",
+    "learning_goal": "Identificar qué hace realmente la IA, sus sesgos y límites, y qué significa usarla de forma responsable en contextos de salud y comunidad.",
     "level": "inicial",
-    "estimated_minutes": 30,
-    "color": "#246b4f",
+    "estimated_minutes": 34,
+    "color": "#4f46e5",
     "activity_ids": [
-      "activity-plato-diverso",
-      "activity-energia-cuerpo",
-      "activity-etiqueta-preguntas"
+      "act-ia-quiz-1",
+      "act-ia-mindmap-1",
+      "act-ia-branching-1"
+    ],
+    "badge_ids": [
+      "badge-etico-ia"
+    ]
+  },
+  {
+    "id": "route-nutricion-datos",
+    "title": "Nutrición y Datos",
+    "short_title": "Nutrición",
+    "domain": "nutrición y pensamiento crítico",
+    "story": "La información sobre nutrición es abundante y a menudo contradictoria. Esta ruta te da herramientas para leer evidencia, detectar mitos y relacionarte de forma crítica con los datos de salud.",
+    "learning_goal": "Desarrollar alfabetización en evidencia nutricional: cómo leerla, cuestionarla y aplicarla sin moralizar ni simplificar.",
+    "level": "inicial",
+    "estimated_minutes": 32,
+    "color": "#059669",
+    "activity_ids": [
+      "act-nut-claim-1",
+      "act-nut-lectura-1",
+      "act-nut-reflection-1"
     ],
     "badge_ids": [
       "badge-primer-paso"
     ]
   },
   {
-    "id": "route-seguridad-alimentaria",
-    "title": "Ruta 2: Seguridad alimentaria y nutricional",
-    "short_title": "Seguridad",
-    "domain": "seguridad alimentaria",
-    "story": "El mapa se abre hacia mercados, escuelas y hogares. La pregunta cambia: no solo que comemos, sino quien puede acceder a comida suficiente y digna.",
-    "learning_goal": "Explorar disponibilidad, acceso, utilizacion y estabilidad como dimensiones de seguridad alimentaria.",
-    "level": "inicial",
-    "estimated_minutes": 34,
-    "color": "#2f6f97",
+    "id": "route-salud-publica-digital",
+    "title": "Salud Pública Digital",
+    "short_title": "Salud Digital",
+    "domain": "salud pública y tecnología",
+    "story": "La digitalización de la salud abre posibilidades enormes, pero también reproduce desigualdades. Esta ruta explora telemedicina, brechas digitales y toma de decisiones en salud pública.",
+    "learning_goal": "Analizar oportunidades y límites de la tecnología digital en salud pública, con foco en equidad, acceso y toma de decisiones.",
+    "level": "intermedio",
+    "estimated_minutes": 36,
+    "color": "#d97706",
     "activity_ids": [
-      "activity-cuatro-dimensiones",
-      "activity-mapa-acceso",
-      "activity-decision-publica"
+      "act-spd-sim-1",
+      "act-spd-reto-1",
+      "act-spd-quiz-1"
+    ],
+    "badge_ids": [
+      "badge-retador"
+    ]
+  },
+  {
+    "id": "route-agroecologia-buen-vivir",
+    "title": "Agroecología y Buen Vivir",
+    "short_title": "Agroecología",
+    "domain": "agroecología y filosofía del buen vivir",
+    "story": "La agroecología no es solo una técnica agrícola: es una forma de relacionarse con el territorio, la comunidad y el conocimiento. Esta ruta conecta el suelo con el plato y el plato con la filosofía.",
+    "learning_goal": "Explorar sistemas agroecológicos, soberanía alimentaria y el concepto de Buen Vivir como marco crítico para pensar la relación entre tecnología, naturaleza y comunidad.",
+    "level": "intermedio",
+    "estimated_minutes": 38,
+    "color": "#0f766e",
+    "activity_ids": [
+      "act-agro-mindmap-1",
+      "act-agro-branching-1",
+      "act-agro-lectura-1"
     ],
     "badge_ids": [
       "badge-ruta-completa"
-    ]
-  },
-  {
-    "id": "route-agroecologia-comunidad",
-    "title": "Ruta 3: Agroecologia y comunidad",
-    "short_title": "Agroecologia",
-    "domain": "agroecologia y comunidad",
-    "story": "Llegas a una finca viva: suelo, agua, semillas y comunidad conversan. Aprender aqui significa observar relaciones.",
-    "learning_goal": "Conectar practicas agroecologicas con biodiversidad, cultura alimentaria y resiliencia comunitaria.",
-    "level": "intermedio",
-    "estimated_minutes": 36,
-    "color": "#a46d15",
-    "activity_ids": [
-      "activity-suelo-vivo",
-      "activity-red-comunitaria",
-      "activity-temporada-local"
-    ],
-    "badge_ids": [
-      "badge-exploracion-comunitaria"
-    ]
-  },
-  {
-    "id": "route-ia-salud-buen-vivir",
-    "title": "Ruta 4: IA, salud publica y buen vivir",
-    "short_title": "IA publica",
-    "domain": "inteligencia artificial y salud publica",
-    "story": "En el ultimo territorio, Wellbe te invita a mirar la IA como herramienta: util si se usa con preguntas claras, datos cuidados y responsabilidad social.",
-    "learning_goal": "Identificar usos responsables de IA educativa en salud publica sin sustituir juicio humano, comunidad ni evidencia.",
-    "level": "intermedio",
-    "estimated_minutes": 40,
-    "color": "#8b5740",
-    "activity_ids": [
-      "activity-pregunta-ia",
-      "activity-sesgo-datos",
-      "activity-buen-vivir-futuro"
-    ],
-    "badge_ids": [
-      "badge-ia-responsable"
     ]
   }
 ]

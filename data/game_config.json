@@ -1,34 +1,34 @@
 {
-  "app_name": "Wellbe Quest",
-  "product_name": "Wellbe Quest v1 - Mapa del Buen Vivir",
-  "version": "MVP V1",
-  "progress_version": "1.0.0",
-  "mission": "Wellbe te acompana como co-piloto educativo para conectar nutricion humana, seguridad alimentaria, agroecologia, comunidad, inteligencia artificial y salud publica desde el buen vivir.",
-  "default_avatar_id": "avatar-wellbe-transdisciplinario",
+  "app_name": "WellBe Asistente",
+  "product_name": "WellBe — Asistente de Aprendizaje Transdisciplinario",
+  "version": "0.1.0",
+  "progress_version": "0.1.0",
+  "mission": "WellBe te acompaña para explorar cómo la inteligencia artificial y las tecnologías emergentes se relacionan con la salud pública, la agroecología, la nutrición y el buen vivir.",
+  "default_avatar_id": "avatar-indigo",
   "levels": [
     {
       "level": 1,
-      "name": "Explorador inicial",
+      "name": "Explorador/a",
       "min_points": 0,
-      "wellbe_message": "Empieza con una actividad breve. Aprender tambien es observar con calma."
+      "wellbe_message": "Elige una ruta que despierte tu curiosidad. Aprender es también observar con calma."
     },
     {
       "level": 2,
-      "name": "Conector de saberes",
+      "name": "Conector/a",
       "min_points": 80,
-      "wellbe_message": "Ya estas conectando cuerpo, comunidad y territorio. Sigue con una ruta nueva."
+      "wellbe_message": "Ya estás tejiendo conexiones entre saberes. Sigue con una ruta nueva."
     },
     {
       "level": 3,
-      "name": "Analista del buen vivir",
+      "name": "Analista",
       "min_points": 180,
-      "wellbe_message": "Tus respuestas pueden mirar sistemas, datos y decisiones publicas con mas cuidado."
+      "wellbe_message": "Tu mirada sistémica crece. Puedes examinar datos, decisiones y consecuencias con más profundidad."
     },
     {
       "level": 4,
-      "name": "Co-creador comunitario",
+      "name": "Co-creador/a",
       "min_points": 300,
-      "wellbe_message": "Estas listo para imaginar propuestas educativas con responsabilidad y sentido comunitario."
+      "wellbe_message": "Estás listo/a para imaginar propuestas con responsabilidad, contexto y sentido comunitario."
     }
   ],
   "points": {
@@ -37,12 +37,13 @@
     "route_completion_bonus": 0
   },
   "wellbe": {
-    "default_message": "Elige una ruta, completa una actividad y usa la reflexion como evidencia de aprendizaje.",
-    "tone": "claro, cuidadoso, educativo y no clinico"
+    "default_message": "Elige una ruta, completa una actividad y usa la reflexión como evidencia de aprendizaje.",
+    "tone": "claro, cuidadoso, educativo y no clínico"
   },
   "export_import": {
-    "storage_key": "wellbeQuestV1Progress",
-    "export_filename_prefix": "wellbe-quest-progress",
+    "storage_key": "wellbeAsistentev01Progress",
+    "profile_key": "wellbeAsistentev01Profile",
+    "export_filename_prefix": "wellbe-asistente-progreso",
     "allowed_import_type": "application/json"
   },
   "privacy": {
@@ -52,17 +53,17 @@
     "external_services_enabled": false,
     "commitments": [
       "El progreso se guarda solo en este navegador.",
-      "No hay cuentas, OAuth, Supabase ni servicios externos.",
-      "No hay telemetria remota ni analitica de comportamiento.",
-      "La exportacion JSON queda bajo control de la persona usuaria.",
-      "La importacion valida IDs conocidos e ignora datos desconocidos."
+      "No hay cuentas, OAuth ni servicios externos.",
+      "No hay telemetría remota ni analítica de comportamiento.",
+      "La exportación JSON queda bajo control de la persona usuaria.",
+      "La importación valida IDs conocidos e ignora datos desconocidos."
     ]
   },
   "content_boundaries": [
-    "Contenido educativo, no clinico.",
-    "No diagnostica condiciones de salud.",
-    "No recomienda tratamientos, dietas personalizadas ni sustitutos de atencion profesional.",
-    "No solicita informacion personal sensible.",
-    "No usa IA externa en esta version."
+    "Contenido exclusivamente educativo, no clínico.",
+    "No diagnostica condiciones de salud ni nutricionales.",
+    "No recomienda tratamientos ni dietas personalizadas.",
+    "No solicita información personal sensible.",
+    "No usa IA externa ni APIs de terceros en esta versión."
   ]
 }

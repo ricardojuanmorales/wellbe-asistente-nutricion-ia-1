@@ -2,49 +2,49 @@
   {
     "id": "badge-primer-paso",
     "name": "Primer paso",
-    "description": "Completaste tu primera actividad del Mapa del Buen Vivir.",
+    "description": "Completaste tu primera actividad. El aprendizaje transdisciplinario comienza con una decisión.",
     "category": "inicio",
     "trigger": "complete_1_activity",
-    "trigger_label": "1 actividad"
+    "trigger_label": "1 actividad completada"
   },
   {
     "id": "badge-ruta-completa",
     "name": "Ruta completa",
-    "description": "Terminaste todas las actividades de una ruta de aprendizaje.",
+    "description": "Terminaste todas las actividades de una ruta. Conectar saberes es una habilidad que se entrena.",
     "category": "avance",
     "trigger": "complete_1_route",
-    "trigger_label": "1 ruta"
+    "trigger_label": "1 ruta completada"
   },
   {
-    "id": "badge-mitad-mapa",
-    "name": "Mitad del mapa",
-    "description": "Completaste seis actividades y conectaste varios saberes.",
+    "id": "badge-mitad-camino",
+    "name": "Mitad del camino",
+    "description": "Seis actividades completadas. Ya tienes una visión más amplia del panorama transdisciplinario.",
     "category": "constancia",
     "trigger": "complete_6_activities",
-    "trigger_label": "6 actividades"
+    "trigger_label": "6 actividades completadas"
   },
   {
-    "id": "badge-mapa-completo",
-    "name": "Mapa completo",
-    "description": "Completaste las doce actividades iniciales del MVP.",
+    "id": "badge-aprendiz-completo",
+    "name": "Aprendizaje completo",
+    "description": "Completaste las doce actividades del asistente. Eso es compromiso con el aprendizaje profundo.",
     "category": "maestria",
     "trigger": "complete_12_activities",
-    "trigger_label": "12 actividades"
+    "trigger_label": "12 actividades completadas"
   },
   {
-    "id": "badge-exploracion-comunitaria",
-    "name": "Exploracion comunitaria",
-    "description": "Exploraste agroecologia, territorio o redes comunitarias de alimentos.",
-    "category": "comunidad",
-    "trigger": "complete_community_activity",
-    "trigger_label": "actividad comunitaria"
-  },
-  {
-    "id": "badge-ia-responsable",
-    "name": "IA responsable",
-    "description": "Practicaste preguntas y limites para usar IA de forma educativa y cuidadosa.",
+    "id": "badge-etico-ia",
+    "name": "Ético/a de IA",
+    "description": "Exploraste la ruta de IA Responsable. Preguntar por los límites de la tecnología es una responsabilidad colectiva.",
     "category": "tecnologia",
-    "trigger": "complete_ai_activity",
-    "trigger_label": "actividad IA"
+    "trigger": "complete_ia_route",
+    "trigger_label": "Ruta IA Responsable completada"
+  },
+  {
+    "id": "badge-retador",
+    "name": "Retador/a",
+    "description": "Completaste un reto práctico. Conectar el aprendizaje con la acción en tu contexto es lo que transforma el conocimiento.",
+    "category": "accion",
+    "trigger": "complete_reto",
+    "trigger_label": "Reto completado"
   }
 ]

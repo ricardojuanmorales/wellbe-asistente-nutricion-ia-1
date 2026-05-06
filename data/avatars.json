@@ -1,47 +1,30 @@
 [
   {
-    "id": "avatar-wellbe-transdisciplinario",
-    "name": "Wellbe transdisciplinario",
-    "role": "co-piloto principal",
-    "description": "Acompana el mapa conectando nutricion, salud publica, agroecologia, comunidad e IA responsable.",
-    "traits": [
-      "curioso",
-      "cuidadoso",
-      "critico",
-      "comunitario"
-    ]
+    "id": "avatar-indigo",
+    "name": "Índigo",
+    "role": "Pensador/a sistémico/a",
+    "description": "Conecta ideas de disciplinas distintas para entender problemas complejos. Le apasiona la ética de la tecnología y el pensamiento crítico.",
+    "traits": ["curioso/a", "analítico/a", "ético/a", "transdisciplinario/a"]
   },
   {
-    "id": "avatar-semilla",
-    "name": "Semilla",
-    "role": "aprendiz agroecologico",
-    "description": "Observa relaciones entre suelo, agua, alimentos y territorio.",
-    "traits": [
-      "observadora",
-      "paciente",
-      "territorial"
-    ]
+    "id": "avatar-raiz",
+    "name": "Raíz",
+    "role": "Guardián/a de la tierra",
+    "description": "Conoce el suelo, las semillas y los ciclos del territorio. Conecta la agroecología con la soberanía alimentaria y el buen vivir.",
+    "traits": ["paciente", "territorial", "comunitario/a", "observador/a"]
   },
   {
-    "id": "avatar-brujula",
-    "name": "Brujula",
-    "role": "guia de salud publica",
-    "description": "Ayuda a mirar decisiones colectivas, acceso, equidad y evidencia.",
-    "traits": [
-      "analitica",
-      "justa",
-      "clara"
-    ]
+    "id": "avatar-dato",
+    "name": "Dato",
+    "role": "Analista crítico/a",
+    "description": "Examina evidencia, detecta sesgos y pregunta por las fuentes. Sabe que los datos cuentan historias, pero no toda la historia.",
+    "traits": ["escéptico/a", "riguroso/a", "justo/a", "claro/a"]
   },
   {
-    "id": "avatar-luz",
-    "name": "Luz",
-    "role": "exploradora de IA responsable",
-    "description": "Pregunta por datos, sesgos, limites y decisiones que deben seguir siendo humanas.",
-    "traits": [
-      "creativa",
-      "prudente",
-      "tecnologica"
-    ]
+    "id": "avatar-nexo",
+    "name": "Nexo",
+    "role": "Puente comunidad-tecnología",
+    "description": "Traduce entre mundos: tecnología y comunidad, datos y personas, ciencia y saberes locales. Construye puentes donde otros ven brechas.",
+    "traits": ["empático/a", "creativo/a", "mediador/a", "colaborativo/a"]
   }
 ]

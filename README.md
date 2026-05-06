@@ -1,113 +1,60 @@
-# Wellbe Quest v1 — Mapa del Buen Vivir
+# 🌱 WellBe — Asistente de Aprendizaje Transdisciplinario
 
-Aplicación educativa gamificada sobre nutrición humana, seguridad alimentaria y nutricional, agroecología, comunidad, inteligencia artificial y salud pública. Desarrollada como MVP estático: un solo `index.html`, datos JSON editables y documentación Markdown.
+> "El conocimiento que transforma surge cuando conectamos salud, territorio, tecnología y comunidad."
 
-## Qué incluye V1
+WellBe es una plataforma educativa lúdica y gamificada donde puedes explorar cómo la inteligencia artificial y las tecnologías emergentes se relacionan con la salud pública, la agroecología, la nutrición y el buen vivir — a tu ritmo, desde tu contexto, sin necesidad de instalaciones complicadas.
 
-- **4 rutas educativas:** Nutrición Humana, Seguridad Alimentaria, Agroecología y Comunidad, IA y Salud Pública
-- **12 actividades interactivas** con seis tipos distintos:
-  - `quiz` — preguntas con retroalimentación por respuesta
-  - `claim_detector` — evaluación de afirmaciones nutricionales (Verdadera / Engañosa / Falsa)
-  - `branching_case` — casos con decisiones ramificadas y cierres de Wellbe
-  - `mind_map` — nodos explorables con descripciones y ejemplos
-  - `simple_simulation` — simulación paso a paso con medidor de resiliencia
-  - `reflection` — preguntas abiertas para reflexión metacognitiva
-- **Wellbe** como co-piloto educativo con mensajes contextuales en cada actividad
-- **Perfil local** con nombre/alias, rol y consentimiento de investigación (off por defecto)
-- **4 avatares transdisciplinarios** sin base en apariencia física
-- **Sistema de puntos y niveles** (4 niveles, 6 badges)
-- **Progreso en localStorage** — sin cuentas ni servidores
-- **Exportar / importar / borrar progreso** en JSON
-- **Estadísticas locales** básicas
-- **Aviso de privacidad y límites** visible en la interfaz
+## ✨ ¿Qué puedes hacer aquí?
 
-## Cómo ejecutar localmente
+- 🗺️ Explorar rutas de aprendizaje ramificadas según tus intereses
+- 🧩 Completar actividades interactivas: lecturas, quizzes, reflexiones y retos
+- 🏅 Ganar badges y puntos mientras avanzas por niveles
+- 💾 Guardar tu progreso automáticamente en tu navegador
+- 📤 Exportar tu perfil como archivo JSON para guardarlo o compartirlo
+- 📥 Importar tu perfil en cualquier dispositivo para continuar donde lo dejaste
+- 🔒 Todo privado por defecto — tus datos no salen de tu navegador sin tu permiso
 
-`index.html` usa `fetch` para cargar los JSON, por lo que necesitas un servidor estático:
+## 🚀 Cómo empezar (en 30 segundos)
+
+1. Descarga o clona este repositorio.
+2. Abre el archivo `index.html` en tu navegador (Chrome, Firefox, Safari o Edge).
+3. ¡Listo! No necesitas instalar nada ni crear una cuenta.
 
 ```bash
-# Python 3
-python3 -m http.server 8000
-
-# Node (si tienes npx)
-npx serve .
+# Si tienes git instalado:
+git clone https://github.com/ricardojuanmorales/wellbe-asistente-nutricion-ia-1.git
+cd wellbe-asistente-nutricion-ia-1
+# Abre index.html en tu navegador
 ```
 
-Luego abre `http://localhost:8000` en tu navegador.
+> **Nota:** Si las actividades no cargan, abre una terminal en la carpeta del proyecto y ejecuta:
+> `python3 -m http.server 8000` y luego visita `http://localhost:8000`
 
-> No funciona abriendo `index.html` directamente como archivo (`file://`) por restricciones de CORS en `fetch`.
+## 🌿 Temas que explorarás
 
-## Estructura de archivos
+| | | |
+|---|---|---|
+| 🌾 Agroecología e IA | 🥗 Nutrición y datos | 🏥 Salud pública digital |
+| 🌍 Justicia alimentaria | 🧠 Pensamiento sistémico | 🤖 IA responsable |
+| 💚 Buen vivir | 🔬 Investigación educativa | 🌐 Tecnologías emergentes |
 
-```
-wellbe-quest-mvp-1/
-├── index.html              # Aplicación completa (HTML + CSS + JS)
-├── data/
-│   ├── routes.json         # 4 rutas educativas
-│   ├── activities.json     # 12 actividades con contenido interactivo
-│   ├── badges.json         # 6 badges con triggers
-│   ├── avatars.json        # 4 avatares transdisciplinarios
-│   └── game_config.json    # Configuración de niveles, puntos y privacidad
-├── docs/
-│   ├── README.md           # Documentación técnica extendida
-│   ├── ARCHITECTURE.md     # Arquitectura interna y escalabilidad futura
-│   ├── DATA_SCHEMA.md      # Esquemas JSON documentados
-│   ├── PRIVACY_ETHICS.md   # Privacidad, ética y límites clínicos
-│   ├── ROADMAP.md          # V1 actual y V2 planificado
-│   ├── TESTING_VALIDATION.md # Matriz de pruebas y criterios de aceptación
-│   └── USER_CASES.md       # Casos de uso por perfil
-├── exports/
-│   └── .gitkeep            # Carpeta para exportaciones manuales
-└── README.md               # Este archivo
-```
+## 📚 Para docentes e investigadores
 
-## Cómo probar las funciones principales
+El contenido educativo vive en archivos JSON legibles en la carpeta `/data/`. Puedes editarlos con cualquier editor de texto sin programar. Consulta `docs/DATA_SCHEMA.md` para entender la estructura de cada archivo.
 
-1. **Perfil:** Al cargar la app, completa el formulario de perfil (nombre, rol). El perfil se guarda en `localStorage`.
-2. **Avatar:** Desplázate a la sección Avatar y selecciona uno.
-3. **Rutas:** La sección Rutas muestra las 4 rutas con barra de progreso.
-4. **Actividades:** Haz clic en "Comenzar actividad" en cualquier tarjeta. Se abre un modal interactivo.
-5. **Quiz:** Selecciona una respuesta por pregunta. Se muestra explicación inmediatamente. "Completar" se habilita al responder todas.
-6. **Claim detector:** Evalúa cada afirmación. Se muestra el veredicto correcto con explicación.
-7. **Branching case:** Navega por el caso tomando decisiones. Cada rama lleva a un cierre diferente de Wellbe.
-8. **Mind map:** Expande al menos 3 nodos para habilitar "Completar".
-9. **Simulación:** Elige en cada paso. El medidor de resiliencia cambia según tus decisiones.
-10. **Reflexión:** Escribe al menos 10 caracteres en una caja de texto para habilitar "Completar".
-11. **Puntos y badges:** Se actualizan automáticamente al completar actividades.
-12. **Exportar:** Botón "Exportar progreso" descarga un `.json` con todo el progreso.
-13. **Importar:** Botón "Importar JSON" valida el archivo antes de reemplazar el progreso.
-14. **Reiniciar:** Botón "Reiniciar progreso" pide confirmación antes de borrar.
+## ⚠️ Aviso importante
 
-## Límites del MVP
+Esta aplicación es exclusivamente educativa. No ofrece diagnóstico médico, nutricional, psicológico ni clínico de ningún tipo. Consulta siempre a profesionales de salud calificados.
 
-- Sin backend, autenticación, ni servicios externos
-- Sin telemetría remota ni analítica de comportamiento
-- No ofrece diagnóstico, tratamiento ni recomendaciones clínicas personalizadas
-- El progreso vive solo en el navegador donde se usa
-- La simulación y el mind map son simplificaciones educativas, no modelos técnicos reales
-- Los quizzes evalúan comprensión conceptual, no conocimiento clínico
+## 📖 Documentación
 
-## Editar contenido sin tocar el código
+| Documento | Descripción |
+|---|---|
+| 🏗️ [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Diseño técnico y capas de la aplicación |
+| 📋 [DATA_SCHEMA.md](docs/DATA_SCHEMA.md) | Esquemas JSON explicados para docentes |
+| 🔒 [PRIVACY_ETHICS.md](docs/PRIVACY_ETHICS.md) | Política de privacidad y ética de datos |
+| 🗺️ [ROADMAP.md](docs/ROADMAP.md) | Fases de desarrollo del proyecto |
 
-Docentes e investigadores pueden editar directamente los archivos JSON en `/data/`:
+## 🤝 Estado del proyecto
 
-- `activities.json` — cambiar preguntas, opciones, afirmaciones, pasos de ramificación
-- `routes.json` — modificar títulos, descripción, objetivos de aprendizaje
-- `badges.json` — agregar badges (hasta 24 en V2 sin reescribir lógica)
-- `game_config.json` — ajustar niveles, puntos, mensajes de Wellbe, compromisos de privacidad
-
-Ver `docs/DATA_SCHEMA.md` para la estructura completa de cada archivo.
-
-## Publicar en GitHub Pages
-
-```bash
-git add .
-git commit -m "Deploy MVP V1"
-git push origin main
-```
-
-Luego en el repositorio de GitHub: **Settings → Pages → Source: main / root**.
-
-La URL quedará en `https://<usuario>.github.io/<repositorio>/`.
-
-> Nota: GitHub Pages sirve archivos estáticos, así que `fetch` funciona correctamente.
+**Fase 0 — Andamiaje inicial · En desarrollo activo · Versión 0.1.0**
