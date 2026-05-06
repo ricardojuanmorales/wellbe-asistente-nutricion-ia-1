@@ -46,8 +46,8 @@ Descarga o clona este repositorio. Inicia un servidor local. ¡Listo!
 
 ```bash
 # Si tienes git instalado:
-git clone https://github.com/[org]/wellbe-study-ia.git
-cd wellbe-study-ia
+git clone https://github.com/ricardojuanmorales/wellbe-asistente-nutricion-ia-1.git
+cd wellbe-asistente-nutricion-ia-1
 
 # Inicia el servidor local:
 python3 -m http.server 8000
@@ -167,30 +167,22 @@ data/
 ## 📁 Estructura del proyecto
 
 ```
-wellbe-study-ia/
+wellbe-asistente-nutricion-ia-1/
 ├── 📄 index.html                         ← SPA principal
 ├── 📂 data/
 │   ├── 📋 config.json                    ← configuración y niveles
 │   ├── 📋 cases.json                     ← 12 casos de estudio
 │   └── 📋 badges.json                    ← 6 badges
-└── 📂 docs/
-    ├── 📖 README.md                      ← guía de inicio
-    ├── 🏗️ ARCHITECTURE.md                ← arquitectura técnica
-    ├── 📐 DATA_SCHEMA.md                 ← esquemas de datos
-    ├── 🌿 WELLBE_INTEGRATION.md          ← rol de Wellbe como mentor
-    ├── 🔒 PRIVACY_ETHICS.md              ← marco ético y privacidad
-    ├── 🗺️ ROADMAP.md                     ← plan de desarrollo
-    ├── 📝 CHANGELOG.md                   ← historial de versiones
-    ├── 🤝 CONTRIBUTING.md                ← cómo contribuir casos
-    └── 📂 guias-usuario/
-        ├── 🚀 GUIA_INICIO_RAPIDO.md
-        ├── 🌱 GUIA_N1_BASICO.md
-        ├── 🔧 GUIA_N2_OPERATIVO.md
-        ├── 🔬 GUIA_N3_INVESTIGADOR.md
-        ├── 🏛️ GUIA_N4_EVALUADOR.md
-        ├── 🔨 GUIA_PROMPTS_WELLBE.md     ← ¡nuevo! plantillas de prompt
-        ├── 👩‍🏫 GUIA_DOCENTE.md
-        └── 🚦 SEMAFORO_RIESGO.md
+├── 📖 README.md                          ← guía pública de inicio
+├── 🏗️ ARCHITECTURE.md                    ← arquitectura técnica
+├── 📐 DATA_SCHEMA.md                     ← esquemas de datos
+├── 🌿 WELLBE_INTEGRATION.md              ← rol de Wellbe como mentor
+├── 🔒 PRIVACY_ETHICS.md                  ← marco ético y privacidad
+├── 🗺️ ROADMAP.md                         ← plan de desarrollo
+├── 📝 CHANGELOG.md                       ← historial de versiones
+├── 🧭 CONTINUIDAD_SESION.md              ← compendio y prompt de activación
+├── 🤝 CONTRIBUTING.md                    ← cómo contribuir casos
+└── 📚 GUIA_*.md / SEMAFORO_RIESGO.md     ← guías de usuario
 ```
 
 ---

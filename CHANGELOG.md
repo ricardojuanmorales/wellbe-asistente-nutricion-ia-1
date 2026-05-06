@@ -10,6 +10,10 @@
 - Se corrigieron los `404` al cargar `data/config.json`, `data/cases.json` y `data/badges.json` en GitHub Pages.
 - Se validó que los tres JSON sean parseables y respondan correctamente por HTTP local.
 
+### Documentación
+
+- Se añadió `CONTINUIDAD_SESION.md` con compendio de situación, primer de continuidad y prompt de activación para retomar el proyecto.
+
 ### Sincronización
 
 - Commit publicado en `origin/main`: `eccf52e Fix JSON data paths`.
